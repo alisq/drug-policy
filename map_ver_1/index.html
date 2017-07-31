@@ -2,14 +2,104 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src='script.js'></script>
-        <script src='d3.min.js'></script>
-        <script src='topojson.min.js'></script>
-        <script src='d3-geo-projection.min.js'></script>
-        <link rel="stylesheet" href="style.css">
+        <script src='scripts/script.js'></script>
+        <script src='scripts/d3.min.js'></script>
+        <script src='scripts/topojson.min.js'></script>
+        <script src='scripts/d3-geo-projection.min.js'></script>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/country-template.css">
+        <link rel="stylesheet" href="css/flag-icon.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet"> 
+        <meta charset='UTF-8'>
     </head>
     <body>
         <div class='map'></div>
         <div class='income-button'>Income</div>
+        <div class="container">
+            <nav class="contents">
+                <section>
+                    <a href="">Summary</a>
+                </section>
+                <section>
+                    <a href="">Lead Agencies</a>
+                    <a href="">Supporting Agencies</a>
+                    <a href="">Budget</a>
+                </section>
+                <section>
+                    <a href="">Policy Priorities</a>
+                    <a class="indent" href="">Health</a>
+                    <a class="indent"href="">Peace & Security</a>
+                    <a class="indent"href="">Development</a>
+                    <a class="indent"href="">Human Rights</a>
+                </section>
+                <section>
+                    <a href="">Process Indicators</a>
+                    <a class="indent" href="">Health</a>
+                    <a class="indent"href="">Peace & Security</a>
+                    <a class="indent"href="">Development</a>
+                    <a class="indent"href="">Human Rights</a>
+                </section>
+                <section>
+                    <a href="">Inclusion of Guidelines</a>
+                    <a class="indent" href="">Health</a>
+                    <a class="indent"href="">Peace & Security</a>
+                    <a class="indent"href="">Development</a>
+                    <a class="indent"href="">Human Rights</a>
+                </section>
+                <section>
+                    <a href="">Government Documents</a>
+                </section>
+            </nav>
+            <main>
+                <header>
+                    <h1><span class="flag-icon flag-icon-us"></span>United States</h1>
+                </header>
+                <div class="summary">[summary]</div>
+                <article>
+                    <section class='lead-agencies'>
+                        <h3>Lead Agencies</h3>
+                    </section>
+                    <section class='supporting-agencies'>
+                        <h3>Supporting Agencies</h3>
+                    </section>
+                    <section class='total-budget'>
+                        <h3>Budget</h3>
+                    </section>
+                     <section>
+                        <h2>Policy Priorities</h2>
+                        <h3>Health</h3>
+                        <ul class='priorities-health'></ul>
+                        <h3>Peace &amp; Security</h3>
+                        <ul class='priorities-peace'></ul>
+                        <h3>Development</h3>
+                        <ul class='priorities-development'></ul>
+                        <h3>Human Rights</h3>
+                        <ul class='priorities-rights'></ul>
+                        <h3>Demand Reduction</h3>
+                        <ul class='priorities-demand'></ul>
+                        <h3>Supply Reduction</h3>
+                        <ul class='priorities-supply'></ul>
+                        <h3>Internation Cooperation</h3>
+                        <ul class='priorities-international'></ul>
+                         
+                        <h2>Policy Metrics</h2>
+                        <h3>Health</h3>
+                        <ul class='metrics-health'></ul>
+                        <h3>Peace &amp; Security</h3>
+                        <ul class='metrics-peace'></ul>
+                        <h3>Development</h3>
+                        <ul class='metrics-development'></ul>
+                        <h3>Human Rights</h3>
+                        <ul class='metrics-rights'></ul>
+                        <h3>Demand Reduction</h3>
+                        <ul class='metrics-demand'></ul>
+                        <h3>Supply Reduction</h3>
+                        <ul class='metrics-supply'></ul>
+                        <h3>Internation Cooperation</h3>
+                        <ul class='metrics-international'></ul>
+                    </section>
+                </article>
+            </main>
+        </div>
     </body>
 </html>
