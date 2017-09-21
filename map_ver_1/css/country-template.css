@@ -66,3 +66,13 @@ h1 .flag-icon {
 	color: #999;
 	padding: 20px;
 }
+
+.page-num {
+    font-size:0.7rem;
+    color:rgb(180,180,180);
+    cursor:pointer;
+}
+
+.page-num:hover {
+    color:rgb(140,140,140);
+}
