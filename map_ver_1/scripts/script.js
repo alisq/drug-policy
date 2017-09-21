@@ -11,7 +11,7 @@ window.onload = function() {
     var countryIndex = [];
     
     var getPolicies = function() {
-        d3.csv('data/nds_data_1.csv', function(data){
+        d3.csv('data/nds_policies.csv', function(data){
             
             var country;
             var policies;
