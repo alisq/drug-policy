@@ -142,7 +142,7 @@ body > nav summary .flag-icon {
 	width: 100%;
 	padding: 10px;
 	opacity: 0.5;
-	display: inline-block;
+	display: inline-block; 
 	transition: opacity 0.3s;
 }
 .country-snapshot aside nav a:hover {
