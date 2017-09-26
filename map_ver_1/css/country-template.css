@@ -23,9 +23,11 @@ nav.contents {
 	margin-top: 82px;
 	font-size: 0.9rem;
 }
+
 nav.contents section {
 	margin: 5px 0;
 }
+
 nav.contents a {
 	display: block;
 	text-decoration: none;
@@ -34,22 +36,28 @@ nav.contents a {
 nav.contents a.indent {
 	padding-left: 10px;
 }
+
 main { 
 	display: inline-block;
 	width: 720px;
 }
+
 main h3 {
 	font-size: 1rem;
 	margin-bottom: 0;
 }
+
 main p, main ul {
-	margin-top: 0;
+	margin: 0;
+    padding:0;
 	line-height: 1.2;
 }
+
 h1 .flag-icon {
 	border-radius: 6px;
 	margin-right: 10px;
 }
+
 .summary {
 	background: #f3f3f3;
 	height: 300px;
@@ -58,8 +66,13 @@ h1 .flag-icon {
 	color: #999;
 	padding: 20px;
 }
-footer {
-	background: #f3f3f3;
-	height: 200px;
-	margin-top: 30px;
+
+.page-num {
+    font-size:0.7rem;
+    color:rgb(180,180,180);
+    cursor:pointer;
+}
+
+.page-num:hover {
+    color:rgb(140,140,140);
 }
