@@ -43,7 +43,7 @@ body {
 }
 
 .countries.active:hover {
-    fill:rgba(255,115,140,1);
+    fill:rgba(235,225,230,0.5);
 }
 
 #landing-screen {
@@ -68,8 +68,9 @@ body {
     font-size: 3.5rem;
     font-weight: 400;
     position: absolute;
-    top: 20%;
+    top: 25vh;
     left: 7%;
     color: white;
     text-shadow: 0px 2px 6px rgba(75,0,235,0.9);
 }
+
