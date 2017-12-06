@@ -1,0 +1,214 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+    color:black;
+}
+
+body {
+    position:relative;
+    width:100%;
+    height:auto;
+    margin:0;
+    font-family: 'Atlas Grotesk';
+}
+
+main {
+    position:relative;
+    margin:20px auto 60px auto;
+    width:830px;
+}
+
+main > header > h1 {
+    margin:0 0 10px 0;
+    padding:0;
+    font-weight:400;
+    font-size: 30px;
+    line-height:30px;
+}
+
+main > header > nav {
+    width:100%;
+    padding:14px;
+    background:rgb(240,240,240);
+    border-radius:6px;
+    display:flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+main > header > nav p {
+    padding:0;
+    margin:0 0 8px 0;
+    font-size:15px;
+    line-height:15px;
+    color:rgb(125,125,125);
+}
+
+.country-filters select {
+    margin:0 6px 0 0;
+    padding:6px 8px 6px 8px;
+    font-family: 'Atlas Grotesk';
+    font-size:15px;
+    line-height:15px;
+    border:none;
+    border-radius:4px;
+    background:white;
+    
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+}
+
+.country-views {
+    display: flex;
+}
+
+.country-views .button{
+    padding:6px 8px 5px 8px;
+    font-family: 'Atlas Grotesk';
+    font-size:15px;
+    line-height:15px;
+    color:rgb(125,125,125);
+    
+    border:1px solid rgb(240,240,240);
+    border-radius:4px;
+}
+
+.country-views .column-one{
+    margin:0 6px 0 0;
+}
+
+.country-views .button.selected{
+    color:rgb(240,240,240);
+    background:rgb(125,125,125);
+}
+
+.country-views .button:hover{
+    border:1px solid rgb(125,125,125);
+    cursor:pointer;
+}
+
+main > section {
+    margin:20px 0 0 0;
+    display:flex;
+    flex-wrap: wrap;
+    align-items:flex-start;
+    justify-content: space-between;
+}
+
+.label-bar {
+    padding:0 0 24px 140px;
+    width:100%;
+    height:20px;
+    
+    font-size:14px;
+    line-height:14px;
+    color:rgb(180,180,180);
+}
+
+.country-bar {
+    width:100%;
+    height:20px;
+    display:flex;
+    flex-wrap: wrap;
+    transition: height 200ms;
+    cursor:pointer;
+}
+
+.country-bar + .country-bar {
+    margin:6px 0 0 0;
+}
+
+.country-bar .country-name {
+    margin:0;
+    padding:3px 0 0 0;
+    
+    position:relative;
+    font-size:14px;
+    line-height:14px;
+    width:140px;
+    height:20px;
+    
+    white-space: nowrap;
+    overflow:hidden;
+    
+    align-self: flex-start;
+}
+
+.country-bar .flag-icon {
+    position:relative;
+    top:-1px;
+    border-radius:4px;
+    margin-right:6px;
+    background-size:cover;
+    overflow:visible;
+}
+
+.country-bar .country-chart {
+    margin:0 6px 0 0;
+    background:rgb(125,125,125);
+    border-radius:4px;
+    display:flex;
+    overflow:hidden;
+    
+    height:20px;
+    align-self: flex-start;
+}
+
+.country-bar .country-metrics {
+    margin:0;
+    padding:3px 0 0 0;
+    font-size:14px;
+    line-height:14px;
+    
+    align-self:flex-start;
+    
+    width:30px;
+    height:20px;
+}
+
+.country-domain {
+    height:20px;
+}
+
+.country-domain.demand {
+    background:skyblue;
+}
+
+.country-domain.development {
+    background:yellow;
+}
+
+.country-domain.health {
+    background:red;
+}
+
+.country-domain.international {
+    background:green;
+}
+
+.country-domain.peace {
+    background:pink;
+}
+
+.country-domain.rights {
+    background:orange;
+}
+
+.country-domain.supply {
+    background:purple;
+}
+
+.tool-tip{
+    position:absolute;
+    padding:6px 6px 4px 6px;
+    border:1px solid rgb(200,200,200);
+    border-radius:4px;
+    font-size:14px;
+    line-height:14px;
+    background:white;
+    display:none;
+}

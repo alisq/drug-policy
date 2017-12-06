@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src='scripts/script.js'></script>
+        <script src='scripts/d3.min.js'></script>
+        <script src='scripts/topojson.min.js'></script>
+        <script src='scripts/d3-geo-projection.min.js'></script>
+        
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="css/country-card.css">
+        
+        <link rel="stylesheet" href="css/flag-icon.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet"> 
+        
+        <meta charset='utf-8'>
+    </head>
+    <body>
+        <nav id="top-nav">
+			<section>
+				<p id="site-name">DrugStrat<sup>BETA</sup></p>
+				<ul>
+					<li class='nav-countries'><a href="#">Countries</a></li>
+					<li><a href="#">Themes</a></li>
+					<li><a href="#">Analysis</a></li>
+					<li><a href="#">About this Site</a></li>
+				</ul>
+			</section>
+		</nav>
+        <div id="landing-screen">
+            <h1 id="hero-text">Explore national drug strategies<br/>from all over the world.</h1>
+            <div class="countries-list">
+                <ul>
+                    <li>Luxembourg (235 metrics)</li>
+                    <li>France (229 metrics)</li>
+                    <li>Algeria (118 metrics)</li>
+                    <li>Columbia (79 metrics)</li>
+                    <li>Mexico (84 metrics)</li>
+                    <li>Morocco (67 metrics)</li>
+                </ul>
+                <a href="#" class='nav-countries'>See all countries</a>
+            </div>
+            <div class='map'></div>
+            <div class='country-card'>
+                <h1><span class="flag-icon"></span></h1>
+                <div class='country-details'>
+                    <div class='income'></div>
+                    <div class='gdp'></div>
+                    <div class='strategies'></div>
+                </div>
+                <div class='collection'>Collects data on 277 metrics across 45 themes</div>
+                <!--<div class='domain-cards'>
+                    <div class='domain-card demand'>
+                        <div class='domain-name'>Demand</div>
+                        <div class='domain-count'></div>
+                    </div>
+                    <div class='domain-card supply'>
+                        <div class='domain-name'>Supply</div>
+                        <div class='domain-count'></div>
+                    </div>
+                    <div class='domain-card health'>
+                        <div class='domain-name'>Health</div>
+                        <div class='domain-count'></div>
+                    </div>
+                    <div class='domain-card rights'>
+                        <div class='domain-name'>Human Rights</div>
+                        <div class='domain-count'></div>
+                    </div>
+                    <div class='domain-card peace'>
+                        <div class='domain-name'>Peace &amp; Security</div>
+                        <div class='domain-count'></div>
+                    </div>
+                    <div class='domain-card international'>
+                        <div class='domain-name'>International Cooperation</div>
+                        <div class='domain-count'></div>
+                    </div>
+                    <div class='domain-card development'>
+                        <div class='domain-name'>Development</div>
+                        <div class='domain-count'></div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+       <!-- <div class="compare-screen">
+            <h1>Compare between countries</h1>
+            <div>Canada</div>
+            <div>USA</div>
+        </div>-->
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+    <head lang="en">
+        <meta charset='utf-8'>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src='scripts/countries.js'></script>
+        <script src='scripts/d3.min.js'></script>
+
+        <link rel="stylesheet" href="css/countries.css">
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="css/country-card.css">
+
+        <link rel="stylesheet" href="css/flag-icon.min.css">
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <nav id="top-nav" class="fixed-nav">
+            <section>
+                <p id="site-name">DrugStrat<sup>BETA</sup></p>
+                <ul>
+                    <li class='nav-countries'><a href="#">Countries</a></li>
+                    <li><a href="#">Themes</a></li>
+                    <li><a href="#">Analysis</a></li>
+                    <li><a href="#">About this Site</a></li>
+                </ul>
+            </section>
+            <div class="breadcrumb">
+                <p>
+                    <a href="index.html">Home</a> <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    <a href="countries.html">Countries</a>
+                </p>
+            </div>
+        </nav>
+        <main>
+            <header>
+                <h1>Countries</h1>
+                <nav>
+                    <div class='country-filters'>
+                        <p>Filter by&hellip;</p>
+                        <select class='continent'>
+                            <option selected disabled>Continent</option>
+                            <option value='all'>All</option>
+                            <option>Asia</option>
+                            <option>Africa</option>
+                            <option>North America</option>
+                            <option>South America</option>
+                            <option>Europe</option>
+                            <option>Oceania</option>
+                        </select>
+                        <select class='region'>
+                            <option selected disabled>Region</option>
+                            <option value='all'>All</option>
+                            <option>Eastern Europe</option>
+                            <option>Northern Europe</option>
+                            <option>Western Europe</option>
+                            <option>Central Europe</option>
+                            <option>North America</option>
+                            <option>Latin America and Caribbean</option>
+                            <option>East Asia</option>
+                            <option>South Asia</option>
+                            <option>Southeast Asia</option>
+                            <option>North Africa</option>
+                            <option>Central Africa</option>
+                            <option>Eurasia</option>
+                        </select>
+                        <select class='income'>
+                            <option selected disabled>Income Group</option>
+                            <option value='all'>All</option>
+                            <option>High</option>
+                            <option>Upper-Middle</option>
+                            <option>Lower-Middle</option>
+                            <option>Low</option>
+                        </select>
+                    </div>
+                    <div class='country-views'>
+                        <div class='column-one'>
+                            <div class='button card-view selected'><i class="fa fa-window-maximize" aria-hidden="true"></i> Card View</div>
+                            <div class='button bar-view'><i class="fa fa-bar-chart" aria-hidden="true"></i> Bar View</div>
+                        </div>
+                        <div class='column-two'>
+                            <div class='button most selected'><i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Most Metrics First</div>
+                            <div class='button least'><i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Fewest Metrics First</div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <section>
+            </section>
+        </main>
+        <div class='tool-tip'></div>
+    </body>
+</html>
