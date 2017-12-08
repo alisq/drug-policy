@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/countries.css">
         <link rel="stylesheet" href="css/nav.css">
         <link rel="stylesheet" href="css/country-card.css">
+        <link rel="stylesheet" href="css/countries-page.css">
 
         <link rel="stylesheet" href="css/flag-icon.min.css">
         <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
@@ -31,10 +32,10 @@
                 </p>
             </div>
         </nav>
-        <main>
+        <main class="countries-page">
             <header>
                 <h1>Countries</h1>
-                <nav>
+                <nav class="toggles">
                     <div class='country-filters'>
                         <p>Filter by&hellip;</p>
                         <select class='continent'>
@@ -73,18 +74,16 @@
                         </select>
                     </div>
                     <div class='country-views'>
-                        <div class='column-one'>
-                            <div class='button card-view selected'><i class="fa fa-window-maximize" aria-hidden="true"></i> Card View</div>
-                            <div class='button bar-view'><i class="fa fa-bar-chart" aria-hidden="true"></i> Bar View</div>
-                        </div>
-                        <div class='column-two'>
-                            <div class='button most selected'><i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Most Metrics First</div>
-                            <div class='button least'><i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Fewest Metrics First</div>
-                        </div>
+                        <div class='button card-view selected'><i class="fa fa-window-maximize" aria-hidden="true"></i> Card View</div>
+                        <div class='button bar-view'><i class="fa fa-bar-chart" aria-hidden="true"></i> Bar View</div>
+                    </div>
+                    <div class='country-views'>
+                        <div class='button most selected'><i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Most Metrics First</div>
+                        <div class='button least'><i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Fewest Metrics First</div>
                     </div>
                 </nav>
             </header>
-            <section>
+            <section class="countries">
             </section>
         </main>
         <div class='tool-tip'></div>

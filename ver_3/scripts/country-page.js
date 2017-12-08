@@ -54,9 +54,9 @@ window.onload = function(){
         $('nav .country').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span> ' + country.name);
         $('.country-profile h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span> ' + country.name);
         $('.country-profile .continent').text(country.continent);
-        $('.country-profile .gdp').text('$'+country.GDP);
+        $('.country-profile .gdp').text('GDP: $'+country.GDP);
         $('.country-profile .income-group').text(country.income + ' Income');
-        $('.strategies h2').html('<i class="fa fa-folder-open" aria-hidden="true"></i> '+country.policies.length+' National Drug Strategies')
+        $('.strategies h2').html(country.policies.length+' National Drug Strategies')
 
         // loop through each policy of country
         $(country.policies).each(function(i){
@@ -64,20 +64,20 @@ window.onload = function(){
             var policy = country.policies[i];
             var article = $('.last'); //target last created article
             
-            $(article).append('<p class="strategy-title"><b>'+policy.NDS_Name+' <i class="fa fa-external-link" aria-hidden="true"></i></b></p>');
+            $(article).append('<p class="strategy-title">'+policy.NDS_Name+' <i class="fa fa-external-link" aria-hidden="true"></i></p>');
             
             if (policy.NDS_StartDate) { //if policy has start and end dates
-                $(article).append('<p class="strategy-date space-below">'+policy.NDS_StartDate+'—'+policy.NDS_EndDate+'</p>');
+                $(article).append('<p class="strategy-date">'+policy.NDS_StartDate+'—'+policy.NDS_EndDate+'</p>');
             } else { //else append policy year
-                $(article).append('<p class="strategy-date space-below">'+policy.NDS_Year+'</p>');
+                $(article).append('<p class="strategy-date">'+policy.NDS_Year+'</p>');
             }
             
-            $(article).append('<p class="lead-agency space-below"></p>');
+            $(article).append('<p class="lead-agency"></p>');
             $(policy.Lead_Agency_Name).each(function(i){
                 $(article).find('.lead-agency').append('<p>'+policy.Lead_Agency_Name[i]+'</p>');
             });
             
-            $(article).append('<details class="space-below"><summary>Supporting Agencies</summary><ul class="supporting-agencies"></ul></details>');
+            $(article).append('<details><summary>Supporting Agencies</summary><ul class="supporting-agencies"></ul></details>');
             $(policy.Supporting_Agencies).each(function(i){
                 $(article).find('.supporting-agencies').append('<li>'+policy.Supporting_Agencies[i]+'</li>');
             });
@@ -177,9 +177,9 @@ window.onload = function(){
         });
         
         if (country.domains){
-            $('.country-snapshot .domains').css('display', 'block');
-            $('.country-snapshot .collects').text('Collects data on '+country.domains.total_metric_count+' metrics across 45 themes');
-            $('.country-snapshot .metrics').html('<li><span>Demand ('+country.domains.demand.metric_count+')</span></li><li><span>Supply ('+country.domains.supply.metric_count+')</span></li><li><span>Health ('+country.domains.health.metric_count+')</span></li><li><span>Human Rights ('+country.domains.rights.metric_count+')</span></li><li><span>Peace & Security ('+country.domains.peace.metric_count+')</span></li><li><span>International Cooperation ('+country.domains.international.metric_count+')</span></li><li><span>Development ('+country.domains.development.metric_count+')</span></li>');
+            $('#domains-summary').css('display', 'block');
+            $('#domains-summary .collects').html('<i class="fa fa-bar-chart" aria-hidden="true"></i> '+country.domains.total_metric_count+' metrics across 45 themes');
+            $('#domains-summary .metrics').html('<li><span>Demand</span><span class="metrics-count">'+country.domains.demand.metric_count+'</span></li><li><span>Supply</span><span class="metrics-count">'+country.domains.supply.metric_count+'</span></li><li><span>Health</span><span class="metrics-count">'+country.domains.health.metric_count+'</span></li><li><span>Human Rights</span><span class="metrics-count">'+country.domains.rights.metric_count+'</span></li><li><span>Peace & Security</span><span class="metrics-count">'+country.domains.peace.metric_count+'</span></li><li><span>International Cooperation</span><span class="metrics-count">'+country.domains.international.metric_count+'</span></li><li><span>Development</span><span class="metrics-count">'+country.domains.development.metric_count+'</span></li>');
             
             $('.health .collects').text(country.domains.health.metric_count+' metrics across '+country.domains.health.themes.length+' themes');
             $(country.domains.health.themes).each(function(){

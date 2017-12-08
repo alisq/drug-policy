@@ -104,16 +104,13 @@ window.onload = function(){
     var countryCard = function(country){
         var lastCard = '.country-card.last';
         $(lastCard).css('display','block');
-        $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name);
         $(lastCard +' .income').text(country.income + ' Income');
         $(lastCard + ' .gdp').text('2.6 Trillion GDP');
         $(lastCard + ' .strategies').text(country.policies.length + ' Strategies');
         
         if (country.domains){ //if country has domains data
-            $(lastCard + ' .collection').css({'display':'block'})
-                .text('Collects data on '+country.domains.total_metric_count+' metrics across 45 themes');
-            $(lastCard + ' .domain-cards').css({'display':'flex'});
-            
+            $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name + " <span class='collection'>"+country.domains.total_metric_count+" metrics, 45 themes");
+        
             var domainRange = d3.scaleLinear()
                 .domain([1, 50])
                 .range(['rgb(255,255,255)', 'rgb(255,245,150)']);
@@ -134,7 +131,7 @@ window.onload = function(){
             $(lastCard + ' .international .domain-count').text(country.domains.international.metric_count);
             $(lastCard + ' .development .domain-count').text(country.domains.development.metric_count);
         } else {
-            $(lastCard + ' .collection').css({'display':'none'});
+            $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name);
             $(lastCard + ' .domain-cards').css({'display':'none'});
         };
         
@@ -144,7 +141,7 @@ window.onload = function(){
     var updateCards = function(filteredArray){
         $('main section').css('display', 'flex');
         for (var i=0; i < filteredArray.length; i++){
-            $('main section').append("<div class='country-card last'><h1><span class='flag-icon'></span></h1><div class='country-details'><div class='income'></div><div class='gdp'></div><div class='strategies'></div></div><div class='collection'>Collects data on 277 metrics across 45 themes</div><div class='domain-cards'><div class='domain-card demand'><div class='domain-name'>Demand</div><div class='domain-count'></div></div><div class='domain-card supply'><div class='domain-name'>Supply</div><div class='domain-count'></div></div><div class='domain-card health'><div class='domain-name'>Health</div><div class='domain-count'></div></div><div class='domain-card rights'><div class='domain-name'>Human Rights</div><div class='domain-count'></div></div><div class='domain-card peace'><div class='domain-name'>Peace &amp; Security</div><div class='domain-count'></div></div><div class='domain-card international'><div class='domain-name'>International Cooperation</div><div class='domain-count'></div></div><div class='domain-card development'><div class='domain-name'>Development</div><div class='domain-count'></div></div></div></div>");
+            $('main section').append("<div class='country-card last'><h1><span class='flag-icon'></span><span class='collection'>Collects data on 277 metrics across 45 themes</span></h1><div class='country-details'><div class='income'></div><div class='gdp'></div><div class='strategies'></div></div><div class='domain-cards'><div class='domain-card demand'><div class='domain-name'>Demand</div><div class='domain-count'></div></div><div class='domain-card supply'><div class='domain-name'>Supply</div><div class='domain-count'></div></div><div class='domain-card health'><div class='domain-name'>Health</div><div class='domain-count'></div></div><div class='domain-card rights'><div class='domain-name'>Human Rights</div><div class='domain-count'></div></div><div class='domain-card peace'><div class='domain-name'>Peace &amp; Security</div><div class='domain-count'></div></div><div class='domain-card international'><div class='domain-name'>International Cooperation</div><div class='domain-count'></div></div><div class='domain-card development'><div class='domain-name'>Development</div><div class='domain-count'></div></div></div></div>");
 
             countryCard(filteredArray[i]);
             $('.last').on('click',function(){
