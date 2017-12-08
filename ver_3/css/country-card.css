@@ -6,46 +6,64 @@
     display:none;
    /* border: 1px solid rgb(75,0,235); */
     background:white;
+    border-radius: 5px;
     box-shadow: 0px 2px 6px rgba(75,0,235,0.9);
 }
 .countries .country-card {
     box-shadow: none;
     width: 100%;
     padding: 1rem 2rem 0;
+    border-radius: 0;
+}
+.country-item {
+    box-shadow: none;
+    width: 100%;
+    padding: 0.5rem 2rem 0.6rem;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
 }
 .countries .country-card h1 {
-    padding: 7px 10px 0px 0px;
     font-size: 2rem;
+}
+.country-item h1 {
+    font-size: 1.5rem;
+}
+.countries .country-card h1, .country-item h1 {
+    padding: 7px 10px 0px 0px;
     color: rgba(75,0,235,0.9);
     background: none;
     box-shadow: none;
-/*     left: 0;
-    transition: left 0.3s; */
+    font-weight: 400;
+    margin: 0;
 }
 .countries .country-card h1 .collection {
+    font-size: 2rem;
+}
+        
+.countries .country-card h1 .collection, .country-item h1 .collection {
     display: inline-block;
     color: rgba(0,0,0,0.25);
-    font-size: 2rem;
     padding: 0;
     position: relative;
     left: 0;
     transition: left 0.3s; 
 }
-.countries .country-card .country-details {
+.countries .country-card .country-details, .country-item .country-details {
     background: none;
     padding-left: 2px;
     padding-bottom: 1rem;
     border-bottom: 2px solid rgba(0,0,0,0.06);
     color: rgba(0,0,0,0.35);
+    padding-top: 7px;
 }
-.country-card:hover{
+.countries .country-card:hover, .country-item:hover{
     background: linear-gradient(to bottom right, rgba(75,0,235,0.9), rgba(75,0,235,0.7));
     cursor:pointer;
 }
-.countries .country-card:hover h1, .countries .country-card:hover h1 .collection, .countries .country-card:hover .country-details {
+.countries .country-card:hover h1, .countries .country-card:hover h1 .collection, .countries .country-card:hover .country-details, .country-item:hover h1, .country-item:hover h1 .collection, .country-item:hover .country-details {
     color: white;
 }
-.countries .country-card:hover h1 .collection {
+.countries .country-card:hover h1 .collection, .country-item:hover h1 .collection {
     left: 1rem;
  } 
  
@@ -76,7 +94,7 @@
     background: linear-gradient(to bottom left, rgba(0,0,0,0), rgba(0,0,0,0.1));
 }
 
-.country-card .country-details div {
+.country-card .country-details div, .country-item .country-details div {
     display:inline-block;
 }
 

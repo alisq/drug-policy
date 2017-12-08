@@ -17,7 +17,7 @@
     <body>
         <nav id="top-nav" class="fixed-nav">
             <section>
-                <p id="site-name">DrugStrat<sup>BETA</sup></p>
+                <p id="site-name"><a href="index.html">DrugStrat<sup>BETA</sup></a></p>
                 <ul>
                     <li class='nav-countries'><a href="#">Countries</a></li>
                     <li><a href="#">Themes</a></li>
@@ -39,7 +39,7 @@
                     <div class='country-filters'>
                         <p>Filter by&hellip;</p>
                         <select class='continent'>
-                            <option selected disabled>Continent</option>
+                            <option selected disabled>Continent</option> 
                             <option value='all'>All</option>
                             <option>Asia</option>
                             <option>Africa</option>
@@ -73,19 +73,30 @@
                             <option>Low</option>
                         </select>
                     </div>
-                    <div class='country-views'>
-                        <div class='button card-view selected'><i class="fa fa-window-maximize" aria-hidden="true"></i> Card View</div>
-                        <div class='button bar-view'><i class="fa fa-bar-chart" aria-hidden="true"></i> Bar View</div>
-                    </div>
-                    <div class='country-views'>
-                        <div class='button most selected'><i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Most Metrics First</div>
-                        <div class='button least'><i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Fewest Metrics First</div>
+                    <div class="country-view-toggles">
+                        <div class='country-views'>
+                            <div class='button card-view selected'><i class="fa fa-list" aria-hidden="true"></i> List View</div>
+                            <div class='button bar-view'><i class="fa fa-bar-chart" aria-hidden="true"></i> Bar View</div>
+                        </div>
+                        <div class='country-views'>
+                            <div class='button most selected'><i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Most Metrics First</div>
+                            <div class='button least'><i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Fewest Metrics First</div>
+                        </div>
                     </div>
                 </nav>
             </header>
             <section class="countries">
             </section>
         </main>
+        <footer>
+            <p id="site-name"><a href="index.html">DrugStrat<sup>BETA</sup></a></p>
+            <ul>
+                <li class='nav-countries'><a href="countries.html">Countries</a></li>
+                <li><a href="#">Themes</a></li>
+                <li><a href="#">Analysis</a></li>
+                <li><a href="#">About this Site</a></li>
+            </ul>
+        </footer>
         <div class='tool-tip'></div>
     </body>
 </html>

@@ -159,10 +159,8 @@ window.onload = function(){
     /// BAR CHART ///
     
     var makeChart = function(filteredArray){
-        $('main section').css('display', 'block');
-        $('main section').append("<div class='label-bar'>Metrics</div>");
-        
-        var barScaleWidth = mainWidth - (140 + 30 + 6);
+        $('main section').css('display', 'block');        
+        var barScaleWidth = mainWidth - (400);
         var barScale = d3.scaleLinear()
             .domain([0, d3.max(filteredArray, function(d){return d.domains.total_metric_count})])
             .range([0, barScaleWidth]);
@@ -183,10 +181,10 @@ window.onload = function(){
             .attr('class', 'country-chart')
             .style('width', function(d) { return barScale(d.domains.total_metric_count) + 'px'; })
             .on('mouseenter', function(d){
+                $(this).addClass('chart-hover');
+                
                 var chart = d3.select(this);
-            
-                chart.style('background', 'white')
-                    .append('div')
+                chart.append('div')
                     .attr('class', 'country-domain demand')
                     .style('width', function(d){return barScale(d.domains.demand.metric_count) + 'px'})
                     .on('mousemove', function(){
@@ -197,7 +195,7 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .text(function(d){return 'Demand: ' + metric});
+                            .html(function(d){return '<span>Demand</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');
@@ -214,7 +212,7 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .text(function(d){return 'Development: ' + metric});
+                            .html(function(d){return '<span>Development</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');
@@ -231,7 +229,7 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .text(function(d){return 'Health: ' + metric});
+                            .html(function(d){return '<span>Health</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');
@@ -248,7 +246,7 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .text(function(d){return 'International Cooperation: ' + metric});
+                            .html(function(d){return '<span>International Cooperation</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');
@@ -265,7 +263,7 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .text(function(d){return 'Peace & Security: ' + metric});
+                            .html(function(d){return '<span>Peace & Security</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');
@@ -282,7 +280,7 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .text(function(d){return 'Human Rights: ' + metric});
+                            .html(function(d){return '<span>Human Rights</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');
@@ -299,22 +297,23 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .text(function(d){return 'Supply: ' + metric});
+                            .html(function(d){return '<span>Supply</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');
                     });
             
             }).on('mouseleave', function(d){
-                d3.select(this)
-                    .style('background', 'rgb(125,125,125)');
+               /* d3.select(this)
+                    .style('background', 'rgb(125,125,125)'); */
                 d3.selectAll('.country-domain').remove();
+                $(this).removeClass('chart-hover');
             });
         
         d3.selectAll('.country-bar')
             .append('p')
             .attr('class', 'country-metrics')
-            .text(function(d) { return d.domains.total_metric_count; });
+            .text(function(d) { return d.domains.total_metric_count + " metrics"; });
     };
 
     

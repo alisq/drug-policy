@@ -64,7 +64,7 @@
 }
 
 /* Global Navigation on Subpages ------------ */ 
-#top-nav.fixed-nav section {
+#top-nav.fixed-nav section, footer {
 	background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
 	position: relative;
 	color: rgba(255,255,255,1);
@@ -85,3 +85,30 @@
 .breadcrumb .flag-icon {
 	display: none;
 }
+
+/* Footer ------------ */ 
+footer {
+	margin: 0;
+}
+footer a {
+	color: white;
+	opacity: 0.9;
+	transition: opacity 0.3s;
+}
+footer a:hover {
+	opacity: 1;
+}
+footer p {
+	padding: 2rem 1rem 2rem 2rem;
+}
+footer p, footer ul {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0;
+}
+footer ul {
+	list-style: none;
+	padding: 2rem 0;
+	line-height: 1.6;
+}
+
