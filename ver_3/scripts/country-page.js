@@ -179,12 +179,12 @@ window.onload = function(){
         if (country.domains){
             $('#domains-summary').css('display', 'block');
             $('#domains-summary .collects').html('<i class="fa fa-bar-chart" aria-hidden="true"></i> '+country.domains.total_metric_count+' metrics across 45 themes');
-            $('#domains-summary .metrics').html('<li><span>Demand</span><span class="metrics-count">'+country.domains.demand.metric_count+'</span></li><li><span>Supply</span><span class="metrics-count">'+country.domains.supply.metric_count+'</span></li><li><span>Health</span><span class="metrics-count">'+country.domains.health.metric_count+'</span></li><li><span>Human Rights</span><span class="metrics-count">'+country.domains.rights.metric_count+'</span></li><li><span>Peace & Security</span><span class="metrics-count">'+country.domains.peace.metric_count+'</span></li><li><span>International Cooperation</span><span class="metrics-count">'+country.domains.international.metric_count+'</span></li><li><span>Development</span><span class="metrics-count">'+country.domains.development.metric_count+'</span></li>');
+            $('#domains-summary .metrics').html('<li><a href="#demand"><span>Demand</span><span class="metrics-count">'+country.domains.demand.metric_count+'</span></a></li><li><a href="#supply"><span>Supply</span><span class="metrics-count">'+country.domains.supply.metric_count+'</span></a></li><li><a href="#health"><span>Health</span><span class="metrics-count">'+country.domains.health.metric_count+'</span></a></li><li><a href="#rights"><span>Human Rights</span><span class="metrics-count">'+country.domains.rights.metric_count+'</span></a></li><li><a href="#peace"><span>Peace & Security</span><span class="metrics-count">'+country.domains.peace.metric_count+'</span></a></li><li><a href="#international"><span>International Cooperation</span><span class="metrics-count">'+country.domains.international.metric_count+'</span></a></li><li><a href="#development"><span>Development</span><span class="metrics-count">'+country.domains.development.metric_count+'</span></a></li>');
             
-            $('.health .collects').text(country.domains.health.metric_count+' metrics across '+country.domains.health.themes.length+' themes');
+            $('#health .collects').text(country.domains.health.metric_count+' metrics across '+country.domains.health.themes.length+' themes');
             $(country.domains.health.themes).each(function(){
                 var theme = $(this)[0];
-                $('.health .themes').append('<li class="theme last"></li>');
+                $('#health .themes').append('<li class="theme last"></li>');
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
@@ -201,10 +201,10 @@ window.onload = function(){
                 $(last).removeClass('last');
             });
             
-            $('.peace .collects').text(country.domains.peace.metric_count+' metrics across '+country.domains.peace.themes.length+' themes');
+            $('#peace .collects').text(country.domains.peace.metric_count+' metrics across '+country.domains.peace.themes.length+' themes');
             $(country.domains.peace.themes).each(function(){
                 var theme = $(this)[0];
-                $('.peace .themes').append('<li class="theme last"></li>');
+                $('#peace .themes').append('<li class="theme last"></li>');
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
@@ -221,10 +221,10 @@ window.onload = function(){
                 $(last).removeClass('last');
             });
             
-            $('.development .collects').text(country.domains.development.metric_count+' metrics across '+country.domains.development.themes.length+' themes');
+            $('#development .collects').text(country.domains.development.metric_count+' metrics across '+country.domains.development.themes.length+' themes');
             $(country.domains.development.themes).each(function(){
                 var theme = $(this)[0];
-                $('.development .themes').append('<li class="theme last"></li>');
+                $('#development .themes').append('<li class="theme last"></li>');
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
@@ -241,10 +241,10 @@ window.onload = function(){
                 $(last).removeClass('last');
             });
             
-            $('.rights .collects').text(country.domains.rights.metric_count+' metrics across '+country.domains.rights.themes.length+' themes');
+            $('#rights .collects').text(country.domains.rights.metric_count+' metrics across '+country.domains.rights.themes.length+' themes');
             $(country.domains.rights.themes).each(function(){
                 var theme = $(this)[0];
-                $('.rights .themes').append('<li class="theme last"></li>');
+                $('#rights .themes').append('<li class="theme last"></li>');
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
@@ -261,10 +261,10 @@ window.onload = function(){
                 $(last).removeClass('last');
             });
             
-            $('.demand .collects').text(country.domains.demand.metric_count+' metrics across '+country.domains.demand.themes.length+' themes');
+            $('#demand .collects').text(country.domains.demand.metric_count+' metrics across '+country.domains.demand.themes.length+' themes');
             $(country.domains.demand.themes).each(function(){
                 var theme = $(this)[0];
-                $('.demand .themes').append('<li class="theme last"></li>');
+                $('#demand .themes').append('<li class="theme last"></li>');
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
@@ -281,10 +281,10 @@ window.onload = function(){
                 $(last).removeClass('last');
             });
             
-            $('.supply .collects').text(country.domains.supply.metric_count+' metrics across '+country.domains.supply.themes.length+' themes');
+            $('#supply .collects').text(country.domains.supply.metric_count+' metrics across '+country.domains.supply.themes.length+' themes');
             $(country.domains.supply.themes).each(function(){
                 var theme = $(this)[0];
-                $('.supply .themes').append('<li class="theme last"></li>');
+                $('#supply .themes').append('<li class="theme last"></li>');
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
@@ -301,10 +301,10 @@ window.onload = function(){
                 $(last).removeClass('last');
             });
             
-            $('.international .collects').text(country.domains.international.metric_count+' metrics across '+country.domains.international.themes.length+' theme');
+            $('#international .collects').text(country.domains.international.metric_count+' metrics across '+country.domains.international.themes.length+' theme');
             $(country.domains.international.themes).each(function(){
                 var theme = $(this)[0];
-                $('.international .themes').append('<li class="theme last"></li>');
+                $('#international .themes').append('<li class="theme last"></li>');
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
