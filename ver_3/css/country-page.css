@@ -360,13 +360,15 @@ summary:focus {
 	display: inline-block;
 	width: 33%;
 	vertical-align: top;
-	position: fixed;
+    top:77px;
+	position: absolute;
 }
 .country-in-context .bubble {
 	border-radius: 6px;
 	margin: 1rem 0 0 1rem;
 	background-color: rgba(0,0,0,0.025);
 	border: 1px solid rgb(235,235,235);
+    transition: filter 100ms;
 }
 .bubble header {
 	font-size: 0.8rem;
@@ -399,6 +401,9 @@ summary:focus {
 	margin-right: 3px;
 	top: -2px;
 }
+.bubble.inactive {
+	filter: blur(3px);
+}
 
 .alternate-description {
 	position: absolute;
@@ -410,13 +415,13 @@ summary:focus {
 	color: white;
 	margin: 2rem 1rem 2rem 2rem;
 	line-height: 1.4;
+    opacity:0;
+    pointer-events: none;
+    transition:opacity 100ms;
 }
 .alternate-description header {
 	margin-bottom: 0.75rem;
 	font-size: 0.8rem;
-}
-.bubble.inactive {
-	filter: blur(3px);
 }
 
 /* Modifiers */

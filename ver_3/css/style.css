@@ -121,7 +121,6 @@ body {
     color: rgba(0,0,0,0.75);
 }
 
-
 @keyframes fadein {
     from {opacity: 0;}
     to {top: 1;}

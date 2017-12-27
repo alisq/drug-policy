@@ -198,6 +198,14 @@ window.onload = function(){
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
+                $(last).on('mouseenter', function(){
+                    $('.bubble').addClass('inactive');
+                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                }).on('mouseleave', function(){
+                    $('.bubble').removeClass('inactive');
+                    $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
+                });
+                
                 $(last).removeClass('last');
             });
             
@@ -217,6 +225,14 @@ window.onload = function(){
                     $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
+                
+                $(last).on('mouseenter', function(){
+                    $('.bubble').addClass('inactive');
+                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                }).on('mouseleave', function(){
+                    $('.bubble').removeClass('inactive');
+                    $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
+                });
                 
                 $(last).removeClass('last');
             });
@@ -238,6 +254,14 @@ window.onload = function(){
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
+                $(last).on('mouseenter', function(){
+                    $('.bubble').addClass('inactive');
+                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                }).on('mouseleave', function(){
+                    $('.bubble').removeClass('inactive');
+                    $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
+                });
+                
                 $(last).removeClass('last');
             });
             
@@ -257,6 +281,14 @@ window.onload = function(){
                     $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
+                
+                $(last).on('mouseenter', function(){
+                    $('.bubble').addClass('inactive');
+                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                }).on('mouseleave', function(){
+                    $('.bubble').removeClass('inactive');
+                    $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
+                });
                 
                 $(last).removeClass('last');
             });
@@ -278,6 +310,14 @@ window.onload = function(){
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
+                $(last).on('mouseenter', function(){
+                    $('.bubble').addClass('inactive');
+                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                }).on('mouseleave', function(){
+                    $('.bubble').removeClass('inactive');
+                    $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
+                });
+                
                 $(last).removeClass('last');
             });
             
@@ -297,6 +337,14 @@ window.onload = function(){
                     $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
+                
+                $(last).on('mouseenter', function(){
+                    $('.bubble').addClass('inactive');
+                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                }).on('mouseleave', function(){
+                    $('.bubble').removeClass('inactive');
+                    $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
+                });
                 
                 $(last).removeClass('last');
             });
@@ -318,6 +366,14 @@ window.onload = function(){
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
+                $(last).on('mouseenter', function(){
+                    $('.bubble').addClass('inactive');
+                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                }).on('mouseleave', function(){
+                    $('.bubble').removeClass('inactive');
+                    $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
+                });
+                
                 $(last).removeClass('last');
             });
         };
@@ -336,4 +392,14 @@ window.onload = function(){
         localStorage.setItem('countryArray', JSON.stringify(countryArray));
         window.location = 'themes.html';
     });
+}
+
+window.onscroll = function(){
+    var scrollTop = $(window).scrollTop();
+    
+    if (scrollTop > 77){
+        $('.country-in-context').css({position: 'fixed', 'top': '0'});
+    } else if (scrollTop <= 77){
+        $('.country-in-context').css({position: 'absolute', 'top': '77px'});
+    }
 }

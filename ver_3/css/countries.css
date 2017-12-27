@@ -252,10 +252,10 @@ main.countries-page {
     height:20px;
 }
 
+/*
 .country-domain:hover {
     background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
 }
-
  
 .country-domain.demand {
     background: linear-gradient(to right, rgba(115,50,255,0.9), rgba(75,0,235,0.9));
@@ -284,7 +284,35 @@ main.countries-page {
 .country-domain.supply {
     background: linear-gradient(to right, rgba(115,50,255,0.3), rgba(75,0,235,0.3));
 } 
+*/
 
+.country-domain.demand {
+    background:skyblue;
+}
+
+.country-domain.development {
+    background:yellow;
+}
+
+.country-domain.health {
+    background:red;
+}
+
+.country-domain.international {
+    background:green;
+}
+
+.country-domain.peace {
+    background:pink;
+}
+
+.country-domain.rights {
+    background:orange;
+}
+
+.country-domain.supply {
+    background:purple;
+}
 
 .tool-tip{
     position:absolute;
