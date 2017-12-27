@@ -199,9 +199,11 @@ window.onload = function(){
                 }
                 
                 $(last).on('mouseenter', function(){
+                    $(this).addClass('active');
                     $('.bubble').addClass('inactive');
                     $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
                 }).on('mouseleave', function(){
+                    $(this).removeClass('active');
                     $('.bubble').removeClass('inactive');
                     $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
                 });

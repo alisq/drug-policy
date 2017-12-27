@@ -338,6 +338,9 @@ details.strategies > summary h2 {
 .theme li {
 	padding: 0;
 }
+.theme.active {
+    background:rgb(245, 245, 245);
+}
 summary:focus {
 	outline: 0px;
 }
