@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+    color:black;
+}
+
+body {
+    position:relative;
+    width:100%;
+    height:auto;
+    margin:0;
+    font-family: 'Atlas Grotesk';
+}
+
+main {
+    position:relative;
+    margin:20px auto 60px auto;
+    width:830px;
+}
+
+main > header > h1 {
+    margin:0 0 10px 0;
+    padding:0;
+    font-weight:400;
+    font-size: 30px;
+    line-height:30px;
+}
+
+main > header > nav {
+    width:100%;
+    padding:14px;
+    background:rgb(240,240,240);
+    border-radius:6px;
+    display:flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+main > header > nav p {
+    padding:0;
+    margin:0 0 8px 0;
+    font-size:15px;
+    line-height:15px;
+    color:rgb(125,125,125);
+}
+
+.theme-views {
+    display: flex;
+}
+
+.theme-views .button{
+    margin:0 2px 0 0;
+    padding:6px 8px 5px 8px;
+    font-family: 'Atlas Grotesk';
+    font-size:15px;
+    line-height:15px;
+    color:rgb(125,125,125);
+    
+    border:1px solid rgb(240,240,240);
+    border-radius:4px;
+}
+
+.theme-views .button.selected{
+    color:rgb(240,240,240);
+    background:rgb(125,125,125);
+}
+
+.theme-views .button:hover{
+    border:1px solid rgb(125,125,125);
+    cursor:pointer;
+}
+
+main > section {
+    margin:20px 0 0 0;
+    display:flex;
+    flex-wrap: wrap;
+    align-items:flex-start;
+    justify-content: space-between;
+}
+
+.theme {
+    margin:0 0 12px 0;
+    padding:14px;
+    border-radius:6px;
+    border:1px solid rgb(200,200,200);
+    width:100%;
+}
+
+.theme-title {
+    margin:0;
+    font-weight: 600;
+    color:black;
+    font-size:15px;
+    line-height:15px;
+}
+
+.theme-subtitle {
+    margin:6px 0 0 0;
+    padding:0;
+    font-weight: 400;
+    color:rgb(150,150,150);
+    font-size:15px;
+    line-height:15px;
+}
+
+.country-flags{
+    margin:10px 0 0 0;
+}
+
+.flag-icon{
+    background-size:cover; 
+}
+
+.flag-icon + .flag-icon{
+    margin:0 0 0 4px;
+}
+
+.theme summary{
+    margin:12px 0 0 0;
+    color:rgb(150,150,150);
+    font-size: 15px;
+    line-height:15px;
+    cursor:pointer;
+    outline:none;
+}
+
+.theme summary::before {
+    font-family: FontAwesome;
+    content: "\f07b";
+    margin-right: 5px;
+    display: inline-block;
+    transition: 0.5s transform;
+}
+
+summary::-webkit-details-marker { display:none; }
+
+.theme-country{
+    margin:8px 0 0 0;
+}
+
+.theme-country-name{
+    margin:0;
+    font-weight: 600;
+    color:black;
+    font-size:15px;
+    line-height:15px;
+}
+
+.theme-country ul{
+    list-style-type: none;
+    padding-left: 12px;
+    background: rgba(0,0,0,0.03);
+    border-radius: 4px;
+    padding: 12px 33px;
+    margin: 5px 25px 10px auto;
+}
+
+.theme-country .flag-icon{
+    margin:0 8px 0 0;
+}
+
+.theme-country summary {
+    margin:5px 0 0 29px;
+    color: rgba(0,0,0,0.5);
+    cursor:pointer;
+    outline:none;
+    font-size: 0.8rem;
+}
+
+.theme-country summary::before {
+    font-family: FontAwesome;
+    content: "\f0da";
+    margin-right: 5px;
+    display: inline-block;
+    transition: 0.5s transform;
+}
+
+.theme-country li{
+    padding:15px 0 15px 0;
+}
+
+.theme-country li + li{
+    border-top: 2px solid rgba(0,0,0,0.05);
+}
+
+.theme-country small{
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.5);
+}

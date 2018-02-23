@@ -1,0 +1,335 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+    color:black;
+}
+
+body {
+    position:relative;
+    width:100%;
+    height:auto;
+    margin:0;
+    font-family: 'Atlas Grotesk';
+}
+
+main {
+    position:relative;
+    margin:20px auto 60px auto;
+    width:830px;
+}
+
+main > header > h1 {
+    margin:0 0 10px 0;
+    padding:0;
+    font-weight:400;
+    font-size: 30px;
+    line-height:30px;
+}
+
+nav.toggles {
+    width:100%;
+    padding: 1rem 2rem 1.25rem;
+    background:rgb(240,240,240);
+    border-radius:6px;
+    display: block;
+}
+
+nav.toggles p {
+    padding:0;
+    margin:0 0.5rem 0 0;
+    font-size:15px;
+    line-height:15px;
+    color:rgb(125,125,125);
+}
+.country-filters {
+    margin-right: 1rem;
+    display: inline-block;
+}
+.country-filters select {
+    margin:0 6px 0 0;
+    padding:6px 8px 6px 8px;
+    font-family: 'Atlas Grotesk';
+    font-size:15px;
+    line-height:15px;
+    border:none;
+    border-radius:4px;
+    background:white;
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    cursor: pointer;
+}
+.country-filters select:after {
+    font-family: FontAwesome;
+    content: "\f0d7";
+    color: black;
+}
+
+.country-view-toggles {
+    display: inline-block;
+}
+
+.country-views {
+    display: inline-block;
+    margin-right: 0.25rem;
+}
+
+.country-views .button{
+    padding: 6px 8px 5px 8px;
+    font-family: 'Atlas Grotesk';
+    font-size:15px;
+    line-height:15px;
+    color: white;
+    background: linear-gradient(to bottom right, rgba(115,50,255,0.6), rgba(75,0,235,0.6));
+    opacity: 0.9;
+    transition: opacity 0.2s;
+    display: inline-block;
+}
+
+.country-views .button:first-of-type {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    margin-right: -5px;
+}
+.country-views .button:last-of-type {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.country-views .column-one{
+    margin:0 6px 0 0;
+}
+
+.country-views .button.selected{
+    color: rgba(255,255,255,1);
+    background: linear-gradient(to bottom right, rgba(115,50,255,1), rgba(75,0,235,1));
+}
+
+.country-views .button:hover{
+    cursor:pointer;
+    opacity: 1;
+}
+
+main.countries-page {
+    width: auto;
+    margin: 0;
+}
+.countries-page h1 {
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.25);
+    padding: 1rem 2rem;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+.toggles {
+    padding-left: 2rem;
+}
+.country-filters p, .country-filters select {
+    display: inline-block;
+}
+.country-filters p {
+    margin-right: 0.5rem;
+}
+
+@media screen and (min-width: 1016px) and (max-width: 1220px) {
+    .country-view-toggles {
+        vertical-align: top;
+    }
+    .country-views {
+        display: block;  
+    }
+    .country-views:first-of-type {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 1015px) {
+    .country-view-toggles { 
+        display: block;
+        margin-top: 0.5rem;
+    }
+    .country-views {
+        display: inline-block;  
+    }
+}
+
+.countries {
+    margin: 0;
+    padding: 0;
+    display:flex;
+    flex-wrap: wrap;
+    align-items:flex-start;
+}
+
+.label-bar {
+    padding:0 0 24px 140px;
+    width:100%;
+    height:20px;
+    
+    font-size:14px;
+    line-height:14px;
+    color:rgb(180,180,180);
+}
+
+.country-bar {
+    height:20px;
+    display:flex;
+    flex-wrap: wrap;
+    transition: height 200ms;
+    cursor:pointer;
+    padding: 0 2rem;
+}
+
+.country-bar:first-of-type {
+    margin-top: 1rem;
+}
+
+.country-bar + .country-bar {
+    margin:6px 0 0 0;
+}
+
+.country-bar .country-name {
+    margin:0;
+    padding:3px 0 0 0;
+    
+    position:relative;
+    line-height:14px;
+    width:140px;
+    height:20px;
+    opacity: 0.8;
+    
+    white-space: nowrap;
+    overflow:hidden;
+    
+    align-self: flex-start;
+
+    transition: opacity 0.3s;
+}
+.country-bar:hover .country-name {
+    opacity: 1;
+}
+
+
+.country-bar .flag-icon {
+    position:relative;
+    top:-1px;
+    border-radius:2px;
+    margin-right:6px;
+    background-size:cover;
+    overflow:visible;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.25);
+}
+
+.country-bar .country-chart {
+    margin:0 6px 0 0;
+    background: linear-gradient(to right, rgba(115,50,255,0.7), rgba(75,0,235,0.7));
+    border-radius:4px;
+    display:flex;
+    overflow:hidden;
+    
+    height:20px;
+    align-self: flex-start;
+}
+.country-chart.chart-hover {
+    background: linear-gradient(to right, rgba(115,50,255,0.6), rgba(75,0,235,0.6));
+}
+
+.country-bar .country-metrics {
+    margin:0;
+    padding:3px 0 0 0;
+    line-height:14px;
+    
+    align-self:flex-start;
+    
+    height:20px;
+    color: rgba(0,0,0,0.35);
+}
+
+.country-domain {
+    height:20px;
+}
+
+/*
+.country-domain:hover {
+    background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
+}
+ 
+.country-domain.demand {
+    background: linear-gradient(to right, rgba(115,50,255,0.9), rgba(75,0,235,0.9));
+}
+
+.country-domain.development {
+    background: linear-gradient(to right, rgba(115,50,255,0.8), rgba(75,0,235,0.8));
+}
+
+.country-domain.health {
+    background: linear-gradient(to right, rgba(115,50,255,0.7), rgba(75,0,235,0.7));
+}
+
+.country-domain.international {
+    background: linear-gradient(to right, rgba(115,50,255,0.6), rgba(75,0,235,0.6));
+}
+
+.country-domain.peace {
+    background: linear-gradient(to right, rgba(115,50,255,0.5), rgba(75,0,235,0.5));
+}
+
+.country-domain.rights {
+    background: linear-gradient(to right, rgba(115,50,255,0.4), rgba(75,0,235,0.4));
+}
+
+.country-domain.supply {
+    background: linear-gradient(to right, rgba(115,50,255,0.3), rgba(75,0,235,0.3));
+} 
+*/
+
+.country-domain.demand {
+    background:skyblue;
+}
+
+.country-domain.development {
+    background:yellow;
+}
+
+.country-domain.health {
+    background:red;
+}
+
+.country-domain.international {
+    background:green;
+}
+
+.country-domain.peace {
+    background:pink;
+}
+
+.country-domain.rights {
+    background:orange;
+}
+
+.country-domain.supply {
+    background:purple;
+}
+
+.tool-tip{
+    position:absolute;
+    border-radius:4px;
+    font-size: 1rem;
+    line-height: 1rem;
+    background:white;
+    display:none;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.25);
+}
+
+.tool-tip span {
+    display: inline-block;
+    padding: 6px 6px 4px 6px;
+}
+
+.tool-tip .count {
+    background-color: rgba(0,0,0,0.05);
+    color: rgba(0,0,0,0.6);
+}
