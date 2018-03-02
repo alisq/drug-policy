@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src='scripts/analysis.js'></script>
+        <script src='scripts/nav.js'></script>
+        <script src='scripts/d3.min.js'></script>
+
+        <link rel="stylesheet" href="css/analysis.css">
+        <link rel="stylesheet" href="css/nav.css">
+
+        <link rel="stylesheet" href="css/flag-icon.min.css">
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+        
+        <meta charset='utf-8'>
+    </head>
+    <body>
+        <nav id="top-nav" class="fixed-nav">
+            <section>
+                <p id="site-name"><a href="index.html">DrugStrat<sup>BETA</sup></a></p>
+                <ul>
+                    <li class='nav-countries'><a href="countries.html">Countries</a></li>
+                    <li class='nav-themes'><a href="themes.html">Themes</a></li>
+                    <li class='nav-analysis'><a href="analysis.html">Analysis</a></li>
+                    <li class='nav-about'><a href="about.html">About this Site</a></li>
+                </ul>
+            </section>
+            <div class="breadcrumb">
+                <p>
+                    <a href="index.html">Home</a> <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    <a href="analysis.html">Analysis</a>
+                </p>
+            </div>
+        </nav>
+        <main>
+            <header>
+                <h1>Analysis</h1>
+                <nav class='toggles'>
+                    <div class='charts'>
+                        <div class='button scatter-button selected'>Scatterplot</div>
+                        <div class='button bar-button'>Bar Chart</div>
+                    </div>
+                </nav>
+            </header>
+            <div class='data'>
+                <div class='dimension'>
+                    <div class='dimension-title'>Outcomes — X Axis</div>
+                    <select class='x-axis'>
+                        <option selected value='males'>% of Homocides by Males</option>
+                        <option value='females'>% of Homocides by Females</option>
+                    </select>
+                </div>
+                <div class='dimension'>
+                    <div class='dimension-title'>Metrics Collected — Y Axis</div>
+                    <select class='y-axis'>
+                        <option selected value='rights'>Total Human Rights Metrics Collected</option>
+                        <option value='health'>Total Health Metrics Collected</option>
+                        <option value='development'>Total Development Metrics Collected</option>
+                        <option value='demand'>Total Demand Metrics Collected</option>
+                        <option value='supply'>Total Supply Metrics Collected</option>
+                        <option value='peace'>Total Peace &amp; Security Metrics Collected</option>
+                        <option value='international'>Total International Cooperation Metrics Collected</option>
+                    </select>
+                </div>
+            </div>
+            <div class='chart'>
+                <div class='chart-svg'></div>
+            </div>
+        </main>
+        <div class='chart-hover'>
+            <div class='country-name'></div>
+            <div class='country-data-x'></div>
+            <div class='country-data-y'></div>
+        </div>
+        <footer>
+            <p id="site-name"><a href="index.html">DrugStrat<sup>BETA</sup></a></p>
+            <ul>
+                <li class='nav-countries'><a href="countries.html">Countries</a></li>
+                <li class='nav-themes'><a href="themes.html">Themes</a></li>
+                <li class='nav-analysis'><a href="analysis.html">Analysis</a></li>
+                <li class='nav-about'><a href="about.html">About this Site</a></li>
+            </ul>
+        </footer>
+    </body>
+</html>

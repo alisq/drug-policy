@@ -41,6 +41,7 @@ window.onload = function() {
                     policies = [];
                     
                     country.name = d.Country;
+                    country.shortName = d['Short name of country'];
                     country.continent = d.Continent;
                     country.region = d.Region;
                     country.ISO = d.ISO;
@@ -370,16 +371,4 @@ window.onload = function() {
             $('.country-card .domain-cards').css({'display':'none'});
         }
     };
-    
-    /// NAV ///
-    
-    $('.nav-countries').click(function(){
-        localStorage.setItem('countryArray', JSON.stringify(countryArray));
-        window.location = 'countries.html';
-    });
-
-    $('.nav-themes').click(function(){
-        localStorage.setItem('countryArray', JSON.stringify(countryArray));
-        window.location = 'themes.html';
-    });
 };
