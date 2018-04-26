@@ -1,6 +1,5 @@
 window.onload = function(){
     console.log('countries.js loaded');
-    
     var mainWidth = $('main').width();
     
     var allCountryArray = JSON.parse(localStorage.getItem('countryArray'));

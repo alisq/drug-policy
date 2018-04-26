@@ -3,7 +3,6 @@
 	<head> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="scripts/themes.js"></script>
-        <script src="scripts/nav.js"></script>
         
 		<link rel="stylesheet" href="css/themes.css">
         <link rel='stylesheet' href='css/nav.css'>
@@ -35,17 +34,25 @@
         <main>
             <header>
                 <h1>Themes</h1>
-                <nav>
-                    <div class='theme-views'>
-                        <div class='button most-metrics selected'>Most Metrics</div>
-                        <div class='button least-metrics'>Fewest Metrics</div>
-                        <div class='button most-countries'>Most Countries</div>
-                        <div class='button least-countries'>Fewest Countries</div>
-                    </div>
+                <nav class='toggles'>
+                    <div class='button most-metrics selected'>Most Metrics</div>
+                    <div class='button least-metrics'>Fewest Metrics</div>
+                    <div class='button most-countries'>Most Countries</div>
+                    <div class='button least-countries'>Fewest Countries</div>
                 </nav>
             </header>
             <section class='themes'>
             </section>
         </main>
+        <footer>
+            <p id="site-name"><a href="index.html">DrugStrat<sup>BETA</sup></a></p>
+            <ul>
+                <li class='nav-countries'><a href="countries.html">Countries</a></li>
+                <li class='nav-themes'><a href="themes.html">Themes</a></li>
+                <li class='nav-analysis'><a href="analysis.html">Analysis</a></li>
+                <li class='nav-about'><a href="about.html">About this Site</a></li>
+            </ul>
+        </footer>
+        <div class='flag-hover-name'>Pakistan</div>
     </body>
 </html>

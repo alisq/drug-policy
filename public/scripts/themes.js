@@ -79,26 +79,24 @@ window.onload = function(){
         $('.theme').remove();
         
         $(array).each(function(){
-            $('.themes').append('<div class="theme last"><p class="theme-title">'+this.theme+'</p><p class="theme-subtitle"></p><div class="country-flags"></div><details><summary>See Metrics</summary><div class="theme-metrics"></div></details></div>');
+            $('.themes').append('<div class="theme last"><p class="theme-title">'+this.theme+'</p><p class="theme-subtitle"></p><div class="country-flags"></div></div>');
             
             $(this.countries).each(function(){
-                $('.last .country-flags').append('<span class="flag-icon flag-icon-'+this.ISO_2+'"></span>');
-                $('.last .theme-metrics').append('<div class="theme-country"><div class="theme-country-name"><span class="flag-icon flag-icon-'+this.ISO_2+'"></span>'+this.name+'</div><details><summary>'+this.metrics.length+' metrics</summary><ul class="last-ol"></ul></details></div>');
-                
-                $(this.metrics).each(function(){
-                    $('.last-ol').append('<li>'+this[0]+'<small>'+this[1]+'</small></li>');
-                });
-                
-                $('.last-ol').removeClass('last-ol');
+                $('.last .country-flags').append('<span data-name='+this.name+' class="last flag-icon flag-icon-'+this.ISO_2+'"></span>');
+                $('.last.flag-icon').on('mousemove', function(e){
+                    var xPos = e.clientX;
+                    var yPos = e.clientY;
+                    var yScroll = $(window).scrollTop();
+                    var country = $(this).attr('data-name');
+                    $('.flag-hover-name').css({'top':yPos + yScroll - 24 + 'px', 'left':xPos + 10 + 'px', 'opacity':1})
+                        .text(country);
+                }).on('mouseleave', function(){
+                    $('.flag-hover-name').css('opacity',0);
+                }).removeClass('last');
             });
             
-//            $('.last .metrics-button').on('click', function(){
-//                $(this).siblings('.theme-metrics').css('display', 'block');
-//            });
-            
             $('.last .theme-subtitle').text(this.metric_count+' metrics collected by '+this.country_count+' countries');
-            
-            $('.last').removeClass('last');
+            $('.last.theme').removeClass('last');
         });
     };
     

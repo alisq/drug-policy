@@ -2,7 +2,10 @@ window.onload = function(){
     console.log('country-page.js loaded');
     
     var country = JSON.parse(localStorage.getItem('country'));
+    var countries = JSON.parse(localStorage.getItem('countryArray'));
+    var descriptions;
     console.log(country);
+    console.log(countries);
     
     var clearCountry = function(){
         $('.lead-agencies p').remove();
@@ -48,9 +51,28 @@ window.onload = function(){
         };
     };
     
+    var loadDescriptions = function(){
+        d3.csv('data/theme_descriptions.csv', function(data){
+            descriptions = data;
+            countryPolicies(country);
+        });
+    };
+    
+    var getDescription = function(title){
+        var description;
+        $(descriptions).each(function(){
+            if (this.Metric == title){
+                description = this.Definition;
+                return false;
+            };
+        });
+        return description;
+    };
+    
     var countryPolicies = function(country){
         clearCountry();
         
+        $('.small-header h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name);
         $('nav .country').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span> ' + country.name);
         $('.country-profile h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span> ' + country.name);
         $('.country-profile .continent').text(country.continent);
@@ -188,20 +210,27 @@ window.onload = function(){
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
-                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' metrics</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
                         $(last).find('ol').append('<li>'+$(this)[0]+'<small>'+$(this)[1]+'</small></li>');
                     });
                 } else { //if theme does not have metrics
-                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
                 $(last).on('mouseenter', function(){
                     $(this).addClass('active');
                     $('.bubble').addClass('inactive');
-                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                    var descriptionDiv = $('.alternate-description');
+                    $(descriptionDiv).css({'opacity':'1', 'pointer-events':'auto'});
+                    
+                    var metricTitle = $(this).children('h4').text();
+                    var metricDescription = getDescription(metricTitle);
+                    
+                    $(descriptionDiv).children('header').text(metricTitle);
+                    $(descriptionDiv).children('main').text(metricDescription);
                 }).on('mouseleave', function(){
                     $(this).removeClass('active');
                     $('.bubble').removeClass('inactive');
@@ -218,20 +247,29 @@ window.onload = function(){
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
-                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' metrics</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
                         $(last).find('ol').append('<li>'+$(this)[0]+'<small>'+$(this)[1]+'</small></li>');
                     });
                 } else { //if theme does not have metrics
-                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
                 $(last).on('mouseenter', function(){
+                    $(this).addClass('active');
                     $('.bubble').addClass('inactive');
-                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                    var descriptionDiv = $('.alternate-description');
+                    $(descriptionDiv).css({'opacity':'1', 'pointer-events':'auto'});
+                    
+                    var metricTitle = $(this).children('h4').text();
+                    var metricDescription = getDescription(metricTitle);
+                    
+                    $(descriptionDiv).children('header').text(metricTitle);
+                    $(descriptionDiv).children('main').text(metricDescription);
                 }).on('mouseleave', function(){
+                    $(this).removeClass('active');
                     $('.bubble').removeClass('inactive');
                     $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
                 });
@@ -246,20 +284,29 @@ window.onload = function(){
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
-                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' metrics</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
                         $(last).find('ol').append('<li>'+$(this)[0]+'<small>'+$(this)[1]+'</small></li>');
                     });
                 } else { //if theme does not have metrics
-                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
                 $(last).on('mouseenter', function(){
+                    $(this).addClass('active');
                     $('.bubble').addClass('inactive');
-                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                    var descriptionDiv = $('.alternate-description');
+                    $(descriptionDiv).css({'opacity':'1', 'pointer-events':'auto'});
+                    
+                    var metricTitle = $(this).children('h4').text();
+                    var metricDescription = getDescription(metricTitle);
+                    
+                    $(descriptionDiv).children('header').text(metricTitle);
+                    $(descriptionDiv).children('main').text(metricDescription);
                 }).on('mouseleave', function(){
+                    $(this).removeClass('active');
                     $('.bubble').removeClass('inactive');
                     $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
                 });
@@ -274,20 +321,29 @@ window.onload = function(){
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
-                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' metrics</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
                         $(last).find('ol').append('<li>'+$(this)[0]+'<small>'+$(this)[1]+'</small></li>');
                     });
                 } else { //if theme does not have metrics
-                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
                 $(last).on('mouseenter', function(){
+                    $(this).addClass('active');
                     $('.bubble').addClass('inactive');
-                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                    var descriptionDiv = $('.alternate-description');
+                    $(descriptionDiv).css({'opacity':'1', 'pointer-events':'auto'});
+                    
+                    var metricTitle = $(this).children('h4').text();
+                    var metricDescription = getDescription(metricTitle);
+                    
+                    $(descriptionDiv).children('header').text(metricTitle);
+                    $(descriptionDiv).children('main').text(metricDescription);
                 }).on('mouseleave', function(){
+                    $(this).removeClass('active');
                     $('.bubble').removeClass('inactive');
                     $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
                 });
@@ -302,20 +358,29 @@ window.onload = function(){
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
-                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' metrics</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
                         $(last).find('ol').append('<li>'+$(this)[0]+'<small>'+$(this)[1]+'</small></li>');
                     });
                 } else { //if theme does not have metrics
-                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
                 $(last).on('mouseenter', function(){
+                    $(this).addClass('active');
                     $('.bubble').addClass('inactive');
-                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                    var descriptionDiv = $('.alternate-description');
+                    $(descriptionDiv).css({'opacity':'1', 'pointer-events':'auto'});
+                    
+                    var metricTitle = $(this).children('h4').text();
+                    var metricDescription = getDescription(metricTitle);
+                    
+                    $(descriptionDiv).children('header').text(metricTitle);
+                    $(descriptionDiv).children('main').text(metricDescription);
                 }).on('mouseleave', function(){
+                    $(this).removeClass('active');
                     $('.bubble').removeClass('inactive');
                     $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
                 });
@@ -330,20 +395,29 @@ window.onload = function(){
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
-                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' metrics</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
                         $(last).find('ol').append('<li>'+$(this)[0]+'<small>'+$(this)[1]+'</small></li>');
                     });
                 } else { //if theme does not have metrics
-                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
                 $(last).on('mouseenter', function(){
+                    $(this).addClass('active');
                     $('.bubble').addClass('inactive');
-                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                    var descriptionDiv = $('.alternate-description');
+                    $(descriptionDiv).css({'opacity':'1', 'pointer-events':'auto'});
+                    
+                    var metricTitle = $(this).children('h4').text();
+                    var metricDescription = getDescription(metricTitle);
+                    
+                    $(descriptionDiv).children('header').text(metricTitle);
+                    $(descriptionDiv).children('main').text(metricDescription);
                 }).on('mouseleave', function(){
+                    $(this).removeClass('active');
                     $('.bubble').removeClass('inactive');
                     $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
                 });
@@ -358,20 +432,29 @@ window.onload = function(){
                 var last = $('.last');
                 
                 if (theme.metrics.length > 0){ //if theme has metrics
-                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' metrics</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
                         $(last).find('ol').append('<li>'+$(this)[0]+'<small>'+$(this)[1]+'</small></li>');
                     });
                 } else { //if theme does not have metrics
-                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i> '+theme.theme+'</h4>');
+                    $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
                 
                 $(last).on('mouseenter', function(){
+                    $(this).addClass('active');
                     $('.bubble').addClass('inactive');
-                    $('.alternate-description').css({'opacity':'1', 'pointer-events':'auto'});
+                    var descriptionDiv = $('.alternate-description');
+                    $(descriptionDiv).css({'opacity':'1', 'pointer-events':'auto'});
+                    
+                    var metricTitle = $(this).children('h4').text();
+                    var metricDescription = getDescription(metricTitle);
+                    
+                    $(descriptionDiv).children('header').text(metricTitle);
+                    $(descriptionDiv).children('main').text(metricDescription);
                 }).on('mouseleave', function(){
+                    $(this).removeClass('active');
                     $('.bubble').removeClass('inactive');
                     $('.alternate-description').css({'opacity':'0', 'pointer-events':'none'});
                 });
@@ -381,15 +464,95 @@ window.onload = function(){
         };
     };
     
-    countryPolicies(country);
+    var createContext = function(){
+        comparableMetrics();
+        sameRegion();
+        sameIncome();
+    };
+    
+    var comparableMetrics = function(){
+        var countryMetrics = country.domains.total_metric_count;
+        var comparableArray = [];
+        $(countries).each(function(){
+            if (this.domains){
+                var upperRange = country.domains.total_metric_count - this.domains.total_metric_count;
+                if (this.name != country.name && (upperRange <= 10 && upperRange >= -10)){
+                    comparableArray.push(this);
+                }
+            }
+        });
+        
+        comparableArray.sort(function(a, b) {
+            return b.domains.total_metric_count - a.domains.total_metric_count;
+        });
+        
+        if (comparableArray.length > 0){
+            $('.comparable-metrics').css('display', 'block');
+            $(comparableArray).each(function(){
+                $('.comparable-metrics main').append('<p><a href=""><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span> — '+this.domains.total_metric_count+'</a></p>');
+            });
+        };
+    }
+    
+    var sameRegion = function(){
+        var countryRegion = country.region;
+        var regionArray = [];
+        
+        $(countries).each(function(){
+            if (this.region){
+                if (this.name != country.name && this.region == countryRegion){
+                    regionArray.push(this);
+                }
+            }
+        });
+        
+        if (regionArray.length > 0){
+            $('.comparable-region').css('display', 'block');
+            $('.comparable-region header').text('Other Countries in ' + countryRegion);
+            $(regionArray).each(function(){
+                $('.comparable-region main').append('<p><a href=""><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
+            });
+        };
+    }
+    
+    var sameIncome = function(){
+        var countryIncome = country.income;
+        var incomeArray = [];
+        
+        $(countries).each(function(){
+            if (this.income){
+                if (this.name != country.name && this.income == countryIncome){
+                    incomeArray.push(this);
+                }
+            }
+        });
+        
+        if (incomeArray.length > 0){
+            $('.comparable-income').css('display', 'block');
+            $('.comparable-income header').text('Other '+ countryIncome +' Income Countries');
+            $(incomeArray).each(function(){
+                $('.comparable-income main').append('<p><a href=""><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
+            });
+        }
+    }
+    
+    loadDescriptions();
+    createContext();
 }
 
 window.onscroll = function(){
     var scrollTop = $(window).scrollTop();
+    var documentHeight = $(document).height();
     
     if (scrollTop > 77){
-        $('.country-in-context').css({position: 'fixed', 'top': '0'});
+        $('.country-in-context').css({position: 'fixed', 'top': '0', 'bottom': 'auto'});
     } else if (scrollTop <= 77){
-        $('.country-in-context').css({position: 'absolute', 'top': '77px'});
-    }
+        $('.country-in-context').css({position: 'absolute', 'top': '77px', 'bottom':'auto'});
+    };
+    
+    if (scrollTop > 149){
+        $('.small-header').addClass('show');
+    } else if (scrollTop <= 149){
+        $('.small-header').removeClass('show');
+    };
 }

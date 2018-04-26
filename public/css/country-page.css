@@ -131,13 +131,35 @@ h2 {
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
-/* .country-snapshot summary main li span {
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	line-height: 1.2;
-	text-shadow: none;
-} */
+.small-header {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:3;
+    background:white;
+    padding:11px 2rem 10px 2rem;
+    box-shadow: -1px 0px 4px rgba(0,0,0,0.25);
+    transform: translateY(-39px);
+    transition: transform 200ms;
+}
+.small-header.show {
+    transform: translateY(0);
+}
+.small-header h1{
+    font-size:18px;
+    line-height:18px;
+    padding:0;
+    margin:0;
+}
+.small-header .flag-icon{
+    position:relative;
+    font-size:16px;
+    line-height:16px;
+    top:-2px;
+    margin:0 8px 0 0;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.25);
+}
 .country-snapshot aside main {
 	font-size: 0.8rem;
 	padding: 10px;
@@ -362,13 +384,15 @@ summary:focus {
 .country-in-context {
 	display: inline-block;
 	width: 33%;
+    height: 100vh;
 	vertical-align: top;
     top:77px;
 	position: absolute;
+    overflow: scroll;
 }
 .country-in-context .bubble {
 	border-radius: 6px;
-	margin: 1rem 0 0 1rem;
+	margin: 1rem 0 1rem 1rem;
 	background-color: rgba(0,0,0,0.025);
 	border: 1px solid rgb(235,235,235);
     transition: filter 100ms;
@@ -408,9 +432,13 @@ summary:focus {
 	filter: blur(3px);
 }
 
+.comparable-metrics, .comparable-region, .comparable-income{
+    display:none;
+}
+
 .alternate-description {
 	position: absolute;
-	top: 2rem;
+	top: 0;
 	background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
 	padding: 2rem;
 	border-radius: 12px;

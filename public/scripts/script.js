@@ -40,16 +40,22 @@ window.onload = function() {
                     country = new Object;
                     policies = [];
                     
-                    country.name = d.Country;
-                    country.shortName = d['Short name of country'];
+                    country.name = d['Country'];
+                    country.longName = d['Long Name'];
                     country.continent = d.Continent;
                     country.region = d.Region;
                     country.ISO = d.ISO;
                     country.ISO_2 = d['ISO 2'];
-                    country.unemployment = d['Unemployment Rate (%  - World Bank)'];
+                    country.unemployment = d['Unemployment Rate (%  - World Bank)']
                     country.GDP = d['GDP (World Bank)'];
                     country.income = d['Income Group (World Bank)'];
-                
+                    
+                    country.unemployment = country.unemployment.substring(0, country.unemployment.length - 1);
+                    
+                    country.GDP = country.GDP.replace(/,/g , "");
+                    country.GDP = country.GDP.split(' USD');
+                    country.GDP = Number(country.GDP[0]);
+                                                        
                     var policy = newPolicy(d);
                     policies.push(policy);
                     country.policies = policies;
@@ -193,6 +199,7 @@ window.onload = function() {
             };
         });
         
+        theme.metric_count = theme.metrics.length;
         return theme;
     };
     
@@ -267,6 +274,7 @@ window.onload = function() {
         });
         
         console.log('Policies and Themes Joined');
+        console.log(countryArray);
         drawCountries();
     };
     
@@ -314,6 +322,7 @@ window.onload = function() {
                     var index = $(this).attr('data-index');
                     var country = countryArray[index];
                 
+                    localStorage.setItem('countryArray', JSON.stringify(countryArray));
                     localStorage.setItem('country', JSON.stringify(country));
                     window.location = 'country-page.html';
                 }).mousemove(function(e){
@@ -371,4 +380,19 @@ window.onload = function() {
             $('.country-card .domain-cards').css({'display':'none'});
         }
     };
+    
+    $('.nav-countries').click(function(){
+        localStorage.setItem('countryArray', JSON.stringify(countryArray));
+        window.location = 'countries.html';
+    });
+
+    $('.nav-themes').click(function(){
+        localStorage.setItem('countryArray', JSON.stringify(countryArray));
+        window.location = 'themes.html';
+    });
+
+    $('.nav-analysis').click(function(){
+        localStorage.setItem('countryArray', JSON.stringify(countryArray));
+        window.location = 'analysis.html';
+    });
 };
