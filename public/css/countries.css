@@ -174,12 +174,16 @@ nav.toggles p {
     padding: 0 2rem;
 }
 
+.country-bar + .country-bar {
+    margin:6px 0 0 0;
+}
+
 .country-bar:first-of-type {
     margin-top: 1rem;
 }
 
-.country-bar + .country-bar {
-    margin:6px 0 0 0;
+.country-bar:last-of-type {
+    margin-bottom: 1.2rem;
 }
 
 .country-bar .country-name {

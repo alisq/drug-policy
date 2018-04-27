@@ -1,3 +1,6 @@
+var headerHeight = 77;
+var footerHeight = 164;
+
 window.onload = function(){
     console.log('country-page.js loaded');
     
@@ -542,13 +545,20 @@ window.onload = function(){
 
 window.onscroll = function(){
     var scrollTop = $(window).scrollTop();
+    var windowHeight = $(window).height();
     var documentHeight = $(document).height();
+    var contextHeight = $('.country-in-context').height();
     
-    if (scrollTop > 77){
-        $('.country-in-context').css({position: 'fixed', 'top': '0', 'bottom': 'auto'});
-    } else if (scrollTop <= 77){
-        $('.country-in-context').css({position: 'absolute', 'top': '77px', 'bottom':'auto'});
-    };
+    if ((scrollTop > headerHeight) && (scrollTop < documentHeight - windowHeight - footerHeight)){
+        $('.country-in-context').css({position: 'fixed', 'top': '0', 'height': windowHeight + 'px'});
+        $('.alternate-description').css('top', '0');
+    } else if (scrollTop <= headerHeight){
+        var countryContextHeight = $('.country-in-context').outerHeight();
+        $('.country-in-context').css({position: 'absolute', 'top': headerHeight + 'px', 'height': (windowHeight - (headerHeight - scrollTop)) + 'px'});
+        $('.alternate-description').css('top', headerHeight + 'px');
+    } else if (scrollTop >= documentHeight - windowHeight - footerHeight){
+        $('.country-in-context').css({position: 'fixed', 'top': '0', 'height': windowHeight - (footerHeight - (documentHeight - (scrollTop + windowHeight))) + 'px'});
+    }
     
     if (scrollTop > 149){
         $('.small-header').addClass('show');

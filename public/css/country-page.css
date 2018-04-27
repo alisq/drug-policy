@@ -1,3 +1,6 @@
+* {
+    box-sizing:border-box;
+}
 body {
 	font-family: 'Atlas Grotesk';
 	margin: 0; 
@@ -50,6 +53,7 @@ h2 {
 	font-size: 1.2rem;
 }
 .country-profile {
+    position:relative;
 	display: inline-block;
 	width: 65%;
 	margin: 0 auto;
@@ -135,7 +139,7 @@ h2 {
     position:fixed;
     top:0;
     left:0;
-    width:100%;
+    width:inherit;
     z-index:3;
     background:white;
     padding:11px 2rem 10px 2rem;
@@ -306,7 +310,7 @@ details.strategies > summary h2 {
 	padding: 10px 15px;
 }
 .metrics-priorities .themes {
-	padding: 5px 15px;
+	padding: 5px 0;
 }
 .metrics-priorities > article ul {
 	list-style: none;
@@ -314,7 +318,7 @@ details.strategies > summary h2 {
 	padding: 0;
 }
 .metrics-priorities > article ul li {
-	padding: 15px 0;
+	padding: 15px 15px;
 	border-bottom: 2px solid rgba(0,0,0,0.05)
 }
 .metrics-priorities .themes li:last-child {
@@ -337,7 +341,7 @@ details.strategies > summary h2 {
 	text-indent: -12px;
 }
 .themes h4 i {
-	margin-right: 6px;
+	margin-right: 10px;
 }
 .metrics-priorities .themes p {
 	margin-left: 26px;
@@ -384,11 +388,15 @@ summary:focus {
 .country-in-context {
 	display: inline-block;
 	width: 33%;
-    height: 100vh;
+    height: calc(100vh - 77px);
 	vertical-align: top;
     top:77px;
 	position: absolute;
-    overflow: scroll;
+    overflow-y:scroll;
+}
+.country-in-context .top-margin {
+    height:0;
+    transition: height 200ms;
 }
 .country-in-context .bubble {
 	border-radius: 6px;
@@ -437,7 +445,7 @@ summary:focus {
 }
 
 .alternate-description {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
 	padding: 2rem;
