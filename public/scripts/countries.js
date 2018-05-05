@@ -1,10 +1,17 @@
 window.onload = function(){
-    console.log('countries.js loaded');
-    var mainWidth = $('main').width();
-    
-    var allCountryArray = JSON.parse(localStorage.getItem('countryArray'));
+    var allCountryArray;
     var countryArray = [];
-    console.log(allCountryArray);
+    
+    function getCountries(){
+        return $.get('/countries');
+    };
+
+    $.when(getCountries()).done(function(data){
+        allCountryArray = data;
+        startVisual();
+    });
+    
+    var mainWidth = $('main').width();
     var metricsSort = 'most';
     var view = 'card';
     
@@ -303,8 +310,6 @@ window.onload = function(){
                     });
             
             }).on('mouseleave', function(d){
-               /* d3.select(this)
-                    .style('background', 'rgb(125,125,125)'); */
                 d3.selectAll('.country-domain').remove();
                 $(this).removeClass('chart-hover');
             });
@@ -325,8 +330,5 @@ window.onload = function(){
             };
         };
         sortArray(countryArray);
-        console.log(countryArray);
     };
-    
-    startVisual();
 };

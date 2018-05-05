@@ -1,9 +1,18 @@
 window.onload = function(){
     var homocideArray = [];
-    var countryArray = JSON.parse(localStorage.getItem('countryArray'));
+    var countryArray;
     var linkedArray = [];
-    var windowWidth = $(window).width();
     
+    function getCountries(){
+        return $.get('/countries');
+    };
+
+    $.when(getCountries()).done(function(data){
+        countryArray = data;
+        getOutcomes();
+    });
+    
+    var windowWidth = $(window).width();
     var svgMaxWidth = 500;
     var svgWidth;
     var svgHeight;
@@ -22,20 +31,22 @@ window.onload = function(){
             .attr("height", svgHeight)
             .attr("overflow", "visible");
     
-    d3.csv('data/homocide_outcomes.csv', function(data){
-        data.forEach(function(d, i){
-            var country = new Object;
-            country.name = d['Country/ territory'];
-            country.source = d.Source;
-            country.year = d.Year;
-            country.males = parseInt(d.Males);
-            country.females = parseInt(d.Females);
-            country.homocide = d['Any Homicide'];
-            
-            homocideArray.push(country);
+    function getOutcomes(){
+        d3.csv('data/homocide_outcomes.csv', function(data){
+            data.forEach(function(d, i){
+                var country = new Object;
+                country.name = d['Country/ territory'];
+                country.source = d.Source;
+                country.year = d.Year;
+                country.males = parseInt(d.Males);
+                country.females = parseInt(d.Females);
+                country.homocide = d['Any Homicide'];
+
+                homocideArray.push(country);
+            });
+            linkData();
         });
-        linkData();
-    });
+    };
     
     function linkData(){
         $(countryArray).each(function(){
@@ -289,6 +300,7 @@ window.onload = function(){
     
     $('.data-button').on('click', function(){
         var dimension = $(this).closest('.dimension').attr('id');
+        $('.data-list.open').removeClass('open');
         $('#' + dimension + ' .data-button.selected').removeClass('selected');
         $(this).addClass('selected');
     });
@@ -374,5 +386,11 @@ window.onload = function(){
             };
         });
     };
+    
+    $(window).on('click', function(event){
+        if(!event.target.closest('.data-list') && !event.target.closest('.data-button')){
+            $('.data-list.open').removeClass('open');
+        };
+    });
     
 };

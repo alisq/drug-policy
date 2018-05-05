@@ -1,14 +1,20 @@
 var headerHeight = 77;
 var footerHeight = 164;
 
-window.onload = function(){
-    console.log('country-page.js loaded');
-    
+window.onload = function() {    
     var country = JSON.parse(localStorage.getItem('country'));
-    var countries = JSON.parse(localStorage.getItem('countryArray'));
+    var countries;
     var descriptions;
-    console.log(country);
-    console.log(countries);
+    
+    function getCountries() {
+        return $.get('/countries');
+    }
+
+    $.when(getCountries()).done(function(data){
+        countries = data;
+        loadDescriptions();
+        createContext();
+    });
     
     var clearCountry = function(){
         $('.lead-agencies p').remove();
@@ -222,6 +228,7 @@ window.onload = function(){
                     $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<p class="grey">No metrics</p>');
                 }
+                
                 
                 $(last).on('mouseenter', function(){
                     $(this).addClass('active');
@@ -538,9 +545,6 @@ window.onload = function(){
             });
         }
     }
-    
-    loadDescriptions();
-    createContext();
 }
 
 window.onscroll = function(){
@@ -564,5 +568,5 @@ window.onscroll = function(){
         $('.small-header').addClass('show');
     } else if (scrollTop <= 149){
         $('.small-header').removeClass('show');
-    };
+    }
 }

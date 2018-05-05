@@ -1,8 +1,15 @@
 window.onload = function(){
-    console.log('themes.js loaded');
-    
-    var allCountryArray = JSON.parse(localStorage.getItem('countryArray'));
+    var allCountryArray
     var themeArray = [];
+    
+    function getCountries(){
+        return $.get('/countries');
+    };
+
+    $.when(getCountries()).done(function(data){
+        allCountryArray = data;
+        getThemes();
+    });
     
     var metricsSort = 'most-metrics'
     
@@ -99,8 +106,6 @@ window.onload = function(){
             $('.last.theme').removeClass('last');
         });
     };
-    
-    getThemes();
     
     /// FILTER AND SORT MENU ///
     
