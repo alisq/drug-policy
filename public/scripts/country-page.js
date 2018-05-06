@@ -2,7 +2,9 @@ var headerHeight = 77;
 var footerHeight = 164;
 
 window.onload = function() {    
-    var country = JSON.parse(localStorage.getItem('country'));
+    var country;
+    var countryName = JSON.parse(localStorage.getItem('country'));
+    console.log(countryName);
     var countries;
     var descriptions;
     
@@ -12,6 +14,15 @@ window.onload = function() {
 
     $.when(getCountries()).done(function(data){
         countries = data;
+        console.log(countries);
+        for (var i=0; i < countries.length; i++){
+            if (countries[i].name == countryName){
+                country = countries[i];
+                console.log(country);
+                break;
+            };
+        };
+        
         loadDescriptions();
         createContext();
     });

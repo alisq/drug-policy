@@ -56,7 +56,6 @@ window.onload = function(){
             this.country_count = countryCount;
         });
         
-        console.log(themeArray);
         sortArray(themeArray);
     };
     
@@ -89,7 +88,7 @@ window.onload = function(){
             $('.themes').append('<div class="theme last"><p class="theme-title">'+this.theme+'</p><p class="theme-subtitle"></p><div class="country-flags"></div></div>');
             
             $(this.countries).each(function(){
-                $('.last .country-flags').append('<span data-name='+this.name+' class="last flag-icon flag-icon-'+this.ISO_2+'"></span>');
+                $('.last .country-flags').append('<span data-name="'+this.name+'" class="last flag-icon flag-icon-'+this.ISO_2+'"></span>');
                 $('.last.flag-icon').on('mousemove', function(e){
                     var xPos = e.clientX;
                     var yPos = e.clientY;
@@ -99,6 +98,10 @@ window.onload = function(){
                         .text(country);
                 }).on('mouseleave', function(){
                     $('.flag-hover-name').css('opacity',0);
+                }).on('click', function(){
+                    var country = $(this).attr('data-name');
+                    localStorage.setItem('country', JSON.stringify(country));
+                    window.location = 'country-page.html';
                 }).removeClass('last');
             });
             

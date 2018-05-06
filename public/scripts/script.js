@@ -54,7 +54,7 @@ window.onload = function() {
                 .attr('data-index', i)
                 .on('click', function(){
                     var index = $(this).attr('data-index');
-                    var country = countryArray[index];
+                    var country = countryArray[index].name;
                 
                     localStorage.setItem('country', JSON.stringify(country));
                     window.location = 'country-page.html';

@@ -152,12 +152,8 @@ window.onload = function(){
             countryCard(filteredArray[i]);
             $('.last').on('click',function(){
                 var countryName = $(this).attr('data-name');
-                for (var i=0; i < filteredArray.length; i++){
-                    if (filteredArray[i].name == countryName){
-                        localStorage.setItem('country', JSON.stringify(filteredArray[i]));
-                        window.location = 'country-page.html';
-                    };
-                };
+                localStorage.setItem('country', JSON.stringify(countryName));
+                window.location = 'country-page.html';
             }).removeClass('last');
         };
     };
