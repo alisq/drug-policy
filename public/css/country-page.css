@@ -106,7 +106,8 @@ h2 {
 #domains-summary li {
 	display: inline-block;
     margin:0 7px 7px 0;
-	background: linear-gradient(to bottom right, rgb(115,50,255), rgb(75,0,235));
+	/*background: linear-gradient(to bottom right, rgb(0,132,255), rgb(0,104,214));*/
+	background: rgb(255,92,46);
 	vertical-align: top;
 	position: relative;
 	border-radius: 4px;
@@ -209,7 +210,7 @@ details.strategies > summary:before {
 	transition: color 0.5s;
 }
 details.strategies > summary:hover:before {
-	color: rgba(75,0,235,0.5);
+	color: rgba(0,104,214,0.5);
 }
 details.strategies > summary h2 {
 	position: absolute;
@@ -220,7 +221,7 @@ details.strategies[open] > summary:before {
   transform: none;
   content: "\f07c";
   margin-right: 0px;
-  color: rgba(75,0,235,0.7);
+  color: rgba(0,104,214,0.7);
 }
 details.strategies > summary h2 {
 	display: inline-block;
@@ -238,7 +239,7 @@ article:first-of-type{
 }
 .strategy-title {
 	font-weight: 400;
-	background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
+	background: linear-gradient(to right, rgb(0,132,255), rgb(0,104,214));
 	color: white;
 	border-top-right-radius: 4px;
 	border-top-left-radius: 4px;
@@ -300,7 +301,7 @@ article:first-of-type{
 }
 .metrics-priorities > article h3 {
 	font-weight: 400;
-	background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
+	background: linear-gradient(to right, rgb(0,132,255), rgb(0,104,214));
 	color: white;
 	border-top-right-radius: 4px;
 	border-top-left-radius: 4px;
@@ -456,7 +457,7 @@ summary:focus {
 .alternate-description {
 	position: fixed;
 	top: 0;
-	background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
+	background: linear-gradient(to right, rgb(0,132,255), rgb(0,104,214));
 	padding: 2rem;
 	border-radius: 12px;
 	box-shadow: -2px 2px 10px rgba(0,0,0,0.25);

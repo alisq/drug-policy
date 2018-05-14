@@ -34,7 +34,7 @@ body {
     margin: 0 auto;
     width:100%;
     height:100vh;
-    background: radial-gradient(rgba(75,0,235,0.7), rgba(75,0,235,0.9));
+    background: radial-gradient(rgba(0,104,214,0.7), rgba(0,104,214,0.9));
 }
 
 #landing-screen .map {
@@ -51,7 +51,7 @@ body {
     top: 25vh;
     left: 7%;
     color: white;
-    text-shadow: 0px 2px 6px rgba(75,0,235,0.9);
+    text-shadow: 0px 2px 6px rgba(0,104,214,0.9);
     margin:0;
     transition: font-size 400ms, top 400ms, left 400ms;
 }
@@ -74,7 +74,7 @@ body {
     flex-shrink: 0;
     background:white;
     border-radius: 5px;
-    box-shadow: 0px 2px 6px rgba(75,0,235,0.9);
+    box-shadow: 0px 2px 6px rgba(0,104,214,0.9);
     opacity:0;
     pointer-events:none;
     transition:opacity 200ms;
@@ -114,7 +114,7 @@ body {
 
 .country-card .country-details div {
     color:white;
-    background:rgb(115,50,255);
+    background:rgb(0,132,255);
     padding:4px 5px 2px 5px;
     border-radius:7px;
     display:inline-block;
@@ -162,7 +162,7 @@ body {
 .country-item h1 {
     font-size: 1.5rem;
     padding: 7px 10px 0px 0px;
-    color: rgba(75,0,235,0.9);
+    color: rgba(0,104,214,0.9);
     background: none;
     box-shadow: none;
     font-weight: 400;
@@ -177,7 +177,7 @@ body {
     transition: left 0.3s; 
 }
 .country-item:hover{
-    background: linear-gradient(to bottom right, rgba(75,0,235,0.9), rgba(75,0,235,0.7));
+    background: linear-gradient(to bottom right, rgba(0,104,214,0.9), rgba(0,104,214,0.7));
     cursor:pointer;
     color:white;
 }

@@ -65,7 +65,7 @@
 
 /* Global Navigation on Subpages ------------ */ 
 #top-nav.fixed-nav section, footer {
-	background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
+	background: linear-gradient(to right, rgb(0,132,255), rgb(0,104,214));
 	position: relative;
 	color: rgba(255,255,255,1);
 }
@@ -113,3 +113,12 @@ footer ul {
 	line-height: 1.6;
 }
 
+
+#CDPE-logo {
+	float:right;
+}
+
+#CDPE-logo img {
+	margin:1.5em;
+	height:4em;
+}

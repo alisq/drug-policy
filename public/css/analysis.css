@@ -75,11 +75,11 @@ nav.data {
 }
 
 .button.selected {
-    background:linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
+    background:linear-gradient(to right, rgb(0,132,255), rgb(0,104,214));
 }
 
 .button.enabled:hover {
-    background:linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
+    background:linear-gradient(to right, rgb(0,132,255), rgb(0,104,214));
 }
 
 .button + .button {
@@ -144,7 +144,7 @@ nav.data {
 }
 
 .data-button.selected{
-    background:linear-gradient(to right, rgba(115,50,255,1), rgba(75,0,235,1));
+    background:linear-gradient(to right, rgba(0,132,255,1), rgba(0,104,214,1));
     color:white;
 }
 
@@ -166,7 +166,7 @@ nav.data {
 }
 
 .data-button.pointed.selected::after{
-    border-left: 14px solid rgba(75,0,235,1);
+    border-left: 14px solid rgba(0,104,214,1);
 }
 
 .data-button-group {
@@ -222,7 +222,7 @@ nav.data {
 }
 
 .data-list-item:hover{
-    background:linear-gradient(to right, rgba(115,50,255,1), rgba(75,0,235,1));
+    background:linear-gradient(to right, rgba(0,132,255,1), rgba(0,104,214,1));
     color:white;
 }
 
@@ -260,7 +260,7 @@ nav.data {
 }
 
 .chart-title .dimension-title{
-    background:linear-gradient(to bottom right, rgb(115,50,255), rgb(75,0,235));
+    background:linear-gradient(to bottom right, rgb(0,132,255), rgb(0,104,214));
     color:white;
     font-size:16px;
     line-height:20px;
@@ -293,7 +293,7 @@ nav.data {
 }
 
 .point{
-    fill:rgba(115,50,255,0.6);
+    fill:rgba(0,132,255,0.6);
 }
 
 .point:hover{
@@ -307,7 +307,7 @@ nav.data {
 .regression {
     stroke-width: 1px;
     stroke-dasharray: 5,3;
-    stroke:rgb(150,150,150);
+    stroke:rgb(255,92,46);
 }
 
 .axis path,
@@ -359,7 +359,7 @@ nav.data {
 
 .amount {
     color:white;
-    background:rgb(115,50,255);
+    background:rgb(0,132,255);
     padding:4px 5px 2px 5px;
     border-radius:7px;
 }

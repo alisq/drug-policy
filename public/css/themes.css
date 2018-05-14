@@ -55,7 +55,8 @@ nav.toggles .button{
     font-size:15px;
     line-height:15px;
     color: white;
-    background: linear-gradient(to bottom right, rgba(115,50,255,0.6), rgba(75,0,235,0.6));
+    /*background: linear-gradient(to bottom right, rgba(0,132,255,0.6), rgba(0,104,214,0.6));*/
+    background: rgb(255,92,46);
     opacity: 0.9;
     transition: opacity 0.2s;
     display: inline-block;
@@ -68,7 +69,7 @@ nav.toggles .button + .button{
 
 nav.toggles .button.selected{
     color: rgba(255,255,255,1);
-    background: linear-gradient(to bottom right, rgba(115,50,255,1), rgba(75,0,235,1));
+    background: linear-gradient(to bottom right, rgba(0,132,255,1), rgba(		,1));
 }
 
 nav.toggles .button:hover{
@@ -142,7 +143,7 @@ main > section {
 
 .flag-hover .metric-count {
     color:white;
-    background:rgb(115,50,255);
+    background:rgb(0,132,255);
     padding:4px 5px 2px 5px;
     border-radius:7px;
 }

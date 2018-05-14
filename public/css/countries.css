@@ -86,7 +86,8 @@ nav.toggles p {
     font-size:15px;
     line-height:15px;
     color: white;
-    background: linear-gradient(to bottom right, rgba(115,50,255,0.6), rgba(75,0,235,0.6));
+    /*background: linear-gradient(to bottom right, rgba(0,132,255,0.6), rgba(0,104,214,0.6));*/
+    background: rgba(255,92,46,0.7);
     opacity: 0.9;
     transition: opacity 0.2s;
     display: inline-block;
@@ -108,7 +109,8 @@ nav.toggles p {
 
 .country-views .button.selected{
     color: rgba(255,255,255,1);
-    background: linear-gradient(to bottom right, rgba(115,50,255,1), rgba(75,0,235,1));
+    /*background: linear-gradient(to bottom right, rgba(0,132,255,1), rgba(0,104,214,1));*/
+    background: rgb(255,92,46);
 }
 
 .country-views .button:hover{
@@ -220,7 +222,7 @@ nav.toggles p {
 
 .country-bar .country-chart {
     margin:0 6px 0 0;
-    background: linear-gradient(to right, rgba(115,50,255,0.7), rgba(75,0,235,0.7));
+    background: linear-gradient(to right, rgba(0,132,255,0.7), rgba(0,104,214,0.7));
     border-radius:4px;
     display:flex;
     overflow:hidden;
@@ -229,7 +231,7 @@ nav.toggles p {
     align-self: flex-start;
 }
 .country-chart.chart-hover {
-    background: linear-gradient(to right, rgba(115,50,255,0.6), rgba(75,0,235,0.6));
+    background: linear-gradient(to right, rgba(0,132,255,0.6), rgba(0,104,214,0.6));
 }
 
 .country-bar .country-metrics {
@@ -307,7 +309,7 @@ nav.toggles p {
 .countries .country-card h1 {
     font-size: 2rem;
     padding: 7px 10px 0px 0px;
-    color: rgba(75,0,235,0.9);
+    color: rgba(0,104,214,0.9);
     background: none;
     box-shadow: none;
     font-weight: 400;
@@ -334,7 +336,7 @@ nav.toggles p {
     padding:0 6px 0 0;
 }
 .countries .country-card:hover{
-    background: linear-gradient(to bottom right, rgba(75,0,235,0.9), rgba(75,0,235,0.7));
+    background: linear-gradient(to bottom right, rgba(0,104,214,0.9), rgba(0,104,214,0.7));
     cursor:pointer;
 }
 .countries .country-card:hover h1, .countries .country-card:hover h1 .collection, .countries .country-card:hover .country-details {
