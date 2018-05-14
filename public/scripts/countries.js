@@ -75,6 +75,7 @@ window.onload = function(){
     
     $('select').on('change', function(){
         filterCountries();
+        customRoute($(this).attr("class")+"="+$(this).val().toLowerCase().replace(" ","-"));
     });
     
     $('.most').on('click', function(){
