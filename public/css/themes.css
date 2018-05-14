@@ -107,21 +107,44 @@ main > section {
     line-height:22px;
 }
 
-.flag-hover-name {
-    font-size:16px;
-    line-height:16px;
+.flag-hover {
     background:white;
-    padding:4px 5px 4px 5px;
-    border:1px solid rgba(0,0,0,0.25);
-    border-radius:4px;
-    display:inline-block;
-    position:absolute;
-    top:0;
-    left:0;
     z-index:3;
-    pointer-events:none;
-    transition: opacity 100ms;
+    margin: 0;
+    position:absolute;
+    width:300px;
+    flex-shrink: 0;
+    background:white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.25);
     opacity:0;
+    pointer-events:none;
+    transition:opacity 200ms;
+}
+
+.flag-hover h1 {
+    position:relative;
+    margin:0;
+    font-family: 'Atlas Grotesk';
+    font-size: 14px;
+    line-height:18px;
+    padding:6px 8px 5px 8px;
+    font-weight: 400;
+}
+
+.flag-hover .metrics {
+    font-size:14px;
+    line-height:18px;
+    padding:6px 8px 5px 8px;
+    border-top:1px solid rgb(220,220,220);
+    color:rgb(150,150,150);
+}
+
+.flag-hover .metric-count {
+    color:white;
+    background:rgb(115,50,255);
+    padding:4px 5px 2px 5px;
+    border-radius:7px;
 }
 
 .country-flags{
@@ -131,16 +154,17 @@ main > section {
 }
 
 .country-flags .flag-icon:hover {
-    border: 2px solid rgb(75,0,235);
-    border-radius:2px;
     cursor:pointer;
 }
 
 .country-flags .flag-icon{
-    border: 2px solid white;
-    border-radius:2px;
-    width:1.9em;
-    line-height:1.2em;
+    font-size:22px;
+    position: relative;
+    border-radius: 2px;
+    background-size: cover;
+    overflow: visible;
+    margin:8px 8px 0 0;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.25);
 }
 
 .flag-icon{

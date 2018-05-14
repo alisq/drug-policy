@@ -86,18 +86,22 @@ window.onload = function(){
         
         $(array).each(function(){
             $('.themes').append('<div class="theme last"><p class="theme-title">'+this.theme+'</p><p class="theme-subtitle"></p><div class="country-flags"></div></div>');
-            
+            var theme = this.theme;
             $(this.countries).each(function(){
-                $('.last .country-flags').append('<span data-name="'+this.name+'" class="last flag-icon flag-icon-'+this.ISO_2+'"></span>');
+                $('.last .country-flags').append('<span data-name="'+this.name+'" data-theme="'+theme+'" data-metrics="'+this.metrics.length+'" class="last flag-icon flag-icon-'+this.ISO_2+'"></span>');
                 $('.last.flag-icon').on('mousemove', function(e){
                     var xPos = e.clientX;
                     var yPos = e.clientY;
                     var yScroll = $(window).scrollTop();
                     var country = $(this).attr('data-name');
-                    $('.flag-hover-name').css({'top':yPos + yScroll - 24 + 'px', 'left':xPos + 10 + 'px', 'opacity':1})
-                        .text(country);
+                    var metrics = $(this).attr('data-metrics');
+                    var theme = $(this).attr('data-theme').toLowerCase();
+                    console.log(theme);
+                    $('.flag-hover').css({'top':yPos + yScroll - 24 + 'px', 'left':xPos + 10 + 'px', 'opacity':1});
+                    $('.flag-hover h1').text(country);
+                    $('.flag-hover .metrics').html('Collects <span class="metric-count">'+ metrics +'</span> metrics on ' + theme);
                 }).on('mouseleave', function(){
-                    $('.flag-hover-name').css('opacity',0);
+                    $('.flag-hover').css('opacity',0);
                 }).on('click', function(){
                     var country = $(this).attr('data-name');
                     localStorage.setItem('country', JSON.stringify(country));

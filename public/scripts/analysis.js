@@ -70,32 +70,33 @@ window.onload = function(){
         var yText = yText;
         
         var dataArray = [];
+        var countryNameArray = [];
+        
         $(linkedArray).each(function(){
-            var dataObj = new Object();
-            dataObj.name = this.country.name;
-            dataObj.x = getValue(this, xData);
-            dataObj.y = getValue(this, yData);
+            var dataElement = [];
+            dataElement[0] = Number(getValue(this, xData));
+            dataElement[1] = Number(getValue(this, yData));
             
-            if (dataObj.x && dataObj.y){
-                dataArray.push(dataObj);
+            if (dataElement[0] && dataElement[1]){
+                dataArray.push(dataElement);
+                countryNameArray.push(this.country.name);
             } else {
-                console.log('null');
+                console.log('No X and/or Y data avalible for country');
             };
         });
         
-        console.log(dataArray);
-        
-        var lg = calcLinear(dataArray, "x", "y", d3.min(dataArray, function(d){return d.x}), d3.min(dataArray, function(d){return d.y}));
-        console.log(lg);
+        var lr = ss.linearRegression(dataArray);
+        var lrLine = ss.linearRegressionLine(lr);
+        var xMax = d3.max(dataArray, function(d){return d[0]});
            
         var padding = {top:20, right:20, bottom:20, left:30};
             
         var xScale = d3.scaleLinear()
-            .domain([0, d3.max(dataArray, function(d){return d.x})])
+            .domain([0, xMax])
             .range([padding.left, svgWidth - padding.right]);
         
         var yScale = d3.scaleLinear()
-            .domain([0, d3.max(dataArray, function(d){return d.y})])
+            .domain([0, d3.max(dataArray, function(d){return d[1]})])
             .range([svgHeight - padding.bottom, padding.top]);
         
         var xAxis = d3.axisBottom(xScale).ticks(10);
@@ -106,41 +107,43 @@ window.onload = function(){
         
         plot.append("line")
 	        .attr("class", "regression")
-	        .attr("x1", xScale(lg.ptA.x))
-	        .attr("y1", yScale(lg.ptA.y))
-	        .attr("x2", xScale(lg.ptB.x))
-	        .attr("y2", yScale(lg.ptB.y));
+	        .attr("x1", xScale(0))
+	        .attr("y1", yScale(lrLine(0)))
+	        .attr("x2", xScale(xMax))
+	        .attr("y2", yScale(lrLine(xMax)));
                         
         plot.selectAll("circle")
             .data(dataArray)
             .enter()
             .append("circle")
             .attr('class', 'point')
-            .attr("cx", function(d) {return xScale(d.x)})
-            .attr("cy", function(d) {return yScale(d.y)})
+            .attr("cx", function(d) {return xScale(d[0])})
+            .attr("cy", function(d) {return yScale(d[1])})
             .attr("r", 5)
-            .on('mouseenter', function(d){
+            .on('mouseenter', function(d, i){
                 $(this).addClass('point-hover');
-                hoverPoint(d)
-            }).on('mousemove', function(d){
+                var countryName = countryNameArray[i];
+                hoverPoint(d, countryName)
+            }).on('mousemove', function(d, i){
                 $(this).addClass('point-hover');
-                hoverPoint(d)
+                var countryName = countryNameArray[i];
+                hoverPoint(d, countryName)
             }).on('mouseleave', function(d){
                 $('.chart-hover').removeClass('show')
                 $(this).removeClass('point-hover');
             });
         
-        function hoverPoint(data){
+        function hoverPoint(data, countryName){
             var mouseX = event.clientX + 14;
             var mouseY = $(window).scrollTop() + event.clientY - 3;
             
-            $('.chart-hover .country-name').text(data.name);
-            $('.chart-hover .country-data-x').html(xText + ': ' + data.x);
-            $('.chart-hover .country-data-y').html(yText + ': ' + data.y);
+            $('.chart-hover .country-name').text(countryName);
+            $('.chart-hover .country-data-x').html(xText + ' <span class="amount">' + data[0] + '</span>');
+            $('.chart-hover .country-data-y').html(yText + ' <span class="amount">' + data[1] + '</span>');
             
-            var chartHoverWidth = $('.chart-hover').innerWidth();
+            var chartHoverWidth = $('.chart-hover').innerHeight();
             $('.chart-hover').addClass('show')
-                .css({'top': mouseY + 'px', 'left': mouseX - chartHoverWidth - 24 + 'px'});
+                .css({'top': mouseY - chartHoverWidth - 5 + 'px', 'left': mouseX - 5 + 'px'});
         };
         
         plot.append("g")
@@ -152,6 +155,9 @@ window.onload = function(){
             .call(yAxis)
             .attr("transform", "translate(" + padding.left + ",0)")
             .attr("class", "axis");
+        
+        $('.dimension-title.x-axis .dimension-text').text(xText);
+        $('.dimension-title.y-axis .dimension-text').text(yText);
     };
     
     function getValue(data, array){
@@ -186,90 +192,6 @@ window.onload = function(){
         return current;
     };
     
-    // Calculate a linear regression from the data (From: https://bl.ocks.org/HarryStevens/be559bed98d662f69e68fc8a7e0ad097)
-
-    // Takes 5 parameters:
-    // (1) Your data
-    // (2) The column of data plotted on your x-axis
-    // (3) The column of data plotted on your y-axis
-    // (4) The minimum value of your x-axis
-    // (5) The minimum value of your y-axis
-
-    // Returns an object with two points, where each point is an object with an x and y coordinate
-
-    function calcLinear(data, x, y, minX, minY){
-      /////////
-      //SLOPE//
-      /////////
-
-      // Let n = the number of data points
-      var n = data.length;
-
-      // Get just the points
-      var pts = [];
-      data.forEach(function(d,i){
-        var obj = {};
-        obj.x = d[x];
-        obj.y = d[y];
-        obj.mult = obj.x*obj.y;
-        pts.push(obj);
-      });
-
-      // Let a equal n times the summation of all x-values multiplied by their corresponding y-values
-      // Let b equal the sum of all x-values times the sum of all y-values
-      // Let c equal n times the sum of all squared x-values
-      // Let d equal the squared sum of all x-values
-      var sum = 0;
-      var xSum = 0;
-      var ySum = 0;
-      var sumSq = 0;
-      pts.forEach(function(pt){
-        sum = sum + pt.mult;
-        xSum = xSum + pt.x;
-        ySum = ySum + pt.y;
-        sumSq = sumSq + (pt.x * pt.x);
-      });
-      var a = sum * n;
-      var b = xSum * ySum;
-      var c = sumSq * n;
-      var d = xSum * xSum;
-
-      // Plug the values that you calculated for a, b, c, and d into the following equation to calculate the slope
-      // slope = m = (a - b) / (c - d)
-      var m = (a - b) / (c - d);
-
-      /////////////
-      //INTERCEPT//
-      /////////////
-
-      // Let e equal the sum of all y-values
-      var e = ySum;
-
-      // Let f equal the slope times the sum of all x-values
-      var f = m * xSum;
-
-      // Plug the values you have calculated for e and f into the following equation for the y-intercept
-      // y-intercept = b = (e - f) / n
-      var b = (e - f) / n;
-
-//			// Print the equation below the chart
-//			document.getElementsByClassName("equation")[0].innerHTML = "y = " + m + "x + " + b;
-//			document.getElementsByClassName("equation")[1].innerHTML = "x = ( y - " + b + " ) / " + m;
-
-      // return an object of two points
-      // each point is an object with an x and y coordinate
-      return {
-        ptA : {
-          x: minX,
-          y: m * minX + b
-        },
-        ptB : {
-          y: minY,
-          x: (minY - b) / m
-        }
-      }
-
-    };
     
     $('.plot-button.enabled').on('click', function(){
         svg.selectAll('.plot').remove();
@@ -300,7 +222,7 @@ window.onload = function(){
     
     $('.data-button').on('click', function(){
         var dimension = $(this).closest('.dimension').attr('id');
-        $('.data-list.open').removeClass('open');
+        $('.data-list.open').removeClass('open right');
         $('#' + dimension + ' .data-button.selected').removeClass('selected');
         $(this).addClass('selected');
     });
@@ -315,23 +237,36 @@ window.onload = function(){
     
     $('.level-two').on('click', function(){
         var dataList = $(this).children('.data-list');
+        var dataListWidth = dataList.innerWidth();
+        var buttonCoor = this.getBoundingClientRect();
+        
         if ($(dataList).hasClass('open')){
-            $(dataList).removeClass('open');
+            $(dataList).removeClass('open right');
         } else {
             $(dataList).addClass('open');
+            if (buttonCoor.left + dataListWidth > windowWidth){
+                $(dataList).addClass('right');
+            }
         }
     });
     
     $('.level-three').on('click', function(){
         var dataList = $(this).children('.data-list');
+        var dataListWidth = dataList.innerWidth();
+        var buttonCoor = this.getBoundingClientRect();
+        
         if ($(dataList).hasClass('open')){
-            $(dataList).removeClass('open');
+            $(dataList).removeClass('open right');
         } else {
             $(dataList).addClass('open');
+            if (buttonCoor.left + dataListWidth > windowWidth){
+                $(dataList).addClass('right');
+            }
         }
     });
     
     $('.data-list-item').on('click', function(event){
+        event.stopPropagation();
         var dimension = $(this).closest('.dimension').attr('id');
         var dataButton = $(this).parent().parent();
         var newText = $(this).text();
@@ -362,10 +297,13 @@ window.onload = function(){
                 $('#' + dimension + ' .level-three').addClass('hidden');
             };
         };
+        
+        $(this).parent().removeClass('open right');
     });
     
     var activateLevelThreeList = function(){
         $('.data-list-item').on('click', function(){
+            event.stopPropagation();
             var dimension = $(this).closest('.dimension').attr('id');
             var dataButton = $(this).parent().parent();
             var newText = $(this).text();
@@ -384,12 +322,14 @@ window.onload = function(){
                     $('#' + dimension + ' .level-two').addClass('selected');
                 };
             };
+            
+            $(this).parent().removeClass('open right');
         });
     };
     
     $(window).on('click', function(event){
         if(!event.target.closest('.data-list') && !event.target.closest('.data-button')){
-            $('.data-list.open').removeClass('open');
+            $('.data-list.open').removeClass('open right');
         };
     });
     

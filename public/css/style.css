@@ -15,24 +15,6 @@ body {
     font-family: 'Atlas Grotesk';
 }
 
-.income-button {
-    position:absolute;
-    top:10px;
-    left:10px;
-    
-    background:rgb(240,240,240);
-    display: inline-block;
-    color:black;
-    font-family: 'Helvetica';
-    padding:5px;
-    
-    cursor:pointer;
-}
-
-.income-button:hover {
-    background:rgb(230,230,230);
-}
-
 .countries {
     fill:rgba(255,255,255,0.1);
 }
@@ -40,6 +22,7 @@ body {
 .countries.active {
     fill:rgba(235,225,230,0.3);
     cursor: pointer;
+    transition: fill 200ms;
 }
 
 .countries.active:hover {
@@ -47,21 +30,17 @@ body {
 }
 
 #landing-screen {
+    position:relative;
     margin: 0 auto;
-    width: 100%;
-    padding: 60px 10px;
+    width:100%;
+    height:100vh;
     background: radial-gradient(rgba(75,0,235,0.7), rgba(75,0,235,0.9));
 }
-#landing-screen .countries-list, #landing-screen .map {
-    display: inline-block;
-    vertical-align: top;
-}
-#landing-screen .countries-list{
-    width: 33%;
-    display: none;
-}
+
 #landing-screen .map {
+    padding:60px 30px 30px 0;
     width: 100%;
+    height: 100%;
     animation: fadein 0.5s;
 }
 #hero-text {
@@ -73,6 +52,80 @@ body {
     left: 7%;
     color: white;
     text-shadow: 0px 2px 6px rgba(75,0,235,0.9);
+    margin:0;
+    transition: font-size 400ms, top 400ms, left 400ms;
+}
+
+#hero-text.min{
+    top:calc(100vh - 58px - 8px);
+    font-size:1.5em;
+    left:12px;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {top: 1;}
+}
+
+.country-card {
+    margin: 0;
+    position:absolute;
+    width:375px;
+    flex-shrink: 0;
+    background:white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(75,0,235,0.9);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 200ms;
+}
+
+.country-card.show {
+    opacity:1;
+}
+
+.country-card h1 {
+    position:relative;
+    margin:0;
+    font-family: 'Atlas Grotesk';
+    font-size: 14px;
+    line-height:18px;
+    padding:6px 8px 5px 8px;
+    font-weight: 400;
+}
+
+.country-card .flag-icon {
+    position: relative;
+    top: -1px;
+    border-radius: 2px;
+    margin:0 5px 0 1px;
+    background-size: cover;
+    overflow: visible;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.25);
+}
+
+.country-card .country-details {
+    font-size:14px;
+    line-height:18px;
+    color:rgb(150,150,150);
+    padding:6px 8px 5px 8px;
+    border-top:1px solid rgb(220,220,220);
+}
+
+.country-card .country-details div {
+    color:white;
+    background:rgb(115,50,255);
+    padding:4px 5px 2px 5px;
+    border-radius:7px;
+    display:inline-block;
+}
+
+.country-card .collection {
+    border-top:1px solid rgb(220,220,220);
+    font-size: 14px;
+    line-height:18px;
+    padding:6px 8px 5px 8px;
+    display:none;
 }
 
 .countries-intro h1 {
@@ -96,10 +149,44 @@ body {
     margin: 2rem 0;
 }
 
-.countries-list .country-details {
-    display: none;
+.country-item {
+    box-shadow: none;
+    width: 100%;
+    padding: 0.5rem 2rem 0.6rem;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
 }
-
+.country-item:first-of-type {
+    border-radius:4px 4px 0 0;
+}
+.country-item h1 {
+    font-size: 1.5rem;
+    padding: 7px 10px 0px 0px;
+    color: rgba(75,0,235,0.9);
+    background: none;
+    box-shadow: none;
+    font-weight: 400;
+    margin: 0;
+}
+.country-item h1 .collection {
+    display: inline-block;
+    color: rgba(0,0,0,0.25);
+    padding: 0;
+    position: relative;
+    left: 0;
+    transition: left 0.3s; 
+}
+.country-item:hover{
+    background: linear-gradient(to bottom right, rgba(75,0,235,0.9), rgba(75,0,235,0.7));
+    cursor:pointer;
+    color:white;
+}
+.country-item:hover h1, .country-item:hover h1 .collection, .country-item:hover .country-details {
+    color: white;
+}
+.country-item:hover h1 .collection {
+    left: 1rem;
+ } 
 .see-all a {
     display: block;
     padding: 1rem 2rem;
@@ -108,6 +195,7 @@ body {
     color: rgba(0,0,0,0.75);
     opacity: 0.7;
     transition: opacity 0.3s;
+    border-radius:0 0 4px 4px;
 }
 .see-all a i {
     color: rgba(0,0,0,0.5);
@@ -119,9 +207,4 @@ body {
 .see-all a:hover i {
     margin-left: 0.5rem;
     color: rgba(0,0,0,0.75);
-}
-
-@keyframes fadein {
-    from {opacity: 0;}
-    to {top: 1;}
 }

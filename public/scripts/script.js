@@ -11,11 +11,12 @@ window.onload = function() {
 
     $.when(getCountries()).done(function(data){
         countryArray = data;
+        console.log(countryArray);
         drawCountries();
     });
         
     var svgWidth = $('.map').width();
-    var svgHeight = svgWidth/2;
+    var svgHeight = $('.map').height();
     
     var countries;
     var projection;
@@ -61,58 +62,66 @@ window.onload = function() {
                 }).mousemove(function(e){
                     var index = $(this).attr('data-index');
                     var country = countryArray[index];
+                    $('#hero-text').addClass('min');
                     
                     var mouseMargin = 4;
                     var top = e.pageY;
                     var left = e.pageX;
-                    if (left > windowWidth - 410) {
-                        $('.country-card').css({'position': 'absolute', 'top': top + mouseMargin + 'px', 'left':left - 410 - mouseMargin + 'px', 'display':'block'});
+                    if (left > windowWidth - 375) {
+                        $('.country-card').css({'top': top + mouseMargin + 'px', 'left':left - 10 - 375 - mouseMargin + 'px'})
+                            .addClass('show');
                     } else {
-                        $('.country-card').css({'position': 'absolute', 'top': top + mouseMargin + 'px', 'left':left + mouseMargin + 'px', 'display':'block'});
+                        $('.country-card').css({'top': top + mouseMargin + 'px', 'left':left + 10 + mouseMargin + 'px'})
+                            .addClass('show');
                     };
                     
                     countryCard(country);
                 }).mouseout(function(){
-                    $('.country-card').css({'display':'none'});
+                    $('.country-card').removeClass('show');
                 });
+        });
+        createIntro();
+    };
+    
+    var createIntro = function(){
+        $('.review').html('Review detailed profiles<br>for '+countryArray.length+' countries');
+        
+        var randomArray = [];
+        while (randomArray.length < 3){
+            var randomNum = getRandom(0, countryArray.length);
+            console.log(randomNum);
+            if (randomArray.indexOf(randomNum) < 0){
+                randomArray.push(randomNum);
+            };
+        };
+    
+        $(randomArray).each(function(){
+            var randomCountry = countryArray[this];
+            $('.countries-list').prepend('<div class="country-item last"><h1>'+randomCountry.name+' <span class="collection">'+randomCountry.domains.total_metric_count+' metrics, '+randomCountry.policies.length+' strategies</span></h1></div>');
+            $('.country-item.last').on('click', function(){
+                localStorage.setItem('country', JSON.stringify(randomCountry.name));
+                window.location = 'country-page.html';
+            }).removeClass('last');
         });
     };
     
     var countryCard = function(country){
         $('.country-card h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name);
         $('.country-card .income').text(country.income + ' Income');
-        $('.country-card .gdp').text('$466.4B GDP');
-        $('.country-card .strategies').text(country.policies.length + ' Strategies');
+        $('.country-card .gdp').text('$' + country.GDPtext + ' GDP');
         
         if (country.domains){ //if country has domains data
             $('.country-card .collection').css({'display':'block'})
-                .text('Collects data on '+country.domains.total_metric_count+' metrics across 45 themes');
-            $('.country-card .domain-cards').css({'display':'flex'});
-            
-            var domainRange = d3.scaleLinear()
-                .domain([1, 50])
-                .range(['rgb(255,255,255)', 'rgb(255,245,150)']);
-            
-            $('.country-card .demand').css('background', domainRange(country.domains.demand.metric_count));
-            $('.country-card .supply').css('background', domainRange(country.domains.supply.metric_count));
-            $('.country-card .health').css('background', domainRange(country.domains.health.metric_count));
-            $('.country-card .rights').css('background', domainRange(country.domains.rights.metric_count));
-            $('.country-card .peace').css('background', domainRange(country.domains.peace.metric_count));
-            $('.country-card .international').css('background', domainRange(country.domains.international.metric_count));
-            $('.country-card .development').css('background', domainRange(country.domains.development.metric_count));
-            
-            $('.country-card .demand .domain-count').text(country.domains.demand.metric_count);
-            $('.country-card .supply .domain-count').text(country.domains.supply.metric_count);
-            $('.country-card .health .domain-count').text(country.domains.health.metric_count);
-            $('.country-card .rights .domain-count').text(country.domains.rights.metric_count);
-            $('.country-card .peace .domain-count').text(country.domains.peace.metric_count);
-            $('.country-card .international .domain-count').text(country.domains.international.metric_count);
-            $('.country-card .development .domain-count').text(country.domains.development.metric_count);
+                .text('Collects data on '+country.domains.total_metric_count+' metrics across ' + country.policies.length + ' Drug Strategies');
         } else {
             $('.country-card .collection').css({'display':'none'});
-            $('.country-card .domain-cards').css({'display':'none'});
         }
     };
+    
+    var getRandom = function(min, max){
+        var random = Math.floor((Math.random() * max) + min);
+        return random;
+    }
     
     $('.nav-countries').click(function(){
         window.location = 'countries.html';

@@ -247,40 +247,6 @@ nav.toggles p {
     height:20px;
 }
 
-/*
-.country-domain:hover {
-    background: linear-gradient(to right, rgb(115,50,255), rgb(75,0,235));
-}
- 
-.country-domain.demand {
-    background: linear-gradient(to right, rgba(115,50,255,0.9), rgba(75,0,235,0.9));
-}
-
-.country-domain.development {
-    background: linear-gradient(to right, rgba(115,50,255,0.8), rgba(75,0,235,0.8));
-}
-
-.country-domain.health {
-    background: linear-gradient(to right, rgba(115,50,255,0.7), rgba(75,0,235,0.7));
-}
-
-.country-domain.international {
-    background: linear-gradient(to right, rgba(115,50,255,0.6), rgba(75,0,235,0.6));
-}
-
-.country-domain.peace {
-    background: linear-gradient(to right, rgba(115,50,255,0.5), rgba(75,0,235,0.5));
-}
-
-.country-domain.rights {
-    background: linear-gradient(to right, rgba(115,50,255,0.4), rgba(75,0,235,0.4));
-}
-
-.country-domain.supply {
-    background: linear-gradient(to right, rgba(115,50,255,0.3), rgba(75,0,235,0.3));
-} 
-*/
-
 .country-domain.demand {
     background:skyblue;
 }
@@ -327,4 +293,63 @@ nav.toggles p {
 .tool-tip .count {
     background-color: rgba(0,0,0,0.05);
     color: rgba(0,0,0,0.6);
+}
+
+.country-card {
+    margin: 0;
+    padding: 1rem 2rem 0;
+    position:relative;
+    width:100%;
+    flex-shrink: 0;
+    display:none;
+    background:white;
+}
+.countries .country-card h1 {
+    font-size: 2rem;
+    padding: 7px 10px 0px 0px;
+    color: rgba(75,0,235,0.9);
+    background: none;
+    box-shadow: none;
+    font-weight: 400;
+    margin: 0;
+}
+.countries .country-card h1 .collection {
+    font-size: 2rem;
+    display: inline-block;
+    color: rgba(0,0,0,0.25);
+    padding: 0;
+    position: relative;
+    left: 0;
+    transition: left 0.3s; 
+}
+.countries .country-card .country-details{
+    background: none;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(0,0,0,0.06);
+    color: rgba(0,0,0,0.35);
+    padding-top: 7px;
+}
+.country-card .country-details div{
+    display:inline-block;
+    padding:0 6px 0 0;
+}
+.countries .country-card:hover{
+    background: linear-gradient(to bottom right, rgba(75,0,235,0.9), rgba(75,0,235,0.7));
+    cursor:pointer;
+}
+.countries .country-card:hover h1, .countries .country-card:hover h1 .collection, .countries .country-card:hover .country-details {
+    color: white;
+}
+.countries .country-card:hover h1 .collection{
+    left: 1rem;
+ }
+.country-card .flag-icon {
+    font-size:1.6rem;
+    position: relative;
+    top: -5px;
+    margin:0 8px 0 1px;
+    border-radius: 2px;
+    background-size: cover;
+    overflow: visible;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.25);
 }

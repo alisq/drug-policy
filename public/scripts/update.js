@@ -49,6 +49,8 @@ var getPolicies = function() {
                 country.GDP = country.GDP.replace(/,/g , "");
                 country.GDP = country.GDP.split(' USD');
                 country.GDP = Number(country.GDP[0]);
+                
+                country.GDPtext = GDPparse(country.GDP);
 
                 var policy = newPolicy(d);
                 policies.push(policy);
@@ -62,6 +64,26 @@ var getPolicies = function() {
         getThemes();
     });
 };
+
+var GDPparse = function(labelValue){
+    // Twelve Zeroes for Trillions
+    return Math.abs(Number(labelValue)) >= 1.0e+12
+    ? Math.abs(Number(labelValue)) / 1.0e+12 + " Trillion"
+
+    // Nine Zeroes for Billions
+    : Math.abs(Number(labelValue)) >= 1.0e+9
+    ? Math.abs(Number(labelValue)) / 1.0e+9 + " Billion"
+   
+    // Six Zeroes for Millions 
+    : Math.abs(Number(labelValue)) >= 1.0e+6
+    ? Math.abs(Number(labelValue)) / 1.0e+6 + " Million"
+    
+    // Three Zeroes for Thousands
+    : Math.abs(Number(labelValue)) >= 1.0e+3
+    ? Math.abs(Number(labelValue)) / 1.0e+3 + " Thousand"
+
+    : Math.abs(Number(labelValue));
+}
 
 var getThemes = function(){
     d3.csv('data/nds_themes.csv', function(data){

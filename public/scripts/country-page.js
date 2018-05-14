@@ -96,8 +96,9 @@ window.onload = function() {
         $('nav .country').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span> ' + country.name);
         $('.country-profile h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span> ' + country.name);
         $('.country-profile .continent').text(country.continent);
-        $('.country-profile .gdp').text('GDP: $'+country.GDP);
-        $('.country-profile .income-group').text(country.income + ' Income');
+        $('.country-profile .gdp .figure').text('$'+country.GDPtext);
+        $('.country-profile .income-group .figure').text(country.income);
+        $('.country-profile .unemployment .figure').text(country.unemployment + '%');
         $('.strategies h2').html(country.policies.length+' National Drug Strategies')
 
         // loop through each policy of country
@@ -510,7 +511,12 @@ window.onload = function() {
         if (comparableArray.length > 0){
             $('.comparable-metrics').css('display', 'block');
             $(comparableArray).each(function(){
-                $('.comparable-metrics main').append('<p><a href=""><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span> — '+this.domains.total_metric_count+'</a></p>');
+                $('.comparable-metrics main').append('<p><a class="last"><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span> — '+this.domains.total_metric_count+'</a></p>');
+                var contextCountryName = this.name;
+                $('a.last').on('click', function(){
+                    localStorage.setItem('country', JSON.stringify(contextCountryName));
+                    window.location = 'country-page.html';
+                }).removeClass('last');
             });
         };
     }
@@ -531,7 +537,12 @@ window.onload = function() {
             $('.comparable-region').css('display', 'block');
             $('.comparable-region header').text('Other Countries in ' + countryRegion);
             $(regionArray).each(function(){
-                $('.comparable-region main').append('<p><a href=""><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
+                $('.comparable-region main').append('<p><a class="last"><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
+                var contextCountryName = this.name;
+                $('a.last').on('click', function(){
+                    localStorage.setItem('country', JSON.stringify(contextCountryName));
+                    window.location = 'country-page.html';
+                }).removeClass('last');
             });
         };
     }
@@ -552,7 +563,12 @@ window.onload = function() {
             $('.comparable-income').css('display', 'block');
             $('.comparable-income header').text('Other '+ countryIncome +' Income Countries');
             $(incomeArray).each(function(){
-                $('.comparable-income main').append('<p><a href=""><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
+                $('.comparable-income main').append('<p><a class="last"><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
+                var contextCountryName = this.name;
+                $('a.last').on('click', function(){
+                    localStorage.setItem('country', JSON.stringify(contextCountryName));
+                    window.location = 'country-page.html';
+                }).removeClass('last');
             });
         }
     }
