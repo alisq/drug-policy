@@ -56,9 +56,9 @@ window.onload = function() {
                 .on('click', function(){
                     var index = $(this).attr('data-index');
                     var country = countryArray[index].name;
-                
+                    var ISO = countryArray[index].ISO;
                     localStorage.setItem('country', JSON.stringify(country));
-                    window.location = 'country-page.html';
+                    window.location = 'country-page.html?ISO='+ISO;
                 }).mousemove(function(e){
                     var index = $(this).attr('data-index');
                     var country = countryArray[index];

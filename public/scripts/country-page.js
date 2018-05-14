@@ -513,9 +513,10 @@ window.onload = function() {
             $(comparableArray).each(function(){
                 $('.comparable-metrics main').append('<p><a class="last"><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span> — '+this.domains.total_metric_count+'</a></p>');
                 var contextCountryName = this.name;
+                var ISO = this.ISO;
                 $('a.last').on('click', function(){
                     localStorage.setItem('country', JSON.stringify(contextCountryName));
-                    window.location = 'country-page.html';
+                    window.location = 'country-page.html?ISO='+ISO;
                 }).removeClass('last');
             });
         };
@@ -539,9 +540,10 @@ window.onload = function() {
             $(regionArray).each(function(){
                 $('.comparable-region main').append('<p><a class="last"><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
                 var contextCountryName = this.name;
+                var ISO = this.ISO;
                 $('a.last').on('click', function(){
                     localStorage.setItem('country', JSON.stringify(contextCountryName));
-                    window.location = 'country-page.html';
+                    window.location = 'country-page.html?ISO='+ISO;
                 }).removeClass('last');
             });
         };
@@ -565,9 +567,10 @@ window.onload = function() {
             $(incomeArray).each(function(){
                 $('.comparable-income main').append('<p><a class="last"><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
                 var contextCountryName = this.name;
+                var ISO = this.ISO;
                 $('a.last').on('click', function(){
                     localStorage.setItem('country', JSON.stringify(contextCountryName));
-                    window.location = 'country-page.html';
+                    window.location = 'country-page.html?ISO='+ISO;
                 }).removeClass('last');
             });
         }
@@ -596,4 +599,115 @@ window.onscroll = function(){
     } else if (scrollTop <= 149){
         $('.small-header').removeClass('show');
     }
+
+}
+
+
+
+
+
+//CUSTOM URL PARAM FUNCTION FOR ROUTING BY ASQ
+function customRoute(f){
+
+    //empty array will contain all url param
+    p = []
+
+    //gets all current URL params
+    $.each(getAllUrlParams(),function(index,value){
+        p[index] = value
+    });
+
+    //this is the current param that should be added to the url, 
+    param = f.split("=");   
+    
+    //place it into the all url params list
+    p[param[0]] = param[1];
+
+    //basic string variable to put at the end of the url
+    var params = "";
+    
+
+    //loops through all the params and puts them into a string 
+    for(var k in p) {
+        
+        if (p[k] != undefined) {
+            params += (k+"="+p[k]+"&")
+        }
+        
+    }
+
+    //if there are params add "?" and remove superfluous "&" at the end.
+    if (params != "") { 
+        params = "?"+params;
+        params = params.substring(0, params.length - 1);
+    };
+
+    //add to the end of the url
+    history.pushState(null, null, params);
+
+
+}
+
+
+//THIS IS A FOUND JS URLPARAM FUNCTION
+function getAllUrlParams(url) {
+
+    // get query string from url (optional) or window
+    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+
+    // we'll store the parameters here
+    var obj = {};
+
+    // if query string exists
+    if (queryString) {
+
+        // stuff after # is not part of query string, so get rid of it
+        queryString = queryString.split('#')[0];
+
+        // split our query string into its component parts
+        var arr = queryString.split('&');
+
+        for (var i = 0; i < arr.length; i++) {
+            // separate the keys and the values
+            var a = arr[i].split('=');
+
+            // in case params look like: list[]=thing1&list[]=thing2
+            var paramNum = undefined;
+            var paramName = a[0].replace(/\[\d*\]/, function(v) {
+                paramNum = v.slice(1, -1);
+                return '';
+            });
+
+            // set parameter value (use 'true' if empty)
+            var paramValue = typeof(a[1]) === 'undefined' ? true : a[1];
+
+            // (optional) keep case consistent
+            paramName = paramName.toLowerCase();
+            paramValue = paramValue.toLowerCase();
+
+            // if parameter name already exists
+            if (obj[paramName]) {
+                // convert value to array (if still string)
+                if (typeof obj[paramName] === 'string') {
+                    obj[paramName] = [obj[paramName]];
+                }
+                // if no array index number specified...
+                if (typeof paramNum === 'undefined') {
+                    // put the value on the end of the array
+                    obj[paramName].push(paramValue);
+                }
+                // if array index number specified...
+                else {
+                    // put the value at that index number
+                    obj[paramName][paramNum] = paramValue;
+                }
+            }
+            // if param name doesn't exist yet, set it
+            else {
+                obj[paramName] = paramValue;
+            }
+        }
+    }
+
+    return obj;
 }
