@@ -229,10 +229,8 @@ window.onload = function(){
         if ($('#y .data-button.selected').children('.selected-value').length > 0){
             yText = $('#y .data-button.selected .selected-value').text();
         } else if ($('#y .data-button.selected').children('.picked-data-point').length > 0){
-            var dataTitle = $('#y .data-button.selected .nest-title').text();
-            console.log(dataTitle);
             var dataSubTitle = $('#y .data-button.selected .picked-data-point').text();
-            yText = dataTitle + ': ' + dataSubTitle;
+            yText = dataSubTitle + ' (Rate out of 100,000 population)';
         } else {
             yText = $('#y .data-button.selected').text();
         };
