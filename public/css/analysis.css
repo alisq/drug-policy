@@ -336,12 +336,14 @@ nav.data {
 .picked-data-point {
     background:white;
     color:rgb(180, 180, 180);
-    padding: 5px 8px 4px 8px;
+    padding: 4px 7px 3px 7px;
     border-radius:0 4px 4px 0;
+    border:1px solid white;
 }
 
 .picked-data-point.selected {
-    color:rgb(100, 100, 100);
+    color:rgb(0,104,214);
+    border:1px solid rgb(0,104,214);
 }
 
 .chart {

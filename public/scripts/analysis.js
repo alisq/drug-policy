@@ -4,10 +4,10 @@ window.onload = function(){
     var linkedArray = [];
     
     var outCrimeArray = [
-        ['Assault', 'assault'],
-        ['Kidnapping', 'kidnapping'],
-        ['Theft', 'theft'],
-        ['Robbery', 'robbery']
+        ['Assault at the national level, number of police-recorded offences', 'assault'],
+        ['Kidnapping at the national level, number of police-recorded offences', 'kidnapping'],
+        ['Theft at the national level, number of police-recorded offences', 'theft'],
+        ['Robbery at the national level, number of police-recorded offences', 'robbery']
     ];
     
     function getCountries(){
@@ -173,6 +173,10 @@ window.onload = function(){
                 var country = new Object;
                 country.name = d.Country;
                 country.outcome = Number(d.Data);
+                
+                if (country.name.indexOf('*') > -1){
+                    country.name = country.name.replace('*','');
+                }
                 outcomeArray.push(country);
             });
             joinData();
@@ -221,8 +225,8 @@ window.onload = function(){
             yText = $('#y .data-button.selected').text();
         };
         
-        console.log(xText, yText);
-        console.log(xPath, yPath);
+        console.log('X: ' + xText,'Y: ' + yText);
+        console.log('X: ' + xPath,'Y: ' + yPath);
         
         plotData(xPath, yPath, xText, yText);
     });
@@ -263,6 +267,7 @@ window.onload = function(){
         var dimension = $(this).closest('.dimension').attr('id');
         $('.data-list.open').removeClass('open right');
         $('#' + dimension + ' .data-button.selected').removeClass('selected');
+        $('#' + dimension + ' .picked-data-point.selected').text('+').removeClass('selected');
         $(this).addClass('selected');
     });
     
