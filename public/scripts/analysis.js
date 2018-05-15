@@ -16,6 +16,7 @@ window.onload = function(){
 
     $.when(getCountries()).done(function(data){
         countryArray = data;
+        initialLinkedArray();
     });
     
     var windowWidth = $(window).width();
@@ -36,6 +37,17 @@ window.onload = function(){
             .attr("width", svgWidth)
             .attr("height", svgHeight)
             .attr("overflow", "visible");
+    
+    function initialLinkedArray(){
+        linkedArray = [];
+        $(countryArray).each(function(){
+            var country = this;
+            var linkedData = new Object;
+            linkedData.country = country;
+            linkedArray.push(linkedData);
+        });
+        console.log(linkedArray);
+    };
     
     function plotData(x, y, xText, yText){
         var xData = x.split('.');

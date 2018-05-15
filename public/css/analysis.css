@@ -390,7 +390,7 @@ nav.data {
     display:inline-block;
     left:50%;
     transform: translateX(-50%);
-    overflow-y: hidden;
+    overflow:visible;
 }
 
 .point{
