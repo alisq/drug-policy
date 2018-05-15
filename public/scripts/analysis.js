@@ -1,5 +1,5 @@
 window.onload = function(){
-    var homocideArray = [];
+    var outcomeArray = [];
     var countryArray;
     var linkedArray = [];
     
@@ -9,7 +9,6 @@ window.onload = function(){
 
     $.when(getCountries()).done(function(data){
         countryArray = data;
-        getOutcomes();
     });
     
     var windowWidth = $(window).width();
@@ -30,38 +29,6 @@ window.onload = function(){
             .attr("width", svgWidth)
             .attr("height", svgHeight)
             .attr("overflow", "visible");
-    
-    function getOutcomes(){
-        d3.csv('data/homocide_outcomes.csv', function(data){
-            data.forEach(function(d, i){
-                var country = new Object;
-                country.name = d['Country/ territory'];
-                country.source = d.Source;
-                country.year = d.Year;
-                country.males = parseInt(d.Males);
-                country.females = parseInt(d.Females);
-                country.homocide = d['Any Homicide'];
-
-                homocideArray.push(country);
-            });
-            linkData();
-        });
-    };
-    
-    function linkData(){
-        $(countryArray).each(function(){
-            var country = this;
-            $(homocideArray).each(function(){
-                if (country.name == this.name){
-                    var linkedData = new Object;
-                    linkedData.country = country;
-                    linkedData.homocide = this;
-                    linkedArray.push(linkedData);
-                };
-            });
-        });
-        console.log(linkedArray);
-    };
     
     function plotData(x, y, xText, yText){
         var xData = x.split('.');
@@ -192,6 +159,33 @@ window.onload = function(){
         return current;
     };
     
+    function getOutcome(dataset){
+        outcomeArray = [];
+        d3.csv('data/outcomes/'+dataset+'.csv', function(data){
+            data.forEach(function(d){
+                var country = new Object;
+                country.name = d.Country;
+                country.outcome = Number(d.Data);
+                outcomeArray.push(country);
+            });
+            joinData();
+        });
+    };
+    
+    function joinData(){
+        linkedArray = [];
+        $(countryArray).each(function(){
+            var country = this;
+            $(outcomeArray).each(function(){
+                if (country.name == this.name){
+                    var linkedData = new Object;
+                    linkedData.country = country;
+                    linkedData.outcome = this.outcome;
+                    linkedArray.push(linkedData);
+                };
+            });
+        });
+    };
     
     $('.plot-button.enabled').on('click', function(){
         svg.selectAll('.plot').remove();
@@ -227,12 +221,17 @@ window.onload = function(){
         $(this).addClass('selected');
     });
     
+    $('.outcome-button').on('click', function(){
+        var dataSet = $(this).attr('data-set');
+        getOutcome(dataSet);
+    });
+    
     $('.level-one').on('click', function(){
         var dimension = $(this).closest('.dimension').attr('id');
         $('#' + dimension + ' .level-two').removeClass('hidden')
-            .children('.selected-value').text('All Metrics');
+            .children('.selected-value').text('Themes');
         $('#' + dimension + ' .level-three').addClass('hidden')
-            .children('.selected-value').text('All Metrics');
+            .children('.selected-value').text('Specific Metrics');
     });
     
     $('.level-two').on('click', function(){
@@ -278,7 +277,7 @@ window.onload = function(){
         if ($(dataButton).hasClass('level-two')){ //if this is the level two list
             var levelTwo = $(this).attr('data-value');
             $('#' + dimension + ' .level-three .data-list').empty()
-                .append('<div class="data-list-item">All Metrics</div>');
+                .append('<div class="data-list-item">Specific Metrics</div>');
             
             if (levelTwo != 'all'){
                 var levelTwoMetrics = countryArray[0].domains[levelTwo].themes;
@@ -290,7 +289,7 @@ window.onload = function(){
                 $('#' + dimension + ' .data-button.selected').removeClass('selected');
                 $('#' + dimension + ' .level-two').addClass('selected');
                 $('#' + dimension + ' .level-three').removeClass('hidden')
-                    .children('.selected-value').text('All Metrics');
+                    .children('.selected-value').text('Specific Metrics');
             } else {
                 $('#' + dimension + ' .data-button.selected').removeClass('selected');
                 $('#' + dimension + ' .level-one').addClass('selected');
@@ -314,7 +313,7 @@ window.onload = function(){
             
             if ($(dataButton).hasClass('level-three')){ //if this is the level three list
                 var levelThree = $(this).text();
-                if (levelThree != 'All Metrics'){
+                if (levelThree != 'Specific Metrics'){
                     $('#' + dimension + ' .data-button.selected').removeClass('selected');
                     $('#' + dimension + ' .level-three').addClass('selected');
                 } else {
