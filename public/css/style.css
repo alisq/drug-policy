@@ -1,4 +1,9 @@
-* {
+@font-face {
+    font-family: ag;
+    src: url("../fonts/ag.otf") format("opentype");
+}
+
+	* {
     box-sizing: border-box;
 }
 
@@ -12,7 +17,7 @@ body {
     width:100%;
     height:auto;
     margin:0;
-    font-family: 'Atlas Grotesk';
+    font-family: 'ag', "times";
 }
 
 .countries {
