@@ -39,6 +39,73 @@ main {
     align-content: flex-start;
 }
 
+.data-window {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background:rgba(0, 0, 0, 0.6);
+    z-index:100;
+    pointer-events: none;
+    opacity:0;
+    transition:opacity 400ms;
+}
+
+.data-window.show {
+    pointer-events: auto;
+    opacity:1;
+}
+
+.data-modal {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background:white;
+    width:50%;
+    max-width:600px;
+    max-height:80%;
+    border-radius:4px;
+    overflow-y:scroll;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.25);
+}
+
+.data-modal header {
+    position:sticky;
+    top:0;
+    left:0;
+    border-radius:4px 4px 0 0;
+    width:100%;
+    color:white;
+    background: linear-gradient(to right, rgb(0,132,255), rgb(0,104,214));
+    padding:8px 10px 9px 10px;
+    font-size:16px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.25);
+}
+
+.data-modal .sub-head {
+    width:100%;
+    padding:8px 10px 9px 10px;
+    font-size:16px;
+    line-height:20px;
+    background:rgba(200, 200, 200);
+    color:white;
+}
+
+.data-modal .data-point {
+    width:100%;
+    padding:8px 10px 9px 10px;
+    font-size:16px;
+    line-height:20px;
+    border-bottom:1px solid rgb(200, 200, 200);
+}
+
+.data-modal .data-point:hover {
+    cursor:pointer;
+    background:rgb(240, 240, 240);
+}
+
 header {
     position:relative;
     z-index:1;
@@ -256,6 +323,25 @@ nav.data {
     white-space: nowrap;
     overflow-x:hidden;
     text-overflow: ellipsis;
+}
+
+.outcome-nest {
+    padding:5px 0 4px 0;
+}
+
+.nest-title {
+    padding: 5px 8px 4px 8px;
+}
+
+.picked-data-point {
+    background:white;
+    color:rgb(180, 180, 180);
+    padding: 5px 8px 4px 8px;
+    border-radius:0 4px 4px 0;
+}
+
+.picked-data-point.selected {
+    color:rgb(100, 100, 100);
 }
 
 .chart {

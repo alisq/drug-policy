@@ -3,6 +3,13 @@ window.onload = function(){
     var countryArray;
     var linkedArray = [];
     
+    var outCrimeArray = [
+        ['Assault', 'assault'],
+        ['Kidnapping', 'kidnapping'],
+        ['Theft', 'theft'],
+        ['Robbery', 'robbery']
+    ];
+    
     function getCountries(){
         return $.get('/countries');
     };
@@ -185,6 +192,7 @@ window.onload = function(){
                 };
             });
         });
+        console.log(linkedArray);
     };
     
     $('.plot-button.enabled').on('click', function(){
@@ -204,6 +212,11 @@ window.onload = function(){
         
         if ($('#y .data-button.selected').children('.selected-value').length > 0){
             yText = $('#y .data-button.selected .selected-value').text();
+        } else if ($('#y .data-button.selected').children('.picked-data-point').length > 0){
+            var dataTitle = $('#y .data-button.selected .nest-title').text();
+            console.log(dataTitle);
+            var dataSubTitle = $('#y .data-button.selected .picked-data-point').text();
+            yText = dataTitle + ': ' + dataSubTitle;
         } else {
             yText = $('#y .data-button.selected').text();
         };
@@ -214,16 +227,43 @@ window.onload = function(){
         plotData(xPath, yPath, xText, yText);
     });
     
+    $('.outcome-nest').on('click', function(){
+        var dataNest = $(this).attr('data-nest');
+        var dataTitle = $(this).children('.nest-title').text();
+        var dataButton = this;
+        var dataNestArray;
+        
+        if (dataNest == 'crime'){
+            dataNestArray = outCrimeArray;
+        };
+        
+        $('.data-modal-list').html('');
+        
+        $(dataNestArray).each(function(){
+            $('.data-modal-list').append("<div class='data-point last' data-set='"+this[1]+"' data-path='outcome'>"+this[0]+"</div>");
+            
+            $('.data-point.last').on('click', function(){
+                var dataPointTitle = $(this).text();
+                var dataSet = $(this).attr('data-set');
+                var dataPath = $(this).attr('data-path');
+                
+                $('.data-window').removeClass('show');
+                
+                $(dataButton).attr('data-path', dataPath)
+                    .children('.picked-data-point').text(dataPointTitle).addClass('selected');
+                getOutcome(dataSet);
+            }).removeClass('last');
+        });
+        
+        $('.data-modal header').text('Select '+dataTitle+' Data to Plot on Y Axis');
+        $('.data-window').addClass('show');
+    });
+    
     $('.data-button').on('click', function(){
         var dimension = $(this).closest('.dimension').attr('id');
         $('.data-list.open').removeClass('open right');
         $('#' + dimension + ' .data-button.selected').removeClass('selected');
         $(this).addClass('selected');
-    });
-    
-    $('.outcome-button').on('click', function(){
-        var dataSet = $(this).attr('data-set');
-        getOutcome(dataSet);
     });
     
     $('.level-one').on('click', function(){
