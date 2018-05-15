@@ -133,7 +133,7 @@ window.onload = function(){
         $('main section').css('display', 'flex');
         for (var i=0; i < filteredArray.length; i++){
             $('main section').append("<div class='country-card last'><h1><span class='flag-icon'></span><span class='collection'>Collects data on 277 metrics across 45 themes</span></h1><div class='country-details'><div class='income'></div><div class='gdp'></div><div class='strategies'></div></div></div>");
-
+        
             countryCard(filteredArray[i]);
             $('.last').on('click',function(){
                 var countryName = $(this).attr('data-name');

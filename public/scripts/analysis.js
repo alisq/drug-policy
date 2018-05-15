@@ -34,9 +34,11 @@ window.onload = function(){
         
     var svg = d3.select(".chart-svg")
             .append("svg")
+            .attr("id","chart")
             .attr("width", svgWidth)
             .attr("height", svgHeight)
-            .attr("overflow", "visible");
+            .attr("overflow", "visible")
+            .attr("xmlns", "http://www.w3.org/2000/svg");
     
     function initialLinkedArray(){
         linkedArray = [];
@@ -96,13 +98,17 @@ window.onload = function(){
 	        .attr("x1", xScale(0))
 	        .attr("y1", yScale(lrLine(0)))
 	        .attr("x2", xScale(xMax))
-	        .attr("y2", yScale(lrLine(xMax)));
+	        .attr("y2", yScale(lrLine(xMax)))
+            .attr("stroke-dasharray","5, 5")
+            .attr("stroke","red")
+            .attr("stroke-width","2")
                         
         plot.selectAll("circle")
             .data(dataArray)
             .enter()
             .append("circle")
             .attr('class', 'point')
+            .attr('fill','#0084ff')
             .attr("cx", function(d) {return xScale(d[0])})
             .attr("cy", function(d) {return yScale(d[1])})
             .attr("r", 5)
@@ -239,6 +245,8 @@ window.onload = function(){
         console.log('X: ' + xPath,'Y: ' + yPath);
         
         plotData(xPath, yPath, xText, yText);
+
+        $(".pdf-button").addClass("enabled");
     });
     
     $('.outcome-nest').on('click', function(){
@@ -386,5 +394,17 @@ window.onload = function(){
             $('.data-list.open').removeClass('open right');
         };
     });
+
+        d3.select(".pdf-button").on("click", function(){
+
+            if ($(this).hasClass("enabled")) {
+                var timeStampInMs = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now();
+
+                d3.select(this)
+                    .attr("href", 'data:application/octet-stream;base64,' + btoa(d3.select(".chart-svg").html()))
+                    .attr("download", "plot-"+timeStampInMs+".svg") 
+            }
+      
+    })
     
 };
