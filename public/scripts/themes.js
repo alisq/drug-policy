@@ -109,7 +109,11 @@ window.onload = function(){
                 }).removeClass('last');
             });
             
-            $('.last .theme-subtitle').text(this.metric_count+' metrics collected by '+this.country_count+' countries');
+            if (metricsSort == 'least-metrics' || metricsSort == 'most-metrics'){
+                $('.last .theme-subtitle').html(this.metric_count+' metrics collected under this theme across '+this.country_count+' countries');
+            } else if (metricsSort == 'least-countries' || metricsSort == 'most-countries'){
+                $('.last .theme-subtitle').html(this.country_count+' countries collect a total of '+this.metric_count+' metrics under this theme');
+            }
             $('.last.theme').removeClass('last');
         });
     };
@@ -146,6 +150,14 @@ window.onload = function(){
         $('.selected').removeClass('selected');
         $(this).addClass('selected');
         customRoute("countries=least");
+    });
+    
+    $('.tool-tip-icon').on('mouseenter', function(){
+        var pos = this.getBoundingClientRect();
+        var scrollTop = $(window).scrollTop();
+        $('.tool-tip').css({'top': 32 + pos.y + scrollTop + 'px', 'left': - 12 + pos.x + 'px', 'opacity':'1'});
+    }).on('mouseleave', function(){
+        $('.tool-tip').css({'opacity':'0'});
     });
 };
 

@@ -66,10 +66,9 @@ nav.toggles p {
 nav.toggles .button{
     padding: 6px 8px 5px 8px;
     font-family: 'Atlas Grotesk';
-    font-size:15px;
-    line-height:15px;
+    font-size:14px;
+    line-height:14px;
     color: white;
-    /*background: linear-gradient(to bottom right, rgba(0,132,255,0.6), rgba(0,104,214,0.6));*/
     background: rgb(255,92,46);
     opacity: 0.9;
     transition: opacity 0.2s;
@@ -83,7 +82,7 @@ nav.toggles .button + .button{
 
 nav.toggles .button.selected{
     color: rgba(255,255,255,1);
-    background: linear-gradient(to bottom right, rgba(0,132,255,1), rgba(		,1));
+    background: rgba(0,132,255,1);
 }
 
 nav.toggles .button:hover{
@@ -126,6 +125,8 @@ main > section {
     background:white;
     z-index:3;
     margin: 0;
+    top:0;
+    left:0;
     position:absolute;
     width:300px;
     flex-shrink: 0;
@@ -259,4 +260,42 @@ summary::-webkit-details-marker { display:none; }
     margin-top: 5px;
     font-size: 0.8rem;
     color: rgba(0,0,0,0.5);
+}
+
+.tool-tip-icon {
+    margin: 0 0 0 6px;
+    opacity:0.5;
+    transition:opacity 200ms;
+}
+
+.tool-tip-icon:hover {
+    opacity:1;
+}
+
+.tool-tip {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:3;
+    padding:6px 8px 8px 8px;
+    border-radius:4px;
+    width:300px;
+    font-size:12px;
+    line-height:16px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.25);
+    background: rgb(255,92,46);
+    color:white;
+    pointer-events:none;
+    opacity:0;
+    border:1px solid rgb(255,92,46);
+    transition: opacity 200ms;
+}
+
+.tool-tip:before{
+    content:"\A";
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent rgb(255,92,46) transparent;
+    position: absolute;
+    top:-10px;
 }
