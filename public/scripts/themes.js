@@ -1,6 +1,7 @@
 window.onload = function(){
     var allCountryArray
     var themeArray = [];
+    var windowWidth = $(window).width();
     
     function getCountries(){
         return $.get('/countries');
@@ -92,12 +93,16 @@ window.onload = function(){
                 $('.last.flag-icon').on('mousemove', function(e){
                     var xPos = e.clientX;
                     var yPos = e.clientY;
+                    var flagHoverWidth = $('.flag-hover').width();
                     var yScroll = $(window).scrollTop();
                     var country = $(this).attr('data-name');
                     var metrics = $(this).attr('data-metrics');
                     var theme = $(this).attr('data-theme').toLowerCase();
-                    console.log(theme);
-                    $('.flag-hover').css({'top':yPos + yScroll - 24 + 'px', 'left':xPos + 10 + 'px', 'opacity':1});
+                    if (xPos + flagHoverWidth > windowWidth){
+                        $('.flag-hover').css({'top':yPos + yScroll - 24 + 'px', 'left':xPos - flagHoverWidth - 10 + 'px', 'opacity':1});
+                    } else {
+                        $('.flag-hover').css({'top':yPos + yScroll - 24 + 'px', 'left':xPos + 10 + 'px', 'opacity':1});
+                    }
                     $('.flag-hover h1').text(country);
                     $('.flag-hover .metrics').html('Collects <span class="metric-count">'+ metrics +'</span> metrics on ' + theme);
                 }).on('mouseleave', function(){
@@ -110,9 +115,9 @@ window.onload = function(){
             });
             
             if (metricsSort == 'least-metrics' || metricsSort == 'most-metrics'){
-                $('.last .theme-subtitle').html(this.metric_count+' metrics collected under this theme across '+this.country_count+' countries');
+                $('.last .theme-subtitle').html('<span class="highlight">'+this.metric_count+' Metrics</span> collected under this theme across '+this.country_count+' countries');
             } else if (metricsSort == 'least-countries' || metricsSort == 'most-countries'){
-                $('.last .theme-subtitle').html(this.country_count+' countries collect a total of '+this.metric_count+' metrics under this theme');
+                $('.last .theme-subtitle').html('<span class="highlight">'+this.country_count+' Countries</span> collect a total of '+this.metric_count+' metrics under this theme');
             }
             $('.last.theme').removeClass('last');
         });
@@ -155,9 +160,19 @@ window.onload = function(){
     $('.tool-tip-icon').on('mouseenter', function(){
         var pos = this.getBoundingClientRect();
         var scrollTop = $(window).scrollTop();
-        $('.tool-tip').css({'top': 32 + pos.y + scrollTop + 'px', 'left': - 12 + pos.x + 'px', 'opacity':'1'});
+        var toolTipWidth = $('.tool-tip').width();
+        var leftPos = pos.x - 12;
+        var topPos = 32 + pos.y + scrollTop;
+        if (leftPos + toolTipWidth > windowWidth){
+            $('.tool-tip').css({'top': topPos + 'px', 'left': leftPos - toolTipWidth + 20 + 'px', 'opacity':'1'})
+                .addClass('left');
+        } else {
+            $('.tool-tip').css({'top': topPos + 'px', 'left': leftPos + 'px', 'opacity':'1'})
+                .addClass('right');
+        };
+       
     }).on('mouseleave', function(){
-        $('.tool-tip').css({'opacity':'0'});
+        $('.tool-tip').css({'opacity':'0'}).removeClass('left right');
     });
 };
 

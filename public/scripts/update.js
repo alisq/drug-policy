@@ -68,19 +68,19 @@ var getPolicies = function() {
 var GDPparse = function(labelValue){
     // Twelve Zeroes for Trillions
     return Math.abs(Number(labelValue)) >= 1.0e+12
-    ? Math.abs(Number(labelValue)) / 1.0e+12 + " Trillion"
+    ? (Math.abs(Number(labelValue)) / 1.0e+12).toFixed(2) + " Trillion"
 
     // Nine Zeroes for Billions
     : Math.abs(Number(labelValue)) >= 1.0e+9
-    ? Math.abs(Number(labelValue)) / 1.0e+9 + " Billion"
+    ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + " Billion"
    
     // Six Zeroes for Millions 
     : Math.abs(Number(labelValue)) >= 1.0e+6
-    ? Math.abs(Number(labelValue)) / 1.0e+6 + " Million"
+    ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + " Million"
     
     // Three Zeroes for Thousands
     : Math.abs(Number(labelValue)) >= 1.0e+3
-    ? Math.abs(Number(labelValue)) / 1.0e+3 + " Thousand"
+    ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + " Thousand"
 
     : Math.abs(Number(labelValue));
 }

@@ -121,6 +121,10 @@ main > section {
     line-height:22px;
 }
 
+.theme-subtitle .highlight {
+    color: rgb(0,132,255);
+}
+
 .flag-hover {
     background:white;
     z-index:3;
@@ -287,15 +291,24 @@ summary::-webkit-details-marker { display:none; }
     color:white;
     pointer-events:none;
     opacity:0;
-    border:1px solid rgb(255,92,46);
     transition: opacity 200ms;
 }
 
-.tool-tip:before{
+.tool-tip.right:before {
     content:"\A";
     border-style: solid;
     border-width: 0 10px 10px 10px;
     border-color: transparent transparent rgb(255,92,46) transparent;
     position: absolute;
     top:-10px;
+}
+
+.tool-tip.left:before {
+    content:"\A";
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent rgb(255,92,46) transparent;
+    position: absolute;
+    top:-10px;
+    right:8px;
 }
