@@ -51,17 +51,13 @@ window.onload = function(){
         console.log(linkedArray);
     };
     
-    function plotData(x, y, xText, yText, yAltValue){
+    function plotData(x, y, xText, yText, xUnit, yUnit, yAltValue){
         var xData = x.split('.');
         var yData = y.split('.');
-        var xText = xText;
-        var yText = yText;
         
         var dataArray = [];
         var countryNameArray = [];
-        
         var yAltValueArray = [];
-        var yAltValue = yAltValue;
         
         $(linkedArray).each(function(){
             var dataElement = [];
@@ -146,6 +142,14 @@ window.onload = function(){
                 $('.chart-hover .country-data-y').html(yText + ' <span class="amount">' + yAltValue + '</span>'); 
             } else {
                $('.chart-hover .country-data-y').html(yText + ' <span class="amount">' + data[1] + '</span>'); 
+            }
+            
+            if (yUnit) {
+                $('.chart-hover .country-data-y .amount').append(yUnit);
+            }
+            
+            if (xUnit) {
+                $('.chart-hover .country-data-x .amount').append(xUnit);
             }
             
             var chartHoverWidth = $('.chart-hover').innerHeight();
@@ -241,6 +245,9 @@ window.onload = function(){
         var xText;
         var yText;
         
+        var xUnit = $('#x .data-button.selected').attr('data-unit');
+        var yUnit = $('#y .data-button.selected').attr('data-unit');
+        
         var yAltValue = $('#y .data-button.selected').attr('data-alt-value');
         
         if ($('#x .data-button.selected').children('.selected-value').length > 0){
@@ -261,7 +268,7 @@ window.onload = function(){
         console.log('X: ' + xText,'Y: ' + yText);
         console.log('X: ' + xPath,'Y: ' + yPath);
         
-        plotData(xPath, yPath, xText, yText, yAltValue);
+        plotData(xPath, yPath, xText, yText, xUnit, yUnit, yAltValue);
         
         $(".pdf-button").addClass("enabled");
     });
@@ -362,7 +369,7 @@ window.onload = function(){
             if (levelTwo != 'all'){
                 var levelTwoMetrics = countryArray[0].domains[levelTwo].themes;
                 $(levelTwoMetrics).each(function(i){
-                    $('#' + dimension + ' .level-three .data-list').append('<div class="data-list-item" data-path="country.domains.'+levelTwo+'.themes.'+i+'.metric_count" data-index="'+i+'">' + this.theme + '</div>');
+                    $('#' + dimension + ' .level-three .data-list').append('<div class="data-list-item" data-path="country.domains.'+levelTwo+'.themes.'+i+'.metric_count" data-unit=" Metrics">' + this.theme + '</div>');
                 });
                 activateLevelThreeList();
                 
@@ -387,9 +394,11 @@ window.onload = function(){
             var dataButton = $(this).parent().parent();
             var newText = $(this).text();
             var newPath = $(this).attr('data-path');
+            var newUnit = $(this).attr('data-unit');
             
             $(this).parent().siblings('.selected-value').text(newText);
-            $(dataButton).attr('data-path', newPath);
+            $(dataButton).attr('data-path', newPath)
+                .attr('data-unit', newUnit);
             
             if ($(dataButton).hasClass('level-three')){ //if this is the level three list
                 var levelThree = $(this).text();
