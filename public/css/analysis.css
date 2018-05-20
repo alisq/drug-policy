@@ -213,9 +213,11 @@ nav.data {
     color:rgb(240, 240, 240);
     background:linear-gradient(to right, rgba(180,180,180,1), rgba(200,200,200,1));
     margin:6px 5px 0 0;
-    padding:5px 8px 4px 8px;
+    padding:5px 8px 6px 8px;
     display:inline-block;
     cursor:pointer;
+    font-size:15px;
+    line-height:19px;
     vertical-align: bottom;
 }
 
@@ -237,16 +239,16 @@ nav.data {
     content:" ";
     position:absolute;
     top:0;
-    right:-14px;
+    right:-15px;
     width: 0; 
     height: 0; 
-    border-top: 14px solid transparent;
-    border-bottom: 14px solid transparent;
-    border-left: 14px solid rgb(200,200,200);
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid rgb(200,200,200);
 }
 
 .data-button.pointed.selected::after{
-    border-left: 14px solid rgba(0,104,214,1);
+    border-left: 15px solid rgba(0,104,214,1);
 }
 
 .data-button-group {
@@ -326,17 +328,17 @@ nav.data {
 }
 
 .outcome-nest {
-    padding:5px 0 4px 0;
+    padding:5px 0 6px 0;
 }
 
 .nest-title {
-    padding: 5px 8px 4px 8px;
+    padding: 5px 8px 6px 8px;
 }
 
 .picked-data-point {
     background:white;
     color:rgb(180, 180, 180);
-    padding: 4px 7px 3px 7px;
+    padding: 4px 7px 5px 7px;
     border-radius:0 4px 4px 0;
     border:1px solid white;
 }

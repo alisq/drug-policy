@@ -51,7 +51,7 @@ window.onload = function(){
         console.log(linkedArray);
     };
     
-    function plotData(x, y, xText, yText){
+    function plotData(x, y, xText, yText, yAltValue){
         var xData = x.split('.');
         var yData = y.split('.');
         var xText = xText;
@@ -59,6 +59,9 @@ window.onload = function(){
         
         var dataArray = [];
         var countryNameArray = [];
+        
+        var yAltValueArray = [];
+        var yAltValue = yAltValue;
         
         $(linkedArray).each(function(){
             var dataElement = [];
@@ -68,6 +71,13 @@ window.onload = function(){
             if (dataElement[0] && dataElement[1]){
                 dataArray.push(dataElement);
                 countryNameArray.push(this.country.name);
+                
+                if (yAltValue){
+                    var yValue = yAltValue.split('.');
+                    yValue = getValue(this, yValue);
+                    yAltValueArray.push(yValue); 
+                }
+                
             } else {
                 console.log('No X and/or Y data avalible for country');
             };
@@ -87,7 +97,7 @@ window.onload = function(){
             .domain([0, d3.max(dataArray, function(d){return d[1]})])
             .range([svgHeight - padding.bottom, padding.top]);
         
-        var xAxis = d3.axisBottom(xScale).ticks(10);
+        var xAxis = d3.axisBottom(xScale);
         var yAxis = d3.axisLeft(yScale);
         
         var plot = svg.append('g')
@@ -115,23 +125,28 @@ window.onload = function(){
             .on('mouseenter', function(d, i){
                 $(this).addClass('point-hover');
                 var countryName = countryNameArray[i];
-                hoverPoint(d, countryName)
+                hoverPoint(d, countryName, yAltValueArray[i]);
             }).on('mousemove', function(d, i){
                 $(this).addClass('point-hover');
                 var countryName = countryNameArray[i];
-                hoverPoint(d, countryName)
+                hoverPoint(d, countryName, yAltValueArray[i]);
             }).on('mouseleave', function(d){
                 $('.chart-hover').removeClass('show')
                 $(this).removeClass('point-hover');
             });
         
-        function hoverPoint(data, countryName){
+        function hoverPoint(data, countryName, yAltValue){
             var mouseX = event.clientX + 14;
             var mouseY = $(window).scrollTop() + event.clientY - 3;
             
             $('.chart-hover .country-name').text(countryName);
             $('.chart-hover .country-data-x').html(xText + ' <span class="amount">' + data[0] + '</span>');
-            $('.chart-hover .country-data-y').html(yText + ' <span class="amount">' + data[1] + '</span>');
+            
+            if (yAltValue){
+                $('.chart-hover .country-data-y').html(yText + ' <span class="amount">' + yAltValue + '</span>'); 
+            } else {
+               $('.chart-hover .country-data-y').html(yText + ' <span class="amount">' + data[1] + '</span>'); 
+            }
             
             var chartHoverWidth = $('.chart-hover').innerHeight();
             $('.chart-hover').addClass('show')
@@ -226,6 +241,8 @@ window.onload = function(){
         var xText;
         var yText;
         
+        var yAltValue = $('#y .data-button.selected').attr('data-alt-value');
+        
         if ($('#x .data-button.selected').children('.selected-value').length > 0){
             xText = $('#x .data-button.selected .selected-value').text();
         } else {
@@ -244,8 +261,8 @@ window.onload = function(){
         console.log('X: ' + xText,'Y: ' + yText);
         console.log('X: ' + xPath,'Y: ' + yPath);
         
-        plotData(xPath, yPath, xText, yText);
-
+        plotData(xPath, yPath, xText, yText, yAltValue);
+        
         $(".pdf-button").addClass("enabled");
     });
     
