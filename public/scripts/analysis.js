@@ -48,7 +48,6 @@ window.onload = function(){
             linkedData.country = country;
             linkedArray.push(linkedData);
         });
-        console.log(linkedArray);
     };
     
     function plotData(x, y, xText, yText, xUnit, yUnit, yAltValue){
@@ -79,11 +78,9 @@ window.onload = function(){
             };
         });
         
-        var lr = ss.linearRegression(dataArray);
-        var lrLine = ss.linearRegressionLine(lr);
         var xMax = d3.max(dataArray, function(d){return d[0]});
            
-        var padding = {top:20, right:20, bottom:20, left:30};
+        var padding = {top:20, right:20, bottom:60, left:72};
             
         var xScale = d3.scaleLinear()
             .domain([0, xMax])
@@ -94,20 +91,23 @@ window.onload = function(){
             .range([svgHeight - padding.bottom, padding.top]);
         
         var xAxis = d3.axisBottom(xScale);
-        var yAxis = d3.axisLeft(yScale);
+        var yAxis = d3.axisLeft(yScale).tickFormat(d3.format("0.2s"));
         
         var plot = svg.append('g')
             .attr('class', 'plot');
         
-        plot.append("line")
-	        .attr("class", "regression")
-	        .attr("x1", xScale(0))
-	        .attr("y1", yScale(lrLine(0)))
-	        .attr("x2", xScale(xMax))
-	        .attr("y2", yScale(lrLine(xMax)))
-            .attr("stroke-dasharray","5, 5")
-            .attr("stroke","red")
-            .attr("stroke-width","2")
+        // REGRESSION //
+//        var lr = ss.linearRegression(dataArray);
+//        var lrLine = ss.linearRegressionLine(lr);
+//        plot.append("line")
+//	        .attr("class", "regression")
+//	        .attr("x1", xScale(0))
+//	        .attr("y1", yScale(lrLine(0)))
+//	        .attr("x2", xScale(xMax))
+//	        .attr("y2", yScale(lrLine(xMax)))
+//            .attr("stroke-dasharray","5, 5")
+//            .attr("stroke","red")
+//            .attr("stroke-width","2")
                         
         plot.selectAll("circle")
             .data(dataArray)
@@ -164,8 +164,41 @@ window.onload = function(){
         
         plot.append("g")
             .call(yAxis)
-            .attr("transform", "translate(" + padding.left + ",0)")
+            .attr("transform", "translate(" + padding.left + ", 0)")
             .attr("class", "axis");
+        
+        plot.append("foreignObject")
+            .attr('width', svgWidth - padding.left - padding.right + 'px')
+            .attr('height', '32px')
+            .attr('x', padding.left + 'px')
+            .attr('y', svgHeight - 32 + 'px')
+            .append('xhtml:div')
+            .append('p')
+            .attr('class', 'axis-title')
+            .text(function(){
+                if (xUnit){
+                    return xText + ' (' + xUnit + ')';
+                } else {
+                   return xText; 
+                }
+            });
+        
+        plot.append("foreignObject")
+            .attr('width', svgWidth - padding.top - padding.bottom + 'px')
+            .attr('height', '32px')
+            .attr('x', (svgHeight - padding.bottom) * '-1')
+            .attr('y', 0)
+            .attr('transform', 'rotate(-90)')
+            .append('xhtml:div')
+            .append('p')
+            .attr('class', 'axis-title')
+            .text(function(){
+                if (yUnit){
+                    return yText + ' (' + yUnit + ')';
+                } else {
+                   return yText; 
+                }
+            });
         
         $('.dimension-title.x-axis .dimension-text').text(xText);
         $('.dimension-title.y-axis .dimension-text').text(yText);
