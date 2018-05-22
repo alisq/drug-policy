@@ -351,29 +351,8 @@ nav.data {
 .chart {
     position:relative;
     padding:20px 20px 30px 20px;
-    width:100%;
+    width:50%;
     z-index:0;
-}
-
-.chart-title {
-    position:relative;
-    width:100%;
-    margin:20px 0 0 0;
-    text-align:center;
-}
-
-.chart-title .dimension-title{
-    background:linear-gradient(to bottom right, rgb(0,132,255), rgb(0,104,214));
-    color:white;
-    font-size:16px;
-    line-height:20px;
-    border-radius:4px;
-    display:inline-block;
-    margin:0 0 8px 0;
-}
-
-.chart-title .dimension-title + .dimension-title{
-    margin:0 0 8px 4px;
 }
 
 .dimension-label{
@@ -430,7 +409,7 @@ nav.data {
 .axis-title {
     font-family: 'Atlas Grotesk';
     font-size: 13px;
-    color:rgb(0,132,255);
+    color:rgb(150, 150, 150);
     margin:0;
     padding:0;
     text-align:center;
@@ -479,4 +458,17 @@ nav.data {
 .unit {
     color:rgb(200, 200, 200);
     margin:0 0 0 4px;
+}
+
+.chart-text {
+    position:relative;
+    padding:20px 20px 30px 20px;
+    width:50%;
+    z-index:0;
+}
+
+.chart-text-box {
+    padding:8px 12px 8px 12px;
+    background:rgb(240, 240, 240);
+    border-radius:4px;
 }

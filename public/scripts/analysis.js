@@ -4,10 +4,10 @@ window.onload = function(){
     var linkedArray = [];
     
     var outCrimeArray = [
-        ['Assault at the national level, number of police-recorded offences', 'assault', 'Rate per 100,000 Population'],
-        ['Kidnapping at the national level, number of police-recorded offences', 'kidnapping', 'Rate per 100,000 Population'],
-        ['Theft at the national level, number of police-recorded offences', 'theft', 'Rate per 100,000 Population'],
-        ['Robbery at the national level, number of police-recorded offences', 'robbery', 'Rate per 100,000 Population']
+        ['Rate of police-recorded Assault at the national level', 'assault', 'Rate per 100,000 Population'],
+        ['Rate of police-recorded Kidnapping at the national level', 'kidnapping', 'Rate per 100,000 Population'],
+        ['Rate of police-recorded Theft at the national level', 'theft', 'Rate per 100,000 Population'],
+        ['Rate of police-recorded Robbery at the national level', 'robbery', 'Rate per 100,000 Population']
     ];
     
     function getCountries(){
@@ -50,7 +50,7 @@ window.onload = function(){
         });
     };
     
-    function plotData(x, y, xText, yText, xUnit, yUnit, yAltValue){
+    function plotData(x, y, xText, yText, xUnit, yUnit, xLevel, yAltValue){
         var xData = x.split('.');
         var yData = y.split('.');
         
@@ -200,8 +200,17 @@ window.onload = function(){
                 }
             });
         
-        $('.dimension-title.x-axis .dimension-text').text(xText);
-        $('.dimension-title.y-axis .dimension-text').text(yText);
+        var chartTitle;
+        
+        if (xLevel == 'level one'){
+            chartTitle = 'Number of metrics used to evaluate national drug policies and the '+yText+' across '+dataArray.length+' countries';
+        } else if (xLevel == 'level two'){
+            chartTitle = 'Number of '+xText+' used to evaluate national drug policies and the '+yText+' across '+dataArray.length+' countries';
+        } else if (xLevel == 'level three'){
+            chartTitle = 'Use of metrics to assess the '+xText+' and the '+yText+' across '+dataArray.length+' countries';
+        };
+        
+        $('.chart-title').text(chartTitle);
     };
     
     function getValue(data, array){
@@ -272,16 +281,25 @@ window.onload = function(){
     $('.plot-button.enabled').on('click', function(){
         svg.selectAll('.plot').remove();
         
-        var xPath = $('#x .data-button.selected').attr('data-path');
-        var yPath = $('#y .data-button.selected').attr('data-path');
-        
         var xText;
         var yText;
+        var xLevel;
+        
+        var xPath = $('#x .data-button.selected').attr('data-path');
+        var yPath = $('#y .data-button.selected').attr('data-path');
         
         var xUnit = $('#x .data-button.selected').attr('data-unit');
         var yUnit = $('#y .data-button.selected').attr('data-unit');
         
         var yAltValue = $('#y .data-button.selected').attr('data-alt-value');
+        
+        if ($('#x .data-button.selected').hasClass('level-one')){
+            xLevel = 'level one';
+        } else if ($('#x .data-button.selected').hasClass('level-two')){
+            xLevel = 'level two';
+        } else if ($('#x .data-button.selected').hasClass('level-three')){
+            xLevel = 'level three';
+        };
         
         if ($('#x .data-button.selected').children('.selected-value').length > 0){
             xText = $('#x .data-button.selected .selected-value').text();
@@ -300,7 +318,7 @@ window.onload = function(){
         console.log('X: ' + xText,'Y: ' + yText);
         console.log('X: ' + xPath,'Y: ' + yPath);
         
-        plotData(xPath, yPath, xText, yText, xUnit, yUnit, yAltValue);
+        plotData(xPath, yPath, xText, yText, xUnit, yUnit, xLevel, yAltValue);
         
         $(".pdf-button").addClass("enabled");
     });
