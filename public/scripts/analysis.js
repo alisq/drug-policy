@@ -4,10 +4,10 @@ window.onload = function(){
     var linkedArray = [];
     
     var outCrimeArray = [
-        ['Assault at the national level, number of police-recorded offences', 'assault'],
-        ['Kidnapping at the national level, number of police-recorded offences', 'kidnapping'],
-        ['Theft at the national level, number of police-recorded offences', 'theft'],
-        ['Robbery at the national level, number of police-recorded offences', 'robbery']
+        ['Assault at the national level, number of police-recorded offences', 'assault', 'Rate per 100,000 Population'],
+        ['Kidnapping at the national level, number of police-recorded offences', 'kidnapping', 'Rate per 100,000 Population'],
+        ['Theft at the national level, number of police-recorded offences', 'theft', 'Rate per 100,000 Population'],
+        ['Robbery at the national level, number of police-recorded offences', 'robbery', 'Rate per 100,000 Population']
     ];
     
     function getCountries(){
@@ -145,11 +145,11 @@ window.onload = function(){
             }
             
             if (yUnit) {
-                $('.chart-hover .country-data-y .amount').append(yUnit);
+                $('.chart-hover .country-data-y').append('<span class="unit">' + yUnit + '</span>');
             }
             
             if (xUnit) {
-                $('.chart-hover .country-data-x .amount').append(xUnit);
+                $('.chart-hover .country-data-x').append('<span class="unit">' + xUnit + '</span>');
             }
             
             var chartHoverWidth = $('.chart-hover').innerHeight();
@@ -292,8 +292,7 @@ window.onload = function(){
         if ($('#y .data-button.selected').children('.selected-value').length > 0){
             yText = $('#y .data-button.selected .selected-value').text();
         } else if ($('#y .data-button.selected').children('.picked-data-point').length > 0){
-            var dataSubTitle = $('#y .data-button.selected .picked-data-point').text();
-            yText = dataSubTitle + ' (Rate out of 100,000 population)';
+            yText = $('#y .data-button.selected .picked-data-point').text();
         } else {
             yText = $('#y .data-button.selected').text();
         };
@@ -319,16 +318,18 @@ window.onload = function(){
         $('.data-modal-list').html('');
         
         $(dataNestArray).each(function(){
-            $('.data-modal-list').append("<div class='data-point last' data-set='"+this[1]+"' data-path='outcome'>"+this[0]+"</div>");
+            $('.data-modal-list').append("<div class='data-point last' data-set='"+this[1]+"' data-unit='"+this[2]+"' data-path='outcome'>"+this[0]+"</div>");
             
             $('.data-point.last').on('click', function(){
                 var dataPointTitle = $(this).text();
                 var dataSet = $(this).attr('data-set');
                 var dataPath = $(this).attr('data-path');
+                var dataUnit = $(this).attr('data-unit');
                 
                 $('.data-window').removeClass('show');
                 
                 $(dataButton).attr('data-path', dataPath)
+                    .attr('data-unit', dataUnit)
                     .children('.picked-data-point').text(dataPointTitle).addClass('selected');
                 getOutcome(dataSet);
             }).removeClass('last');
@@ -402,7 +403,7 @@ window.onload = function(){
             if (levelTwo != 'all'){
                 var levelTwoMetrics = countryArray[0].domains[levelTwo].themes;
                 $(levelTwoMetrics).each(function(i){
-                    $('#' + dimension + ' .level-three .data-list').append('<div class="data-list-item" data-path="country.domains.'+levelTwo+'.themes.'+i+'.metric_count" data-unit=" Metrics">' + this.theme + '</div>');
+                    $('#' + dimension + ' .level-three .data-list').append('<div class="data-list-item" data-path="country.domains.'+levelTwo+'.themes.'+i+'.metric_count" data-unit="Metrics">' + this.theme + '</div>');
                 });
                 activateLevelThreeList();
                 

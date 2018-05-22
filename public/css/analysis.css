@@ -424,13 +424,13 @@ nav.data {
 .axis text {
     font-family: 'Atlas Grotesk';
     font-size: 11px;
-    fill:rgb(150,150,150);
+    fill:rgb(150, 150, 150);
 }
 
 .axis-title {
     font-family: 'Atlas Grotesk';
     font-size: 13px;
-    color:rgb(150,150,150);
+    color:rgb(0,132,255);
     margin:0;
     padding:0;
     text-align:center;
@@ -474,4 +474,9 @@ nav.data {
     background:rgb(0,132,255);
     padding:4px 5px 2px 5px;
     border-radius:7px;
+}
+
+.unit {
+    color:rgb(200, 200, 200);
+    margin:0 0 0 4px;
 }
