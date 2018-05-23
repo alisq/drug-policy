@@ -211,6 +211,17 @@ window.onload = function(){
         };
         
         $('.chart-title').text(chartTitle);
+        
+        $('.country-list').text('');
+        for (var i=0; i < countryNameArray.length; i++){
+            if (i == countryNameArray.length-1){
+                $('.country-list').append(countryNameArray[i]);
+            } else {
+                $('.country-list').append(countryNameArray[i] + ', ');
+            }
+        };
+        
+        $('.chart-caveat').text('Please note that when using the figures, any cross-national comparisons should be conducted with caution because of the differences that exist between the legal definitions of offences in countries, or the different methods of offence counting and recording.');
     };
     
     function getValue(data, array){
