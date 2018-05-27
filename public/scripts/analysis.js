@@ -195,6 +195,10 @@ window.onload = function(){
                 }
             });
         
+        /// CHART TEXT ///
+        
+        // generate chart title
+        
         var chartTitle;
         
         if (plotGuide.x.level == 'level one'){
@@ -207,6 +211,8 @@ window.onload = function(){
         
         $('.chart-title').text(chartTitle);
         
+        // add list of countries
+        
         $('.country-list').html("<span class='chart-header'>Countries Plotted: </span>");
         for (var i=0; i < countryNameArray.length; i++){
             if (i == countryNameArray.length-1){
@@ -216,13 +222,16 @@ window.onload = function(){
             }
         };
         
+        // generate chart notes and sources
+        
         $('.chart-notes .x-notes').html('');
         $('.chart-notes .y-notes').html('');
+        $('.chart-sources').html('<span class="chart-header">Sources: </span>');
         
         $('.chart-notes .x-notes').html('<span class="chart-header">X Axis Notes: </span>');
         $('.chart-notes .x-notes').append('Notes from St.Micheals Team about metric data go here.');
         
-        // If chart has outcome data, add Y Axis notes //
+        // notes + sources for outcome data
         if (linkedArray[0].outcome){
             $('.chart-notes .y-notes').html('<span class="chart-header">Y Axis Notes: </span>');
             
@@ -238,7 +247,19 @@ window.onload = function(){
                 $('.chart-notes .y-notes').append('Average of available data from the years ' + yearString);
             };
             
-            $('.chart-notes .y-notes').append('Please note that when using the figures, any cross-national comparisons should be conducted with caution because of the differences that exist between the legal definitions of offences in countries, or the different methods of offence counting and recording.');
+            if (linkedArray[0].outcome.notes){
+                $('.chart-notes .y-notes').append(linkedArray[0].outcome.notes);
+            };
+            
+            $('.chart-sources').append('<a target="_blank" href="https://data.unodc.org/">UNODC</a>');
+        };
+        
+        if (plotGuide.y.text == 'GDP'){
+            $('.chart-sources').append('<a target="_blank" href="https://data.worldbank.org/">World Bank</a>');
+        };
+        
+        if (plotGuide.y.text == 'Rate of Unemployment'){
+            $('.chart-sources').append('<a target="_blank" href="https://www.google.ca/">Unemployment Source</a>');
         };
     };
     
@@ -290,6 +311,9 @@ window.onload = function(){
                 if (outcome.name.indexOf('*') > -1){
                     outcome.name = outcome.name.replace('*','');
                 };
+                
+                outcome.notes = data[0]['Interpretation'];
+                outcome.link = data[0]['Link'];
                 
                 outcomeArray.push(outcome);
             });
@@ -383,6 +407,14 @@ window.onload = function(){
             yText = $('#y .data-button.selected .picked-data-point').text();
         } else {
             yText = $('#y .data-button.selected').text();
+        };
+        
+        if (yText == 'Unemployment'){
+            yText = 'Rate of Unemployment';
+        };
+        
+        if (yText == 'GDP'){
+            yText = 'GDP';
         };
         
         console.log('X: ' + xText,'Y: ' + yText);

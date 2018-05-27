@@ -497,3 +497,15 @@ nav.data {
     font-size:12px;
     line-height:17px;
 }
+
+.chart-sources {
+    border-top:1px solid rgb(220,220,220);
+    padding:8px 12px 8px 12px;
+    font-size:12px;
+    line-height:17px;
+}
+
+.chart-sources a{
+    text-decoration:none;
+    color:rgb(0,104,214);
+}
