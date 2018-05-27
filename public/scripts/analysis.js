@@ -216,11 +216,30 @@ window.onload = function(){
             }
         };
         
-        if (linkedArray[0].outcome.years){
-            console.log('has years');
-        }
+        $('.chart-notes .x-notes').html('');
+        $('.chart-notes .y-notes').html('');
         
-        $('.chart-caveat').html('<span class="chart-header">Interpretation: </span>Please note that when using the figures, any cross-national comparisons should be conducted with caution because of the differences that exist between the legal definitions of offences in countries, or the different methods of offence counting and recording.');
+        $('.chart-notes .x-notes').html('<span class="chart-header">X Axis Notes: </span>');
+        $('.chart-notes .x-notes').append('Notes from St.Micheals Team about metric data go here.');
+        
+        // If chart has outcome data, add Y Axis notes //
+        if (linkedArray[0].outcome){
+            $('.chart-notes .y-notes').html('<span class="chart-header">Y Axis Notes: </span>');
+            
+            if (linkedArray[0].outcome.years){
+                var yearString = '';
+                for (var i=0; i<linkedArray[0].outcome.years.length; i++){
+                    if (i == linkedArray[0].outcome.years.length - 1){
+                        yearString = yearString + linkedArray[0].outcome.years[i] + '. ';
+                    } else {
+                        yearString = yearString + linkedArray[0].outcome.years[i] + ', ';
+                    }
+                };
+                $('.chart-notes .y-notes').append('Average of available data from the years ' + yearString);
+            };
+            
+            $('.chart-notes .y-notes').append('Please note that when using the figures, any cross-national comparisons should be conducted with caution because of the differences that exist between the legal definitions of offences in countries, or the different methods of offence counting and recording.');
+        };
     };
     
     function getValue(data, array){
@@ -479,9 +498,11 @@ window.onload = function(){
         var dataButton = $(this).parent().parent();
         var newText = $(this).text();
         var newPath = $(this).attr('data-path');
+        var newUnit = $(this).attr('data-unit');
         
         $(this).parent().siblings('.selected-value').text(newText);
         $(dataButton).attr('data-path', newPath);
+        $(dataButton).attr('data-unit', newUnit);
         
         if ($(dataButton).hasClass('level-two')){ //if this is the level two list
             var levelTwo = $(this).attr('data-value');
@@ -491,7 +512,7 @@ window.onload = function(){
             if (levelTwo != 'all'){
                 var levelTwoMetrics = countryArray[0].domains[levelTwo].themes;
                 $(levelTwoMetrics).each(function(i){
-                    $('#' + dimension + ' .level-three .data-list').append('<div class="data-list-item" data-path="country.domains.'+levelTwo+'.themes.'+i+'.metric_count" data-unit="Metrics">' + this.theme + '</div>');
+                    $('#' + dimension + ' .level-three .data-list').append('<div class="data-list-item" data-path="country.domains.'+levelTwo+'.themes.'+i+'.metric_count" data-unit="Number of Metrics">' + this.theme + '</div>');
                 });
                 activateLevelThreeList();
                 

@@ -462,7 +462,7 @@ nav.data {
 
 .chart-text {
     position:relative;
-    padding:20px 20px 30px 20px;
+    padding:20px 40px 30px 20px;
     width:50%;
     z-index:0;
 }
@@ -491,7 +491,7 @@ nav.data {
     line-height:19px;
 }
 
-.chart-caveat {
+.chart-notes {
     border-top:1px solid rgb(220,220,220);
     padding:8px 12px 8px 12px;
     font-size:12px;
