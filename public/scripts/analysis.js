@@ -5,6 +5,7 @@ window.onload = function(){
     var linkedArray = [];
     
     var outcomeCrime = [];
+    var outcomeCriminalJustice = [];
     
     function getCountries(){
         return $.get('/countries');
@@ -30,6 +31,8 @@ window.onload = function(){
                 
                 if (outcome.category == 'Crime'){
                     outcomeCrime.push(outcome);
+                } else if (outcome.category == 'Criminal Justice'){
+                    outcomeCriminalJustice.push(outcome);       
                 };
             });
         });
@@ -361,7 +364,7 @@ window.onload = function(){
         $(countryArray).each(function(){
             var country = this;
             $(outcomeArray).each(function(){
-                if (country.name == this.name){
+                if (country.UNODCName == this.name){
                     var linkedData = new Object;
                     linkedData.country = country;
                     linkedData.outcome = this;
@@ -447,7 +450,9 @@ window.onload = function(){
         
         if (dataNest == 'crime'){
             dataNestArray = outcomeCrime;
-        };
+        } else if (dataNest = 'justice-criminal'){
+            dataNestArray = outcomeCriminalJustice;
+        }
         
         $('.data-modal-list').html('');
         

@@ -12,49 +12,51 @@ var getPolicies = function() {
         var lastCountry;
 
         data.forEach(function(d, i){
-            var currentCountry = d.Country;
+            if (d['Country Completed'] == 'Y'){
+                var currentCountry = d.Country;
 
-            if (i > 0) {
-                var lastCountry = data[i-1].Country;
-            };
-
-            if (currentCountry === lastCountry) {
-                // if new policy is from same country as previous policy
-                var policy = newPolicy(d);
-                policies.push(policy);
-                country.policies = policies;
-
-            } else {
-                // last country is complete, push it to array;
                 if (i > 0) {
-                    countryArray.push(country);
+                    var lastCountry = data[i-1].Country;
                 };
 
-                // create new country and policies;
-                country = new Object;
-                policies = [];
+                if (currentCountry === lastCountry) {
+                    // if new policy is from same country as previous policy
+                    var policy = newPolicy(d);
+                    policies.push(policy);
+                    country.policies = policies;
 
-                country.name = d['Country'];
-                country.longName = d['Long Name'];
-                country.continent = d.Continent;
-                country.region = d.Region;
-                country.ISO = d.ISO;
-                country.ISO_2 = d['ISO 2'];
-                country.unemployment = d['Unemployment Rate (%  - World Bank)']
-                country.GDP = d['GDP (World Bank)'];
-                country.income = d['Income Group (World Bank)'];
+                } else {
+                    // last country is complete, push it to array;
+                    if (i > 0) {
+                        countryArray.push(country);
+                    };
 
-                country.unemployment = country.unemployment.substring(0, country.unemployment.length - 1);
+                    // create new country and policies;
+                    country = new Object;
+                    policies = [];
 
-                country.GDP = country.GDP.replace(/,/g , "");
-                country.GDP = country.GDP.split(' USD');
-                country.GDP = Number(country.GDP[0]);
-                
-                country.GDPtext = GDPparse(country.GDP);
+                    country.name = d['Country'];
+                    country.UNODCName = d['UNODC Name'];
+                    country.continent = d.Continent;
+                    country.region = d.Region;
+                    country.ISO = d.ISO;
+                    country.ISO_2 = d['ISO 2'];
+                    country.unemployment = d['Unemployment Rate (%  - World Bank)']
+                    country.GDP = d['GDP (World Bank)'];
+                    country.income = d['Income Group (World Bank)'];
 
-                var policy = newPolicy(d);
-                policies.push(policy);
-                country.policies = policies;
+                    country.unemployment = country.unemployment.substring(0, country.unemployment.length - 1);
+
+                    country.GDP = country.GDP.replace(/,/g , "");
+                    country.GDP = country.GDP.split(' USD');
+                    country.GDP = Number(country.GDP[0]);
+
+                    country.GDPtext = GDPparse(country.GDP);
+
+                    var policy = newPolicy(d);
+                    policies.push(policy);
+                    country.policies = policies;
+                };
             };
         });
 
@@ -93,90 +95,92 @@ var getThemes = function(){
         var lastCountry;
 
         data.forEach(function(d, i){
-            var currentCountry = d.Country;
+            if (d['Completed'] == 'Y'){
+                var currentCountry = d.Country;
 
-            if (i > 0) {
-                var lastCountry = data[i-1].Country;
-            };
-
-            if (currentCountry === lastCountry) {
-                // if new policy is from same country as previous policy
-                if (d.Domain == 'Health'){
-                    var theme = newTheme(d);
-                    domains.health.themes.push(theme);
-                    domains.health.metric_count = domains.health.metric_count + theme.metrics.length;
-                } else if (d.Domain == 'Peace and Security'){
-                    var theme = newTheme(d);
-                    domains.peace.themes.push(theme);
-                    domains.peace.metric_count = domains.peace.metric_count + theme.metrics.length;
-                } else if (d.Domain == 'Development'){
-                    var theme = newTheme(d);
-                    domains.development.themes.push(theme);
-                    domains.development.metric_count = domains.development.metric_count + theme.metrics.length;
-                } else if (d.Domain == 'Human Rights'){
-                    var theme = newTheme(d);
-                    domains.rights.themes.push(theme);
-                    domains.rights.metric_count = domains.rights.metric_count + theme.metrics.length;
-                } else if (d.Domain == 'Demand'){
-                    var theme = newTheme(d);
-                    domains.demand.themes.push(theme);
-                    domains.demand.metric_count = domains.demand.metric_count + theme.metrics.length;
-                } else if (d.Domain == 'Supply'){
-                    var theme = newTheme(d);
-                    domains.supply.themes.push(theme);
-                    domains.supply.metric_count = domains.supply.metric_count + theme.metrics.length;
-                } else if (d.Domain == 'International Cooperation'){
-                    var theme = newTheme(d);
-                    domains.international.themes.push(theme);
-                    domains.international.metric_count = domains.international.metric_count + theme.metrics.length;
-                };
-
-                country.domains = domains
-
-            } else {
-                // last country is complete, push it to array;
                 if (i > 0) {
-                    countryDomainArray.push(country);
+                    var lastCountry = data[i-1].Country;
                 };
 
-                // create new country, domains and themes;
-                country = new Object;
-                domains = new Object;
+                if (currentCountry === lastCountry) {
+                    // if new policy is from same country as previous policy
+                    if (d.Domain == 'Health'){
+                        var theme = newTheme(d);
+                        domains.health.themes.push(theme);
+                        domains.health.metric_count = domains.health.metric_count + theme.metrics.length;
+                    } else if (d.Domain == 'Peace and Security'){
+                        var theme = newTheme(d);
+                        domains.peace.themes.push(theme);
+                        domains.peace.metric_count = domains.peace.metric_count + theme.metrics.length;
+                    } else if (d.Domain == 'Development'){
+                        var theme = newTheme(d);
+                        domains.development.themes.push(theme);
+                        domains.development.metric_count = domains.development.metric_count + theme.metrics.length;
+                    } else if (d.Domain == 'Human Rights'){
+                        var theme = newTheme(d);
+                        domains.rights.themes.push(theme);
+                        domains.rights.metric_count = domains.rights.metric_count + theme.metrics.length;
+                    } else if (d.Domain == 'Demand'){
+                        var theme = newTheme(d);
+                        domains.demand.themes.push(theme);
+                        domains.demand.metric_count = domains.demand.metric_count + theme.metrics.length;
+                    } else if (d.Domain == 'Supply'){
+                        var theme = newTheme(d);
+                        domains.supply.themes.push(theme);
+                        domains.supply.metric_count = domains.supply.metric_count + theme.metrics.length;
+                    } else if (d.Domain == 'International Cooperation'){
+                        var theme = newTheme(d);
+                        domains.international.themes.push(theme);
+                        domains.international.metric_count = domains.international.metric_count + theme.metrics.length;
+                    };
 
-                country.name = d.Country;
-                country.ISO = d.ISO;
+                    country.domains = domains
 
-                domains.health = new Object;
-                domains.peace = new Object;
-                domains.development = new Object;
-                domains.rights = new Object;
-                domains.demand = new Object;
-                domains.supply = new Object;
-                domains.international = new Object;
-
-                domains.health.themes = [];
-                domains.peace.themes = [];
-                domains.development.themes = [];
-                domains.rights.themes = [];
-                domains.demand.themes = [];
-                domains.supply.themes = [];
-                domains.international.themes = [];
-
-                if (d.Domain == 'Health'){
-                    var theme = newTheme(d);
-                    domains.health.themes.push(theme);
-
-                    domains.health.metric_count = theme.metrics.length;
-                    domains.peace.metric_count = 0;
-                    domains.development.metric_count = 0;
-                    domains.rights.metric_count = 0;
-                    domains.demand.metric_count = 0;
-                    domains.supply.metric_count = 0;
-                    domains.international.metric_count = 0;
                 } else {
-                    console.log('Different Domain Order, Health is not First');
+                    // last country is complete, push it to array;
+                    if (i > 0) {
+                        countryDomainArray.push(country);
+                    };
+
+                    // create new country, domains and themes;
+                    country = new Object;
+                    domains = new Object;
+
+                    country.name = d.Country;
+                    country.ISO = d.ISO;
+
+                    domains.health = new Object;
+                    domains.peace = new Object;
+                    domains.development = new Object;
+                    domains.rights = new Object;
+                    domains.demand = new Object;
+                    domains.supply = new Object;
+                    domains.international = new Object;
+
+                    domains.health.themes = [];
+                    domains.peace.themes = [];
+                    domains.development.themes = [];
+                    domains.rights.themes = [];
+                    domains.demand.themes = [];
+                    domains.supply.themes = [];
+                    domains.international.themes = [];
+
+                    if (d.Domain == 'Health'){
+                        var theme = newTheme(d);
+                        domains.health.themes.push(theme);
+
+                        domains.health.metric_count = theme.metrics.length;
+                        domains.peace.metric_count = 0;
+                        domains.development.metric_count = 0;
+                        domains.rights.metric_count = 0;
+                        domains.demand.metric_count = 0;
+                        domains.supply.metric_count = 0;
+                        domains.international.metric_count = 0;
+                    } else {
+                        console.log('Different Domain Order, Health is not First');
+                    };
+                    country.domains = domains;
                 };
-                country.domains = domains;
             };
         });
 
@@ -188,6 +192,7 @@ var getThemes = function(){
 };
 
 var countData = function(){
+    console.log(countryDomainArray);
     $(countryDomainArray).each(function(){
         var domains = $(this)[0].domains;
         var total_metric_count = domains.demand.metric_count + domains.development.metric_count + domains.health.metric_count + domains.international.metric_count + domains.peace.metric_count + domains.rights.metric_count + domains.supply.metric_count;

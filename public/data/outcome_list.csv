@@ -5,3 +5,19 @@ Dataset Title,Category,Sheet Name,Type,CSV Name
 "Average annual rate of police-recorded robbery per 100,000 population",Crime,Robbery,"Rate/100,000",robbery
 "Average annual rate of police-recorded theft of a motorized land vehicle per 100,000 population ",Crime,Motor Vehicle Theft,"Rate/100,000",car_theft
 "Average annual rate of police-recorded sexual offences against children per 100,000 population",Crime,Sexual Offences Against Children,"Rate/100,000",sexual_offence_childen
+"Average annual rate of total unsentenced/pre-trial persons held per 100,000 population ",Criminal Justice,Pre-Trial Persons Held,"Rate/100,000",pre_trial
+"Average annual rate of total persons prosecuted of all crimes per 100,000 population",Criminal Justice,Persons Prosecuted,"Rate/100,000",prosecuted
+"Average annual rate of total persons held in prisons, penal institutions or correctional institutions per 100,000 population ",Criminal Justice,Total Persons Held,"Rate/100,000",total_held
+"Average annual rate of total persons convicted of all crimes per 100,000 population",Criminal Justice,Total Persons Convicted,"Rate/100,000",total_convicted
+"Average annual rate of total persons brought into formal contact with the police and/or criminal justice system of all crimes per 100,000 population",Criminal Justice,Total Persons in Formal Contact,"Rate/100,000",total_contact
+"Average annual rate of total male adults brought into formal contact with the police and/or criminal justice system per 100,000 population",Criminal Justice,Males in Formal Contact,"Rate/100,000",male_contact
+"Average annual rate of total males prosecuted of all crime per 100,000 population ",Criminal Justice,Males Prosecuted,"Rate/100,000",male_prosecuted
+"Average annual rate of male juveniles held in prisons, penal institutions or correctional institutions per 100,000 population",Criminal Justice,Juvenile Males in Prison,"Rate/100,000",male_juv_prison
+"Average annual rate of male juveniles convicted of all crimes per 100,000 population ",Criminal Justice,Juvenile Males Convicted,"Rate/100,000",male_juv_convicted
+"Average annual rate of male juveniles brought into formal contact with the police and/or criminal justice system of all crimes per 100,000 population",Criminal Justice,Juvenile Males in Formal Contact,"Rate/100,000",male_juv_contact
+"Average annual rate of male adults held in prisons, penal institutions or correctional institutions per 100,000 population ",Criminal Justice,Male Adults Held,"Rate/100,000",male_held
+"Average annual rate of male adults convicted of all crimes per 100,000 population",Criminal Justice,Male Adults Convicted,"Rate/100,000",male_convicted
+"Average annual rate of juveniles held in prisons, penal institutions or correctional institutions per 100,000 population ",Criminal Justice,Juveniles Held,"Rate/100,000",juv_held
+"Average annual rate of juveniles convicted of all crimes per 100,000 population ",Criminal Justice,Juveniles Convicted,"Rate/100,000",juv_convicted
+"Average annual number of total professional judges or magistrates per 100,000 population",Criminal Justice,Total Professional Judges and Magistrates,"Rate/100,000",total_judges
+Average annual rate of total police personnel at the national level ,Criminal Justice,Total Police Personnel ,"Rate/100,000",total_police
