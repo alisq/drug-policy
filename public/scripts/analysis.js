@@ -1,14 +1,10 @@
 window.onload = function(){
+    var windowWidth = $(window).width();
     var outcomeArray = [];
     var countryArray;
     var linkedArray = [];
     
-    var outCrimeArray = [
-        ['Rate of police-recorded Assault at the national level', 'assault', 'Rate per 100,000 Population'],
-        ['Rate of police-recorded Kidnapping at the national level', 'kidnapping', 'Rate per 100,000 Population'],
-        ['Rate of police-recorded Theft at the national level', 'theft', 'Rate per 100,000 Population'],
-        ['Rate of police-recorded Robbery at the national level', 'robbery', 'Rate per 100,000 Population']
-    ];
+    var outcomeCrime = [];
     
     function getCountries(){
         return $.get('/countries');
@@ -16,10 +12,29 @@ window.onload = function(){
 
     $.when(getCountries()).done(function(data){
         countryArray = data;
-        initialLinkedArray();
+        getOutcomeList();
     });
     
-    var windowWidth = $(window).width();
+    function getOutcomeList(){
+        d3.csv('data/outcome_list.csv', function(data){
+            $(data).each(function(){
+                var outcome = new Object();
+                outcome.title = this['Dataset Title'];
+                outcome.category = this['Category'];
+                outcome.csv = this['CSV Name'];
+                outcome.type = this['Type'];
+                
+                if (outcome.type == 'Rate/100,000'){
+                    outcome.unit = 'Rate per 100,000 population';
+                };
+                
+                if (outcome.category == 'Crime'){
+                    outcomeCrime.push(outcome);
+                };
+            });
+        });
+    };
+    
     var svgMaxWidth = 500;
     var svgWidth;
     var svgHeight;
@@ -40,23 +55,16 @@ window.onload = function(){
             .attr("overflow", "visible")
             .attr("xmlns", "http://www.w3.org/2000/svg");
     
-    function initialLinkedArray(){
-        linkedArray = [];
-        $(countryArray).each(function(){
-            var country = this;
-            var linkedData = new Object;
-            linkedData.country = country;
-            linkedArray.push(linkedData);
-        });
-    };
-    
-    function plotData(x, y, xText, yText, xUnit, yUnit, xLevel, yAltValue){
-        var xData = x.split('.');
-        var yData = y.split('.');
+    function plotData(plotGuide){
+        var xData = plotGuide.x.path.split('.');
+        var yData = plotGuide.y.path.split('.');
+        console.log(plotGuide);
         
         var dataArray = [];
         var countryNameArray = [];
         var yAltValueArray = [];
+        
+        console.log(linkedArray);
         
         $(linkedArray).each(function(){
             var dataElement = [];
@@ -67,8 +75,8 @@ window.onload = function(){
                 dataArray.push(dataElement);
                 countryNameArray.push(this.country.name);
                 
-                if (yAltValue){
-                    var yValue = yAltValue.split('.');
+                if (plotGuide.y.altValue){
+                    var yValue = plotGuide.y.altValue.split('.');
                     yValue = getValue(this, yValue);
                     yAltValueArray.push(yValue); 
                 }
@@ -95,19 +103,6 @@ window.onload = function(){
         
         var plot = svg.append('g')
             .attr('class', 'plot');
-        
-        // REGRESSION //
-//        var lr = ss.linearRegression(dataArray);
-//        var lrLine = ss.linearRegressionLine(lr);
-//        plot.append("line")
-//	        .attr("class", "regression")
-//	        .attr("x1", xScale(0))
-//	        .attr("y1", yScale(lrLine(0)))
-//	        .attr("x2", xScale(xMax))
-//	        .attr("y2", yScale(lrLine(xMax)))
-//            .attr("stroke-dasharray","5, 5")
-//            .attr("stroke","red")
-//            .attr("stroke-width","2")
                         
         plot.selectAll("circle")
             .data(dataArray)
@@ -136,20 +131,20 @@ window.onload = function(){
             var mouseY = $(window).scrollTop() + event.clientY - 3;
             
             $('.chart-hover .country-name').text(countryName);
-            $('.chart-hover .country-data-x').html(xText + ' <span class="amount">' + data[0] + '</span>');
+            $('.chart-hover .country-data-x').html(plotGuide.x.text + ' <span class="amount">' + data[0] + '</span>');
             
-            if (yAltValue){
-                $('.chart-hover .country-data-y').html(yText + ' <span class="amount">' + yAltValue + '</span>'); 
+            if (plotGuide.y.altValue){
+                $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + yAltValue + '</span>'); 
             } else {
-               $('.chart-hover .country-data-y').html(yText + ' <span class="amount">' + data[1] + '</span>'); 
+               $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + data[1] + '</span>'); 
             }
             
-            if (yUnit) {
-                $('.chart-hover .country-data-y').append('<span class="unit">' + yUnit + '</span>');
+            if (plotGuide.y.unit) {
+                $('.chart-hover .country-data-y').append('<span class="unit">' + plotGuide.y.unit + '</span>');
             }
             
-            if (xUnit) {
-                $('.chart-hover .country-data-x').append('<span class="unit">' + xUnit + '</span>');
+            if (plotGuide.x.unit) {
+                $('.chart-hover .country-data-x').append('<span class="unit">' + plotGuide.x.unit + '</span>');
             }
             
             var chartHoverWidth = $('.chart-hover').innerHeight();
@@ -176,10 +171,10 @@ window.onload = function(){
             .append('p')
             .attr('class', 'axis-title')
             .text(function(){
-                if (xUnit){
-                    return xText + ' (' + xUnit + ')';
+                if (plotGuide.x.unit){
+                    return plotGuide.x.text + ' (' + plotGuide.x.unit + ')';
                 } else {
-                   return xText; 
+                   return plotGuide.x.text; 
                 }
             });
         
@@ -193,26 +188,26 @@ window.onload = function(){
             .append('p')
             .attr('class', 'axis-title')
             .text(function(){
-                if (yUnit){
-                    return yText + ' (' + yUnit + ')';
+                if (plotGuide.y.unit){
+                    return plotGuide.y.text + ' (' + plotGuide.y.unit + ')';
                 } else {
-                   return yText; 
+                   return plotGuide.y.text; 
                 }
             });
         
         var chartTitle;
         
-        if (xLevel == 'level one'){
-            chartTitle = 'Number of metrics used to evaluate national drug policies and the '+yText+' across '+dataArray.length+' countries';
-        } else if (xLevel == 'level two'){
-            chartTitle = 'Number of '+xText+' used to evaluate national drug policies and the '+yText+' across '+dataArray.length+' countries';
-        } else if (xLevel == 'level three'){
-            chartTitle = 'Use of metrics to assess the '+xText+' and the '+yText+' across '+dataArray.length+' countries';
+        if (plotGuide.x.level == 'level one'){
+            chartTitle = 'Number of metrics used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
+        } else if (plotGuide.x.level == 'level two'){
+            chartTitle = 'Number of '+plotGuide.x.text+' used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
+        } else if (plotGuide.x.level == 'level three'){
+            chartTitle = 'Use of metrics to assess the '+plotGuide.x.text+' and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
         };
         
         $('.chart-title').text(chartTitle);
         
-        $('.country-list').text('');
+        $('.country-list').html("<span class='chart-header'>Countries Plotted: </span>");
         for (var i=0; i < countryNameArray.length; i++){
             if (i == countryNameArray.length-1){
                 $('.country-list').append(countryNameArray[i]);
@@ -221,7 +216,11 @@ window.onload = function(){
             }
         };
         
-        $('.chart-caveat').text('Please note that when using the figures, any cross-national comparisons should be conducted with caution because of the differences that exist between the legal definitions of offences in countries, or the different methods of offence counting and recording.');
+        if (linkedArray[0].outcome.years){
+            console.log('has years');
+        }
+        
+        $('.chart-caveat').html('<span class="chart-header">Interpretation: </span>Please note that when using the figures, any cross-national comparisons should be conducted with caution because of the differences that exist between the legal definitions of offences in countries, or the different methods of offence counting and recording.');
     };
     
     function getValue(data, array){
@@ -256,20 +255,61 @@ window.onload = function(){
         return current;
     };
     
-    function getOutcome(dataset){
+    function getOutcome(dataset, datatype){
         outcomeArray = [];
         d3.csv('data/outcomes/'+dataset+'.csv', function(data){
             data.forEach(function(d){
-                var country = new Object;
-                country.name = d.Country;
-                country.outcome = Number(d.Data);
+                var outcome = new Object;
+                outcome.name = d.Country;
                 
-                if (country.name.indexOf('*') > -1){
-                    country.name = country.name.replace('*','');
-                }
-                outcomeArray.push(country);
+                if (datatype == 'Rate/100,000'){
+                    var rate = averageRate(d);
+                    outcome.value = rate[0];
+                    outcome.years = rate[1];
+                };
+                
+                if (outcome.name.indexOf('*') > -1){
+                    outcome.name = outcome.name.replace('*','');
+                };
+                
+                outcomeArray.push(outcome);
             });
             joinData();
+        });
+    };
+    
+    function averageRate(d){
+        var objectKeys = Object.keys(d);
+        var numericKeys = [];
+        var countryAverage = 0;
+        var countryCount = 0;
+        
+        $(objectKeys).each(function(){
+            if (!isNaN(this)){
+                numericKeys.push(this);
+            };
+        });
+        
+        $(numericKeys).each(function(){
+            if (d[this]){
+                countryAverage = countryAverage + parseFloat(d[this].replace(',',''));
+                countryCount++;
+            };
+        });
+        
+        countryAverage = countryAverage/countryCount;
+        countryAverage = countryAverage.toFixed(2);
+        
+        return [countryAverage, numericKeys];
+    }
+    
+    function linkArray(){
+        linkedArray = [];
+        $(countryArray).each(function(){
+            var country = this;
+            var linkedData = new Object;
+            linkedData.country = country;
+            linkedArray.push(linkedData);
         });
     };
     
@@ -281,7 +321,7 @@ window.onload = function(){
                 if (country.name == this.name){
                     var linkedData = new Object;
                     linkedData.country = country;
-                    linkedData.outcome = this.outcome;
+                    linkedData.outcome = this;
                     linkedArray.push(linkedData);
                 };
             });
@@ -329,7 +369,21 @@ window.onload = function(){
         console.log('X: ' + xText,'Y: ' + yText);
         console.log('X: ' + xPath,'Y: ' + yPath);
         
-        plotData(xPath, yPath, xText, yText, xUnit, yUnit, xLevel, yAltValue);
+        var x = new Object;
+        x.path = xPath;
+        x.text = xText;
+        x.unit = xUnit;
+        x.level = xLevel;
+        
+        var y = new Object;
+        y.path = yPath;
+        y.text = yText;
+        y.unit = yUnit;
+        y.altValue = yAltValue;
+        
+        var plotGuide = {'x': x, 'y': y};
+        
+        plotData(plotGuide);
         
         $(".pdf-button").addClass("enabled");
     });
@@ -341,31 +395,36 @@ window.onload = function(){
         var dataNestArray;
         
         if (dataNest == 'crime'){
-            dataNestArray = outCrimeArray;
+            dataNestArray = outcomeCrime;
         };
         
         $('.data-modal-list').html('');
         
         $(dataNestArray).each(function(){
-            $('.data-modal-list').append("<div class='data-point last' data-set='"+this[1]+"' data-unit='"+this[2]+"' data-path='outcome'>"+this[0]+"</div>");
+            $('.data-modal-list').append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
             
             $('.data-point.last').on('click', function(){
                 var dataPointTitle = $(this).text();
                 var dataSet = $(this).attr('data-set');
                 var dataPath = $(this).attr('data-path');
                 var dataUnit = $(this).attr('data-unit');
+                var dataType = $(this).attr('data-type');
                 
                 $('.data-window').removeClass('show');
                 
                 $(dataButton).attr('data-path', dataPath)
                     .attr('data-unit', dataUnit)
                     .children('.picked-data-point').text(dataPointTitle).addClass('selected');
-                getOutcome(dataSet);
+                getOutcome(dataSet, dataType);
             }).removeClass('last');
         });
         
         $('.data-modal header').text('Select '+dataTitle+' Data to Plot on Y Axis');
         $('.data-window').addClass('show');
+    });
+    
+    $('.country-nest').on('click', function(){
+        linkArray();
     });
     
     $('.data-button').on('click', function(){
