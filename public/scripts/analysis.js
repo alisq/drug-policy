@@ -91,7 +91,7 @@ window.onload = function(){
         
         var xMax = d3.max(dataArray, function(d){return d[0]});
            
-        var padding = {top:20, right:20, bottom:60, left:72};
+        var padding = {top:20, right:20, bottom:60, left:88};
             
         var xScale = d3.scaleLinear()
             .domain([0, xMax])
@@ -183,7 +183,7 @@ window.onload = function(){
         
         plot.append("foreignObject")
             .attr('width', svgWidth - padding.top - padding.bottom + 'px')
-            .attr('height', '32px')
+            .attr('height', '48px')
             .attr('x', (svgHeight - padding.bottom) * '-1')
             .attr('y', 0)
             .attr('transform', 'rotate(-90)')
