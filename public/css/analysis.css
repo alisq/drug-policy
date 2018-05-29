@@ -84,6 +84,22 @@ main {
     box-shadow: 0px 2px 5px rgba(0,0,0,0.25);
 }
 
+.data-modal .close-button{
+    position:absolute;
+    right:0;
+    top:0;
+    font-size:18px;
+    line-height:18px;
+    padding:9px 10px 0 0;
+    opacity:0.6;
+    transition: opacity 200ms;
+    cursor:pointer;
+}
+
+.data-modal .close-button:hover{
+    opacity:1;
+}
+
 .data-modal .sub-head {
     width:100%;
     padding:8px 10px 9px 10px;

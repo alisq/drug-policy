@@ -475,12 +475,16 @@ window.onload = function(){
             }).removeClass('last');
         });
         
-        $('.data-modal header').text('Select '+dataTitle+' Data to Plot on Y Axis');
+        $('.data-modal .modal-title').text('Select '+dataTitle+' Data to Plot on Y Axis');
         $('.data-window').addClass('show');
     });
     
     $('.country-nest').on('click', function(){
         linkArray();
+    });
+    
+    $('.data-modal .close-button').on('click', function(){
+        $('.data-window').removeClass('show');
     });
     
     $('.data-button').on('click', function(){
