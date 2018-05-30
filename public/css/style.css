@@ -104,13 +104,13 @@ body {
     font-family: 'Atlas Grotesk';
     font-size: 14px;
     line-height:18px;
-    padding:6px 8px 5px 8px;
+    padding:6px 8px 3px 8px;
     font-weight: 400;
 }
 
 .country-card .flag-icon {
     position: relative;
-    top: -1px;
+    top: -2px;
     border-radius: 2px;
     margin:0 5px 0 1px;
     background-size: cover;
@@ -129,7 +129,7 @@ body {
 .country-card .country-details div {
     color:white;
     background:rgb(0,132,255);
-    padding:4px 5px 2px 5px;
+    padding:2px 5px 4px 5px;
     border-radius:7px;
     display:inline-block;
 }
@@ -138,7 +138,7 @@ body {
     border-top:1px solid rgb(220,220,220);
     font-size: 14px;
     line-height:18px;
-    padding:6px 8px 5px 8px;
+    padding:6px 8px 7px 8px;
     display:none;
 }
 

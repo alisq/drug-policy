@@ -70,8 +70,10 @@
 	color: rgba(255,255,255,1);
 }
 .breadcrumb {
+    font-size: 15px;
+    line-height: 15px;
 	background: linear-gradient(to bottom left, rgb(255,255,255), rgb(235,235,235));
-	padding: 7px 10px;
+	padding: 5px 10px 8px 10px;
 }
 .breadcrumb, .breadcrumb a {
 	color: rgba(0,0,0,0.6);
