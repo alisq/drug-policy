@@ -264,6 +264,10 @@ window.onload = function(){
         if (plotGuide.y.text == 'Rate of Unemployment'){
             $('.chart-sources').append('<a target="_blank" href="https://www.google.ca/">Unemployment Source</a>');
         };
+        
+        $('.chart-guide').css('opacity', '0');
+        $('.chart-text').css('opacity', '1');
+        $('.chart').css('opacity', '1');
     };
     
     function getValue(data, array){

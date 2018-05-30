@@ -31,7 +31,7 @@ body {
 select:focus {outline:0;}
 
 main {
-    position:realtive;
+    position:relative;
     width:100%;
     height:auto;
     display:flex;
@@ -49,7 +49,7 @@ main {
     z-index:100;
     pointer-events: none;
     opacity:0;
-    transition:opacity 400ms;
+    transition:opacity 300ms;
 }
 
 .data-window.show {
@@ -364,11 +364,41 @@ nav.data {
     border:1px solid rgb(0,104,214);
 }
 
+.chart-area{
+    position:relative;
+    display:flex;
+    flex-flow: wrap;
+    align-content: flex-start;
+    width:100%;
+}
+
+.chart-guide {
+    position:absolute;
+    width:50%;
+    height:calc(100% - 40px);
+    left:50%;
+    transform: translateX(-50%);
+    padding:20px;
+    transition: opacity 200ms;
+}
+
+.guide-text {
+    position:relative;
+    font-size:20px;
+    line-height:28px;
+    color:rgb(180, 180, 180);
+    text-align:center;
+    top:50%;
+    transform:translateY(-50%);
+}
+
 .chart {
     position:relative;
     padding:20px 20px 30px 20px;
     width:50%;
     z-index:0;
+    opacity:0;
+    transition: opacity 200ms;
 }
 
 .dimension-label{
@@ -480,7 +510,9 @@ nav.data {
     position:relative;
     padding:20px 40px 30px 20px;
     width:50%;
+    opacity:0;
     z-index:0;
+    transition:opacity 200ms;
 }
 
 .chart-text-box {
