@@ -379,72 +379,74 @@ window.onload = function(){
         console.log(linkedArray);
     };
     
-    $('.plot-button.enabled').on('click', function(){
-        svg.selectAll('.plot').remove();
-        
-        var xText;
-        var yText;
-        var xLevel;
-        
-        var xPath = $('#x .data-button.selected').attr('data-path');
-        var yPath = $('#y .data-button.selected').attr('data-path');
-        
-        var xUnit = $('#x .data-button.selected').attr('data-unit');
-        var yUnit = $('#y .data-button.selected').attr('data-unit');
-        
-        var yAltValue = $('#y .data-button.selected').attr('data-alt-value');
-        
-        if ($('#x .data-button.selected').hasClass('level-one')){
-            xLevel = 'level one';
-        } else if ($('#x .data-button.selected').hasClass('level-two')){
-            xLevel = 'level two';
-        } else if ($('#x .data-button.selected').hasClass('level-three')){
-            xLevel = 'level three';
-        };
-        
-        if ($('#x .data-button.selected').children('.selected-value').length > 0){
-            xText = $('#x .data-button.selected .selected-value').text();
-        } else {
-            xText = $('#x .data-button.selected').text();
-        };
-        
-        if ($('#y .data-button.selected').children('.selected-value').length > 0){
-            yText = $('#y .data-button.selected .selected-value').text();
-        } else if ($('#y .data-button.selected').children('.picked-data-point').length > 0){
-            yText = $('#y .data-button.selected .picked-data-point').text();
-        } else {
-            yText = $('#y .data-button.selected').text();
-        };
-        
-        if (yText == 'Unemployment'){
-            yText = 'Rate of Unemployment';
-        };
-        
-        if (yText == 'GDP'){
-            yText = 'GDP';
-        };
-        
-        console.log('X: ' + xText,'Y: ' + yText);
-        console.log('X: ' + xPath,'Y: ' + yPath);
-        
-        var x = new Object;
-        x.path = xPath;
-        x.text = xText;
-        x.unit = xUnit;
-        x.level = xLevel;
-        
-        var y = new Object;
-        y.path = yPath;
-        y.text = yText;
-        y.unit = yUnit;
-        y.altValue = yAltValue;
-        
-        var plotGuide = {'x': x, 'y': y};
-        
-        plotData(plotGuide);
-        
-        $(".pdf-button").addClass("enabled");
-    });
+    function enablePlotButton(){
+        $('.plot-button.enabled').on('click', function(){
+            svg.selectAll('.plot').remove();
+
+            var xText;
+            var yText;
+            var xLevel;
+
+            var xPath = $('#x .data-button.selected').attr('data-path');
+            var yPath = $('#y .data-button.selected').attr('data-path');
+
+            var xUnit = $('#x .data-button.selected').attr('data-unit');
+            var yUnit = $('#y .data-button.selected').attr('data-unit');
+
+            var yAltValue = $('#y .data-button.selected').attr('data-alt-value');
+
+            if ($('#x .data-button.selected').hasClass('level-one')){
+                xLevel = 'level one';
+            } else if ($('#x .data-button.selected').hasClass('level-two')){
+                xLevel = 'level two';
+            } else if ($('#x .data-button.selected').hasClass('level-three')){
+                xLevel = 'level three';
+            };
+
+            if ($('#x .data-button.selected').children('.selected-value').length > 0){
+                xText = $('#x .data-button.selected .selected-value').text();
+            } else {
+                xText = $('#x .data-button.selected').text();
+            };
+
+            if ($('#y .data-button.selected').children('.selected-value').length > 0){
+                yText = $('#y .data-button.selected .selected-value').text();
+            } else if ($('#y .data-button.selected').children('.picked-data-point').length > 0){
+                yText = $('#y .data-button.selected .picked-data-point').text();
+            } else {
+                yText = $('#y .data-button.selected').text();
+            };
+
+            if (yText == 'Unemployment'){
+                yText = 'Rate of Unemployment';
+            };
+
+            if (yText == 'GDP'){
+                yText = 'GDP';
+            };
+
+            console.log('X: ' + xText,'Y: ' + yText);
+            console.log('X: ' + xPath,'Y: ' + yPath);
+
+            var x = new Object;
+            x.path = xPath;
+            x.text = xText;
+            x.unit = xUnit;
+            x.level = xLevel;
+
+            var y = new Object;
+            y.path = yPath;
+            y.text = yText;
+            y.unit = yUnit;
+            y.altValue = yAltValue;
+
+            var plotGuide = {'x': x, 'y': y};
+
+            plotData(plotGuide);
+
+            $(".pdf-button").addClass("enabled");
+        });
+    };
     
     $('.outcome-nest').on('click', function(){
         var dataNest = $(this).attr('data-nest');
@@ -497,6 +499,11 @@ window.onload = function(){
         $('#' + dimension + ' .data-button.selected').removeClass('selected');
         $('#' + dimension + ' .picked-data-point.selected').text('+').removeClass('selected');
         $(this).addClass('selected');
+        
+        if ($('#x .data-button').hasClass('selected') && $('#y .data-button').hasClass('selected')){
+            $('.plot-button').addClass('enabled');
+            enablePlotButton();
+        };
     });
     
     $('.level-one').on('click', function(){
