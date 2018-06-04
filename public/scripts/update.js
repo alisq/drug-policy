@@ -2,6 +2,7 @@ console.log('Updating Drug Policies');
 
 var countryArray = [];
 var countryDomainArray = [];
+var countryPopArray = [];
 
 var getPolicies = function() {
     d3.csv('data/nds_policies.csv', function(data){
@@ -192,13 +193,12 @@ var getThemes = function(){
 };
 
 var countData = function(){
-    console.log(countryDomainArray);
     $(countryDomainArray).each(function(){
         var domains = $(this)[0].domains;
         var total_metric_count = domains.demand.metric_count + domains.development.metric_count + domains.health.metric_count + domains.international.metric_count + domains.peace.metric_count + domains.rights.metric_count + domains.supply.metric_count;
         $(this)[0].domains.total_metric_count = total_metric_count;
     });
-    joinData();
+    getPopulation();
 };
 
 var newTheme = function(d){
@@ -281,9 +281,41 @@ var cleanData = function(data){
     return data;
 };
 
+var getPopulation = function() {
+    d3.csv('data/country_pop.csv', function(data){
+        $(data).each(function(i){
+            var objectKeys = Object.keys(this);
+            var yearKeys = [];
+            var totalYears = 0;
+            var totalPopulation = 0;
+            
+            var country = new Object;
+            country.ISO = this['Country Code'];
+
+            $(objectKeys).each(function(){
+                if (!isNaN(this)){
+                    yearKeys.push(this);
+                };
+            });
+
+            $(yearKeys).each(function(k){
+                if (data[i][this]){
+                    country[this] = data[i][this];
+                    totalYears++;
+                    totalPopulation = totalPopulation + Number(data[i][this]);
+                };
+            });
+            country.averagePop = totalPopulation/totalYears;
+            countryPopArray.push(country);
+        });
+        console.log('All Populations Loaded');
+        joinCountryTheme();
+    });
+};
+
 // JOIN DATA //
 
-var joinData = function(){
+var joinCountryTheme = function(){
     $(countryDomainArray).each(function(i){
         var ISO = countryDomainArray[i].ISO;
         $(countryArray).each(function(k){
@@ -292,8 +324,20 @@ var joinData = function(){
             };
         });
     });
+    console.log('Countries and Themes Joined');
+    joinCountryPop();
+};
 
-    console.log('Policies and Themes Joined');
+var joinCountryPop = function(){
+    $(countryPopArray).each(function(i){
+        var ISO = countryPopArray[i].ISO;
+        $(countryArray).each(function(k){
+            if (ISO == countryArray[k].ISO) {
+                countryArray[k].population = countryPopArray[i];
+            };
+        });
+    });
+    console.log('Countries and Populations Joined');
     console.log(countryArray);
     saveData();
 };
