@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var Datastore = require('nedb');
 
 var app = express();
-var server = app.listen(3000, listening);
+var server = app.listen(31717, listening);
 var db = new Datastore({ filename: 'data.json', autoload: true });
 db.persistence.setAutocompactionInterval(43200000); //compact data file every 12 hours
 
