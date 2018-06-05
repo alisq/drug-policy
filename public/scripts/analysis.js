@@ -6,6 +6,7 @@ window.onload = function(){
     
     var outcomeCrime = [];
     var outcomeCriminalJustice = [];
+    var outcomeCrimeVictimization = [];
     
     function getCountries(){
         return $.get('/countries');
@@ -27,13 +28,17 @@ window.onload = function(){
                 
                 if (outcome.type == 'Rate/100,000'){
                     outcome.unit = 'Rate per 100,000 population';
+                } else if (outcome.type == 'Count'){
+                    outcome.unit = 'Rate per 100,000 population';
                 };
                 
                 if (outcome.category == 'Crime'){
                     outcomeCrime.push(outcome);
                 } else if (outcome.category == 'Criminal Justice'){
                     outcomeCriminalJustice.push(outcome);       
-                };
+                } else if (outcome.category == 'Crime Victimization'){
+                    outcomeCrimeVictimization.push(outcome);
+                }
             });
         });
     };
@@ -313,6 +318,10 @@ window.onload = function(){
                     var rate = averageRate(d);
                     outcome.value = rate[0];
                     outcome.years = rate[1];
+                } else if (datatype == 'Count'){
+                    var count = averageCount(d);
+                    outcome.value = count[0];
+                    outcome.years = count[1];
                 };
                 
                 if (outcome.name.indexOf('*') > -1){
@@ -351,6 +360,43 @@ window.onload = function(){
         countryAverage = countryAverage.toFixed(2);
         
         return [countryAverage, numericKeys];
+    }
+    
+    function averageCount(d){
+        var objectKeys = Object.keys(d);
+        var numericKeys = [];
+        var countryAverage = 0;
+        var countryCount = 0;
+        var popAverage;
+        var perCapita;
+        
+        $(objectKeys).each(function(){
+            if (!isNaN(this)){
+                numericKeys.push(this);
+            };
+        });
+        
+        $(numericKeys).each(function(){
+            if (d[this]){
+                countryAverage = countryAverage + parseFloat(d[this].replace(',',''));
+                countryCount++;
+            };
+        });
+        
+        countryAverage = countryAverage/countryCount;
+                
+        $(countryArray).each(function(){
+            if (d.Country == this.UNODCName){
+                popAverage = this.population.averagePop;
+            };
+        });
+        
+        if (countryAverage && popAverage){
+            perCapita = ((countryAverage/popAverage) * 100000).toFixed(2);
+            return [perCapita, numericKeys];
+        } else {
+            return [null, null];
+        }
     }
     
     function linkArray(){
@@ -456,9 +502,13 @@ window.onload = function(){
         
         if (dataNest == 'crime'){
             dataNestArray = outcomeCrime;
-        } else if (dataNest = 'justice-criminal'){
+        } else if (dataNest == 'criminal-justice'){
             dataNestArray = outcomeCriminalJustice;
+        } else if (dataNest == 'crime-victimization'){
+            dataNestArray = outcomeCrimeVictimization;
         }
+        
+        console.log(dataNestArray);
         
         $('.data-modal-list').html('');
         

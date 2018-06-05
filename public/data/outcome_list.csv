@@ -21,3 +21,4 @@ Dataset Title,Category,Sheet Name,Type,CSV Name
 "Average annual rate of juveniles convicted of all crimes per 100,000 population ",Criminal Justice,Juveniles Convicted,"Rate/100,000",juv_convicted
 "Average annual number of total professional judges or magistrates per 100,000 population",Criminal Justice,Total Professional Judges and Magistrates,"Rate/100,000",total_judges
 Average annual rate of total police personnel at the national level ,Criminal Justice,Total Police Personnel ,"Rate/100,000",total_police
+Average annual police reporting rate for sexual assault expressed as a count,Crime Victimization,Police Reporting Rate for Sexual Assault,Count,report_sexual_assault
