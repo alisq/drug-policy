@@ -7,6 +7,7 @@ window.onload = function(){
     var outcomeCrime = [];
     var outcomeCriminalJustice = [];
     var outcomeCrimeVictimization = [];
+    var outcomeTraffickingPerson = [];
     
     function getCountries(){
         return $.get('/countries');
@@ -30,7 +31,9 @@ window.onload = function(){
                     outcome.unit = 'Rate per 100,000 population';
                 } else if (outcome.type == 'Count'){
                     outcome.unit = 'Rate per 100,000 population';
-                };
+                } else if (outcome.type == 'Number'){
+                    outcome.unit = 'Rate per 100,000 population';
+                }
                 
                 if (outcome.category == 'Crime'){
                     outcomeCrime.push(outcome);
@@ -38,6 +41,8 @@ window.onload = function(){
                     outcomeCriminalJustice.push(outcome);       
                 } else if (outcome.category == 'Crime Victimization'){
                     outcomeCrimeVictimization.push(outcome);
+                } else if (outcome.category == 'Trafficking in Person'){
+                    outcomeTraffickingPerson.push(outcome);
                 }
             });
         });
@@ -322,7 +327,9 @@ window.onload = function(){
                     var count = averageCount(d);
                     outcome.value = count[0];
                     outcome.years = count[1];
-                };
+                } else if (datatype == 'Number'){
+                    var number = averageNumber(d);
+                }
                 
                 if (outcome.name.indexOf('*') > -1){
                     outcome.name = outcome.name.replace('*','');
@@ -397,6 +404,10 @@ window.onload = function(){
         } else {
             return [null, null];
         }
+    }
+    
+    function averageNumber(d){
+        console.log(d);
     }
     
     function linkArray(){
@@ -506,6 +517,8 @@ window.onload = function(){
             dataNestArray = outcomeCriminalJustice;
         } else if (dataNest == 'crime-victimization'){
             dataNestArray = outcomeCrimeVictimization;
+        } else if (dataNest == 'trafficking-person'){
+            dataNestArray = outcomeTraffickingPerson;
         }
         
         console.log(dataNestArray);
