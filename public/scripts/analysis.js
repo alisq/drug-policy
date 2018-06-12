@@ -328,7 +328,9 @@ window.onload = function(){
                     outcome.value = count[0];
                     outcome.years = count[1];
                 } else if (datatype == 'Number'){
-                    var number = averageNumber(d);
+                    var number = averageNumber(d, data);
+                    outcome.value = number[0];
+                    console.log(number);
                 }
                 
                 if (outcome.name.indexOf('*') > -1){
@@ -375,7 +377,6 @@ window.onload = function(){
         var countryAverage = 0;
         var countryCount = 0;
         var popAverage;
-        var perCapita;
         
         $(objectKeys).each(function(){
             if (!isNaN(this)){
@@ -399,15 +400,47 @@ window.onload = function(){
         });
         
         if (countryAverage && popAverage){
-            perCapita = ((countryAverage/popAverage) * 100000).toFixed(2);
+            var perCapita = ((countryAverage/popAverage) * 100000).toFixed(2);
             return [perCapita, numericKeys];
         } else {
             return [null, null];
         }
     }
     
-    function averageNumber(d){
-        console.log(d);
+    function averageNumber(country, data){
+        var dataArray = [];
+        var yearCount = 0;
+        var yearAverage = 0;
+        var popAverage;
+        
+        
+        $(data).each(function(){
+           if (this.Country == country.Country){
+               countryArray.push(this);
+           }
+        });
+        
+        $(dataArray).each(function(){
+            if (this.Year != 'na' || this.Year != 'NA' || this.Year != undefined){
+                yearCount++;
+                yearAverage = yearAverage + this.Year;
+            }
+        });
+        
+        $(countryArray).each(function(){
+            if (country.Country == this.UNODCName){
+                popAverage = this.population.averagePop;
+            };
+        });
+        
+        yearAverage = yearAverage/yearCount;
+        
+        if (yearAverage && popAverage){
+            var perCapita = ((yearAverage/popAverage) * 100000).toFixed(2);
+            return [perCapita, [2011, 2012, 2013, 2014, 2015]];
+        } else {
+            return [null, null];
+        }
     }
     
     function linkArray(){
@@ -433,7 +466,6 @@ window.onload = function(){
                 };
             });
         });
-        console.log(linkedArray);
     };
     
     function enablePlotButton(){
