@@ -330,7 +330,6 @@ window.onload = function(){
                 } else if (datatype == 'Number'){
                     var number = averageNumber(d, data);
                     outcome.value = number[0];
-                    console.log(number);
                 }
                 
                 if (outcome.name.indexOf('*') > -1){
@@ -391,14 +390,12 @@ window.onload = function(){
             };
         });
         
-        countryAverage = countryAverage/countryCount;
-                
         $(countryArray).each(function(){
             if (d.Country == this.UNODCName){
                 popAverage = this.population.averagePop;
             };
         });
-        
+                
         if (countryAverage && popAverage){
             var perCapita = ((countryAverage/popAverage) * 100000).toFixed(2);
             return [perCapita, numericKeys];
@@ -413,18 +410,20 @@ window.onload = function(){
         var yearAverage = 0;
         var popAverage;
         
-        
         $(data).each(function(){
            if (this.Country == country.Country){
-               countryArray.push(this);
+               dataArray.push(this);
            }
         });
         
+        console.log(dataArray);
+        
         $(dataArray).each(function(){
-            if (this.Year != 'na' || this.Year != 'NA' || this.Year != undefined){
+            if (this.Total != 'na' || this.Total != 'NA' || this.Total != undefined){
                 yearCount++;
-                yearAverage = yearAverage + this.Year;
+                yearAverage = yearAverage + parseFloat(this.Total.replace(',',''));
             }
+            console.log(yearAverage, yearCount);
         });
         
         $(countryArray).each(function(){
