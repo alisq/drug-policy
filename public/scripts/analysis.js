@@ -8,6 +8,7 @@ window.onload = function(){
     var outcomeCriminalJustice = [];
     var outcomeCrimeVictimization = [];
     var outcomeTraffickingPerson = [];
+    var outcomeDrugUse = [];
     
     function getCountries(){
         return $.get('/countries');
@@ -23,10 +24,10 @@ window.onload = function(){
             $(data).each(function(){
                 if (this['CSV Name']){ ///if data is implimented
                     var outcome = new Object();
-                    outcome.title = this['Dataset Title'];
-                    outcome.category = this['Category'];
-                    outcome.csv = this['CSV Name'];
-                    outcome.type = this['Type'];
+                    outcome.title = this['Dataset Title'].trim();
+                    outcome.category = this['Category'].trim();
+                    outcome.csv = this['CSV Name'].trim();
+                    outcome.type = this['Type'].trim();
 
                     if (outcome.type == 'Rate/100,000'){
                         outcome.unit = 'Rate per 100,000 population';
@@ -34,6 +35,8 @@ window.onload = function(){
                         outcome.unit = 'Rate per 100,000 population';
                     } else if (outcome.type == 'Number'){
                         outcome.unit = 'Rate per 100,000 population';
+                    } else if (outcome.type == '% Prevalence'){
+                        outcome.unit = '%'
                     }
 
                     if (outcome.category == 'Crime'){
@@ -44,6 +47,8 @@ window.onload = function(){
                         outcomeCrimeVictimization.push(outcome);
                     } else if (outcome.category == 'Trafficking in Person'){
                         outcomeTraffickingPerson.push(outcome);
+                    } else if (outcome.category == 'Drug Use and Health Consequences'){
+                        outcomeDrugUse.push(outcome);
                     }
                 }
             });
@@ -338,6 +343,10 @@ window.onload = function(){
                     } else {
                         return;
                     }
+                } else if (datatype == '% Prevalence'){
+                    var percent = percentagePrev(d);
+                    outcome.value = percent[0];
+                    outcome.years = percent[1];
                 }
                 
                 if (outcome.name.indexOf('*') > -1){
@@ -445,6 +454,11 @@ window.onload = function(){
         } else {
             return [null, null];
         }
+    }
+    
+    function percentagePrev(d){
+        var percent = d.Number.replace('%', '');
+        return [percent, [2011, 2012, 2013, 2014, 2015]];
     }
     
     function linkArray(){
@@ -555,6 +569,8 @@ window.onload = function(){
             dataNestArray = outcomeCrimeVictimization;
         } else if (dataNest == 'trafficking-person'){
             dataNestArray = outcomeTraffickingPerson;
+        } else if (dataNest == 'drug-use'){
+            dataNestArray = outcomeDrugUse;
         }
         
         console.log(dataNestArray);
