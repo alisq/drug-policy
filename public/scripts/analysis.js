@@ -21,28 +21,30 @@ window.onload = function(){
     function getOutcomeList(){
         d3.csv('data/outcome_list.csv', function(data){
             $(data).each(function(){
-                var outcome = new Object();
-                outcome.title = this['Dataset Title'];
-                outcome.category = this['Category'];
-                outcome.csv = this['CSV Name'];
-                outcome.type = this['Type'];
-                
-                if (outcome.type == 'Rate/100,000'){
-                    outcome.unit = 'Rate per 100,000 population';
-                } else if (outcome.type == 'Count'){
-                    outcome.unit = 'Rate per 100,000 population';
-                } else if (outcome.type == 'Number'){
-                    outcome.unit = 'Rate per 100,000 population';
-                }
-                
-                if (outcome.category == 'Crime'){
-                    outcomeCrime.push(outcome);
-                } else if (outcome.category == 'Criminal Justice'){
-                    outcomeCriminalJustice.push(outcome);       
-                } else if (outcome.category == 'Crime Victimization'){
-                    outcomeCrimeVictimization.push(outcome);
-                } else if (outcome.category == 'Trafficking in Person'){
-                    outcomeTraffickingPerson.push(outcome);
+                if (this['CSV Name']){ ///if data is implimented
+                    var outcome = new Object();
+                    outcome.title = this['Dataset Title'];
+                    outcome.category = this['Category'];
+                    outcome.csv = this['CSV Name'];
+                    outcome.type = this['Type'];
+
+                    if (outcome.type == 'Rate/100,000'){
+                        outcome.unit = 'Rate per 100,000 population';
+                    } else if (outcome.type == 'Count'){
+                        outcome.unit = 'Rate per 100,000 population';
+                    } else if (outcome.type == 'Number'){
+                        outcome.unit = 'Rate per 100,000 population';
+                    }
+
+                    if (outcome.category == 'Crime'){
+                        outcomeCrime.push(outcome);
+                    } else if (outcome.category == 'Criminal Justice'){
+                        outcomeCriminalJustice.push(outcome);       
+                    } else if (outcome.category == 'Crime Victimization'){
+                        outcomeCrimeVictimization.push(outcome);
+                    } else if (outcome.category == 'Trafficking in Person'){
+                        outcomeTraffickingPerson.push(outcome);
+                    }
                 }
             });
         });
