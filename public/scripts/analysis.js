@@ -328,8 +328,14 @@ window.onload = function(){
                     outcome.value = count[0];
                     outcome.years = count[1];
                 } else if (datatype == 'Number'){
-                    var number = averageNumber(d, data);
-                    outcome.value = number[0];
+                    var countryCheck = $.grep(outcomeArray, function(obj){return obj.name === d.Country;});
+                    if (countryCheck.length <= 0){
+                        var number = averageNumber(d, data);
+                        outcome.value = number[0];
+                        outcome.years = number[1];
+                    } else {
+                        return;
+                    }
                 }
                 
                 if (outcome.name.indexOf('*') > -1){
@@ -415,15 +421,12 @@ window.onload = function(){
                dataArray.push(this);
            }
         });
-        
-        console.log(dataArray);
-        
+                
         $(dataArray).each(function(){
-            if (this.Total != 'na' || this.Total != 'NA' || this.Total != undefined){
+            if (this.Total != 'na' && this.Total != 'NA' && this.Total != undefined){
                 yearCount++;
                 yearAverage = yearAverage + parseFloat(this.Total.replace(',',''));
             }
-            console.log(yearAverage, yearCount);
         });
         
         $(countryArray).each(function(){
