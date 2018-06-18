@@ -10,6 +10,8 @@ window.onload = function(){
     var outcomeTraffickingPerson = [];
     var outcomeDrugUse = [];
     
+    var outcomeDatasets = [];
+    
     function getCountries(){
         return $.get('/countries');
     };
@@ -26,6 +28,8 @@ window.onload = function(){
                     var outcome = new Object();
                     outcome.title = this['Dataset Title'].trim();
                     outcome.category = this['Category'].trim();
+                    outcome.subcategory = this['Subcategory'].trim();
+                    outcome.subcategoryTwo = this['Subcategory 2'].trim();
                     outcome.csv = this['CSV Name'].trim();
                     outcome.type = this['Type'].trim();
 
@@ -38,18 +42,8 @@ window.onload = function(){
                     } else if (outcome.type == '% Prevalence'){
                         outcome.unit = '%'
                     }
-
-                    if (outcome.category == 'Crime'){
-                        outcomeCrime.push(outcome);
-                    } else if (outcome.category == 'Criminal Justice'){
-                        outcomeCriminalJustice.push(outcome);       
-                    } else if (outcome.category == 'Crime Victimization'){
-                        outcomeCrimeVictimization.push(outcome);
-                    } else if (outcome.category == 'Trafficking in Person'){
-                        outcomeTraffickingPerson.push(outcome);
-                    } else if (outcome.category == 'Drug Use and Health Consequences'){
-                        outcomeDrugUse.push(outcome);
-                    }
+                    
+                    outcomeDatasets.push(outcome);
                 }
             });
         });
@@ -562,15 +556,15 @@ window.onload = function(){
         var dataNestArray;
         
         if (dataNest == 'crime'){
-            dataNestArray = outcomeCrime;
+            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Crime'});
         } else if (dataNest == 'criminal-justice'){
-            dataNestArray = outcomeCriminalJustice;
+            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Criminal Justice'});
         } else if (dataNest == 'crime-victimization'){
-            dataNestArray = outcomeCrimeVictimization;
+            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Crime Victimization'});
         } else if (dataNest == 'trafficking-person'){
-            dataNestArray = outcomeTraffickingPerson;
+            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Trafficking in Person'});
         } else if (dataNest == 'drug-use'){
-            dataNestArray = outcomeDrugUse;
+            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Drug Use and Health Consequences'});
         }
         
         console.log(dataNestArray);
