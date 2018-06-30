@@ -550,39 +550,31 @@ window.onload = function(){
     };
     
     $('.outcome-nest').on('click', function(){
-        var dataNest = $(this).attr('data-nest');
         var dataTitle = $(this).children('.nest-title').text();
         var dataButton = this;
         var dataNestArray;
         
-        if (dataNest == 'crime'){
-            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Crime'});
-        } else if (dataNest == 'criminal-justice'){
-            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Criminal Justice'});
-        } else if (dataNest == 'crime-victimization'){
-            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Crime Victimization'});
-        } else if (dataNest == 'trafficking-person'){
-            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Trafficking in Person'});
-        } else if (dataNest == 'drug-use'){
-            dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === 'Drug Use and Health Consequences'});
-        }
-        
+        dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === dataTitle});
         console.log(dataNestArray);
         
         $('.data-modal-list').html('');
         
         $(dataNestArray).each(function(){
-            $('.data-modal-list').append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
-            
+            if (this.subcategory == 'n/a' || this.subcategory == 'N/A' || this.subcategory == undefined){
+                $('.data-modal-list').append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
+            } else {
+                $('.data-modal-list').append("<details><summary>"+this.subcategory+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
+            }
+
             $('.data-point.last').on('click', function(){
                 var dataPointTitle = $(this).text();
                 var dataSet = $(this).attr('data-set');
                 var dataPath = $(this).attr('data-path');
                 var dataUnit = $(this).attr('data-unit');
                 var dataType = $(this).attr('data-type');
-                
+
                 $('.data-window').removeClass('show');
-                
+
                 $(dataButton).attr('data-path', dataPath)
                     .attr('data-unit', dataUnit)
                     .children('.picked-data-point').text(dataPointTitle).addClass('selected');
