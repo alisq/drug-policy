@@ -562,7 +562,7 @@ window.onload = function(){
         $(dataNestArray).each(function(){
             if (this.subcategory == 'n/a' || this.subcategory == 'N/A' || this.subcategory == undefined){
                 $('.data-modal-list').append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
-            } else {
+            } else if (this.subcategoryTwo == 'n/a' || this.subcategoryTwo == 'N/A' || this.subcategoryTwo == undefined) {
                 var detailElements = $('.data-modal-list details');
                 var existingCategory = false;
                 var subCategory = this.subcategory;
@@ -578,8 +578,6 @@ window.onload = function(){
                     });
                 }
                 
-                console.log(newCategory);
-                
                 if (existingCategory){
                     for (var i=0; i < detailElements.length; i++){
                         if ($(detailElements[i]).children('summary').text() == subCategory){
@@ -590,6 +588,8 @@ window.onload = function(){
                 } else {
                     $('.data-modal-list').append("<details><summary>"+this.subcategory+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
                 }
+            } else {
+                console.log('has second subcategory');            
             }
 
             $('.data-point.last').on('click', function(){
