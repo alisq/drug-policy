@@ -563,7 +563,33 @@ window.onload = function(){
             if (this.subcategory == 'n/a' || this.subcategory == 'N/A' || this.subcategory == undefined){
                 $('.data-modal-list').append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
             } else {
-                $('.data-modal-list').append("<details><summary>"+this.subcategory+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
+                var detailElements = $('.data-modal-list details');
+                var existingCategory = false;
+                var subCategory = this.subcategory;
+                
+                if (detailElements.length == 0){
+                    newCategory = true;
+                } else {
+                    $(detailElements).each(function(){
+                        if ($(this).children('summary').text() == subCategory){
+                            existingCategory = true;
+                            return false;
+                        };
+                    });
+                }
+                
+                console.log(newCategory);
+                
+                if (existingCategory){
+                    for (var i=0; i < detailElements.length; i++){
+                        if ($(detailElements[i]).children('summary').text() == subCategory){
+                            $(detailElements[i]).append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
+                            break;
+                        }
+                    }
+                } else {
+                    $('.data-modal-list').append("<details><summary>"+this.subcategory+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
+                }
             }
 
             $('.data-point.last').on('click', function(){
