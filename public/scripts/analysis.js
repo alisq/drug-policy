@@ -560,15 +560,17 @@ window.onload = function(){
         $('.data-modal-list').html('');
         
         $(dataNestArray).each(function(){
+            // if no subcategories
             if (this.subcategory == 'n/a' || this.subcategory == 'N/A' || this.subcategory == undefined){
                 $('.data-modal-list').append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
+            // if one subcategory
             } else if (this.subcategoryTwo == 'n/a' || this.subcategoryTwo == 'N/A' || this.subcategoryTwo == undefined) {
                 var detailElements = $('.data-modal-list details');
                 var existingCategory = false;
                 var subCategory = this.subcategory;
                 
                 if (detailElements.length == 0){
-                    newCategory = true;
+                    existingCategory = false;
                 } else {
                     $(detailElements).each(function(){
                         if ($(this).children('summary').text() == subCategory){
@@ -578,6 +580,7 @@ window.onload = function(){
                     });
                 }
                 
+                // if category already exists
                 if (existingCategory){
                     for (var i=0; i < detailElements.length; i++){
                         if ($(detailElements[i]).children('summary').text() == subCategory){
@@ -585,11 +588,54 @@ window.onload = function(){
                             break;
                         }
                     }
+                // if new category
                 } else {
                     $('.data-modal-list').append("<details><summary>"+this.subcategory+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
                 }
+            // if two subcategories
             } else {
-                console.log('has second subcategory');            
+                var detailElements = $('.data-modal-list details');
+                var existingCategory = false;
+                var existingSubcategory = false;
+                var subCategory = this.subcategory;
+                var subCategoryTwo = this.subcategoryTwo;
+                
+                if (detailElements.length == 0){
+                    existingCategory = false;
+                    existingSubcategory = false;
+                } else {
+                    $(detailElements).each(function(){
+                        if ($(this).children('summary').text() == subCategory){
+                            existingCategory = true;
+                        };
+                        
+                        if ($(this).children('summary').text() == subCategoryTwo){
+                            existingSubcategory = true;
+                        };
+                    });
+                }
+                
+                // if category does not already exist
+                if (!existingCategory){
+                    $('.data-modal-list').append("<details><summary>"+this.subcategory+"</summary></details>");
+                }
+                
+                if (existingSubcategory){
+                    for (var i=0; i < detailElements.length; i++){
+                        if ($(detailElements[i]).children('summary').text() == subCategoryTwo){
+                            $(detailElements[i]).append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
+                            break;
+                        }
+                    }
+                } else {
+                    for (var i=0; i < detailElements.length; i++){
+                        if ($(detailElements[i]).children('summary').text() == subCategory){
+                            $(detailElements[i]).append("<details><summary>"+this.subcategoryTwo+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
+                            break;
+                        }
+                    }
+                }
+                
             }
 
             $('.data-point.last').on('click', function(){
