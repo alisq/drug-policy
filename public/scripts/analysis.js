@@ -590,7 +590,7 @@ window.onload = function(){
                     }
                 // if new category
                 } else {
-                    $('.data-modal-list').append("<details><summary>"+this.subcategory+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
+                    $('.data-modal-list').append("<details class='subcategory'><summary>"+this.subcategory+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
                 }
             // if two subcategories
             } else {
@@ -617,7 +617,7 @@ window.onload = function(){
                 
                 // if category does not already exist
                 if (!existingCategory){
-                    $('.data-modal-list').append("<details><summary>"+this.subcategory+"</summary></details>");
+                    $('.data-modal-list').append("<details class='subcategory'><summary>"+this.subcategory+"</summary></details>");
                 }
                 
                 if (existingSubcategory){
@@ -630,7 +630,7 @@ window.onload = function(){
                 } else {
                     for (var i=0; i < detailElements.length; i++){
                         if ($(detailElements[i]).children('summary').text() == subCategory){
-                            $(detailElements[i]).append("<details><summary>"+this.subcategoryTwo+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
+                            $(detailElements[i]).append("<details class='subcategory-two'><summary>"+this.subcategoryTwo+"</summary><div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div></details>");
                             break;
                         }
                     }

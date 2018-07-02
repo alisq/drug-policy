@@ -64,8 +64,8 @@ nav.toggles p {
 }
 
 nav.toggles .button{
-    padding: 6px 8px 5px 8px;
-    font-family: 'Atlas Grotesk';
+    padding: 6px 8px 6px 8px;
+    font-family: 'Atlas Grotesk Web';
     font-size:14px;
     line-height:14px;
     color: white;
@@ -145,7 +145,7 @@ main > section {
 .flag-hover h1 {
     position:relative;
     margin:0;
-    font-family: 'Atlas Grotesk';
+    font-family: 'Atlas Grotesk Web';
     font-size: 14px;
     line-height:18px;
     padding:6px 8px 5px 8px;
