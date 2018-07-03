@@ -4,13 +4,13 @@ Y,"Average annual rate of police-recorded assaults per 100,000 population",Crime
 Y,"Average annual rate of police-recorded kidnappings per 100,000 population ",Crime,Crime,n/a,Crime,Kidnapping,"Rate/100,000",kidnapping
 Y,"Average annual rate of police-recorded thefts per 100,000 population",Crime,Crime,n/a,Crime,Theft,"Rate/100,000",theft
 Y,"Average annual rate of police-recorded robbery per 100,000 population",Crime,Crime,n/a,Crime,Robbery,"Rate/100,000",robbery
-Y,"Average annual rate of police-recorded domestic burglary per 100,000 population",Crime,Burglary,n/a,Crime,Domestic brgly-housebrking,"Rate/100,000",
-Y,"Average annual rate of burglary breaking and entering at the national level per 100,000 population ",Crime,Burglary,n/a,Crime,Burglary-police offences,"Rate/100,000",
-Y,Average annual police reporting rate for sexual assault,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Sexual Assault,Count ,report_sexual_assault
-Y,Average annual police reporting rate for robbery,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Robbery,Count ,report_robbery
-Y,Average annual police reporting rate for physical assault ,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Physical Assault,Count ,report_physical_assault
-Y,Average annual prevalence rate of physical assault ,Crime Victimization,n/a,n/a,Crime Victimization,Physical Assault,Count ,physical_assault
+Y,"Average annual rate of police-recorded domestic burglary per 100,000 population",Crime,Burglary,n/a,Crime,Domestic brgly-housebrking,"Rate/100,000",dom_burg
+Y,"Average annual rate of burglary breaking and entering at the national level per 100,000 population ",Crime,Burglary,n/a,Crime,Burglary-police offences,"Rate/100,000",police_burg
+Y,Average annual police reporting rate for robbery,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Robbery,Prevalence Rate ,report_robbery
+Y,Average annual police reporting rate for physical assault ,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Physical Assault,Prevalence Rate ,report_physical_assault
+Y,Average annual prevalence rate of physical assault ,Crime Victimization,n/a,n/a,Crime Victimization,Physical Assault,Prevalence Rate ,physical_assault
 Y,Average annual prevalence rate of robbery ,Crime Victimization,n/a,n/a,Crime Victimization,Rate of Robbery Prevalence,Prevalence Rate ,
+Y,Annual annual prevalence rate of sexual assault,Crime Victimization,n/a,n/a,Crime Victimization,Sexual Assult Prevalence,Prevalence Rate ,
 Y,Average annual prevalence rate of bribery,Crime Victimization,n/a,n/a,Crime Victimization ,Rate of Bribery Prevalence,Prevalence Rate ,
 Y,"Average annual rate of total professional judges or magistrates per 100,000 population",Criminal Justice,System Resources,n/a,Criminal Justice,Total Professional Judges and Magistrates,"Rate/100,000",total_judges
 Y,Average annual rate of total police personnel at the national level ,Criminal Justice,System Resources,n/a,Criminal Justice,Total Police Personnel ,"Rate/100,000",total_police
@@ -18,16 +18,16 @@ Y,"Average annual number of prison staff at juvenile prisons, penal institutions
 Y,"Average annual number of prison staff at adult prisons, penal institutions or correctional institutions ",Criminal Justice,System Resources,n/a,Criminal Justice,Adult Prison Staff,Count ,prison_staff
 Y,"Average annual rate of total persons prosecuted of all crimes per 100,000 population",Criminal Justice,Persons Prosecuted,n/a,Criminal Justice,Persons Prosecuted,"Rate/100,000",prosecuted
 Y,"Average annual rate of total males prosecuted of all crime per 100,000 population ",Criminal Justice,Persons Prosecuted,n/a,Criminal Justice,Males Prosecuted,"Rate/100,000",male_prosecuted
-Y,"Average annual rate of total females prosecuted of all crime per 100,000 population ",Criminal Justice,Persons Prosecuted,n/a,Criminal Justice,Females Prosecuted,"Rate/100,000",
+Y,"Average annual rate of total females prosecuted of all crime per 100,000 population ",Criminal Justice,Persons Prosecuted,n/a,Criminal Justice,Females Prosecuted,"Rate/100,000",female_prosecuted
 Y,Average annual number of total unsentenced/pre-trial persons held ,Criminal Justice,Persons Detained,n/a,Criminal Justice,Pre-Trial Persons Held,Count ,pretrial_held
 Y,"Average annual rate of total persons held in prisons, penal institutions or correctional institutions per 100,000 population ",Criminal Justice,Persons Detained,n/a,Criminal Justice,Total Persons Held,"Rate/100,000",total_held
 Y,"Average annual rate of male juveniles held in prisons, penal institutions or correctional institutions per 100,000 population",Criminal Justice,Persons Detained,n/a,Criminal Justice,Juvenile Males in Prison,"Rate/100,000",male_juv_prison
 Y,"Average annual rate of male adults held in prisons, penal institutions or correctional institutions per 100,000 population ",Criminal Justice,Persons Detained,n/a,Criminal Justice,Male Adults Held,"Rate/100,000",male_held
-Y,"Average annual rate of total sentenced persons held per 100,000 population",Criminal Justice,Persons Detained,n/a,Criminal Justice,Sentenced Persons Held,"Rate/100,000",
-Y,Average annual number of foreign citizens convicted of all crimes ,Criminal Justice,Persons Convicted,n/a,Criminal Justice,Foreign Citizens Convicted,Count,
-Y,"Average annual rate of female juveniles convicted of all crimes per 100,000 population",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Female Juv Convicted ,"Rate/100,000",
-Y,"Average annual rate of female adults convicted of all crimes per 100,000 population",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Female Adults Convicted,"Rate/100,001",
-Y,Average number of country citizens convicted of all crimes ,Criminal Justice,Persons Convicted,n/a,Criminal Justice,Country Citizens Convicted,Count ,
+Y,"Average annual rate of total sentenced persons held per 100,000 population",Criminal Justice,Persons Detained,n/a,Criminal Justice,Sentenced Persons Held,"Rate/100,000",sentence_held
+Y,Average annual number of foreign citizens convicted of all crimes ,Criminal Justice,Persons Convicted,n/a,Criminal Justice,Foreign Citizens Convicted,Count,foreign_convicted
+Y,"Average annual rate of female juveniles convicted of all crimes per 100,000 population",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Female Juv Convicted ,"Rate/100,000",female_juv_convicted
+Y,"Average annual rate of female adults convicted of all crimes per 100,000 population",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Female Adults Convicted,"Rate/100,000",female_adult_convicted
+Y,Average number of country citizens convicted of all crimes ,Criminal Justice,Persons Convicted,n/a,Criminal Justice,Country Citizens Convicted,Count ,country_citizens_convicted
 Y,"Average annual rate of total persons convicted of all crimes per 100,000 population",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Total Persons Convicted,"Rate/100,000",total_convicted
 Y,"Average annual rate of male juveniles convicted of all crimes per 100,000 population ",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Juvenile Males Convicted,"Rate/100,000",male_juv_convicted
 Y,"Average annual rate of male adults convicted of all crimes per 100,000 population",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Male Adults Convicted,"Rate/100,000",male_convicted
@@ -36,31 +36,31 @@ Y,"Average annual rate of juveniles convicted of all crimes per 100,000 populati
 Y,"Average annual rate of total persons brought into formal contact with the police and/or criminal justice system of all crimes per 100,000 population",Criminal Justice,Formal Contact,n/a,Criminal Justice,Total Persons in Formal Contact,"Rate/100,000",total_contact
 Y,"Average annual rate of total male adults brought into formal contact with the police and/or criminal justice system per 100,000 population",Criminal Justice,Formal Contact,n/a,Criminal Justice,Males in Formal Contact,"Rate/100,000",male_contact
 Y,"Average annual rate of male juveniles brought into formal contact with the police and/or criminal justice system of all crimes per 100,000 population",Criminal Justice,Formal Contact,n/a,Criminal Justice,Juvenile Males in Formal Contact,"Rate/100,000",male_juv_contact
-Y,"Average annual rate of juveniles brought into formal contact with the police and/or criminal justice system of all crimes per 100,000 population",Criminal Justice,Formal Contact,n/a,Criminal Justice,Juv Formal Contact Police JFCP,"Rate/100,000",
-Y,"Average annual rate of foreign citizens held in prison of all crimers per 100, 000",Criminal Justice,Persons Detained,n/a,Criminal Justice,Foreign Citizens Prison,Count ,
-Y,"Average annual rate of female juveniles held in prisons, penal institutions or correctional institutions per 100,000",Criminal Justice,Persons Detained,n/a,Criminal Justice,Female Juv Prison-CI,"Rate/100,000",
-Y,"Average annual rate of female adults held in prisons, penal institutions or correctional institutions per 100,000",Criminal Justice,Persons Detained,n/a,Criminal Justice,Female Adult Prison-CI,"Rate/100,000",
-Y,"Average annual rate of country citizens held in prison of all crimes per 100, 000 ",Criminal Justice,Persons Detained,n/a,Criminal Justice,Country Citizens Prison,Count ,
-Y,"Average annual number of adults held in prisons, penal institutions or correctional institutions per 100,000",Criminal Justice,Persons Detained,n/a,Criminal Justice,Adults Prison-CI,"Rate/100,000",
-Y,"Average annual rate of total adults convicted of all crimes per 100,000",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Adults Convicted,"Rate/100,000",
-Y,"Average annual rate of foreign citizens brought into formal contact with the police and/or criminal justice system of all crimes per 100, 000",Criminal Justice,Formal Contact,n/a,Criminal Justice,Foreign Citizens police CJS,Count ,
-Y,"Average annual rate of female juveniles brought into formal contact with the police and/or criminal justice system per 100,000",Criminal Justice,Formal Contact,n/a,Criminal Justice,Female Juv Police-CJS,"Rate/100,000",
-Y,"Average annual rate of female adults brought into formal contact with the police and/or criminal justice system of all crimes per 100,000 population",Criminal Justice,Formal Contact,n/a,Criminal Justice,Female Adults Police-CJS,"Rate/100,000",
-Y,"Average annual rate of country citizens brought into formal contact with the police and/or criminal justice system of all crimes per 100,000",Criminal Justice,Formal Contact,n/a,Criminal Justice,Country Citizens Police-CJS,Count ,
-Y,"Average annual rate of adults brought into formal contact with the police and/or criminal justice system per 100,000",Criminal Justice ,Formal Contact,n/a,Criminal Justice,Adults Police CJS,"Rate/100,000",
+Y,"Average annual rate of juveniles brought into formal contact with the police and/or criminal justice system of all crimes per 100,000 population",Criminal Justice,Formal Contact,n/a,Criminal Justice,Juv Formal Contact Police JFCP,"Rate/100,000",juv_formal_jfcp
+Y,"Average annual rate of foreign citizens held in prison of all crimers per 100, 000",Criminal Justice,Persons Detained,n/a,Criminal Justice,Foreign Citizens Prison,Count ,foreign_citizens_prison
+Y,"Average annual rate of female juveniles held in prisons, penal institutions or correctional institutions per 100,000",Criminal Justice,Persons Detained,n/a,Criminal Justice,Female Juv Prison-CI,"Rate/100,000",female_juv_prison
+Y,"Average annual rate of female adults held in prisons, penal institutions or correctional institutions per 100,000",Criminal Justice,Persons Detained,n/a,Criminal Justice,Female Adult Prison-CI,"Rate/100,000",female_adult_prison
+Y,"Average annual rate of country citizens held in prison of all crimes per 100, 000 ",Criminal Justice,Persons Detained,n/a,Criminal Justice,Country Citizens Prison,Count ,country_citizens_prison
+Y,"Average annual number of adults held in prisons, penal institutions or correctional institutions per 100,000",Criminal Justice,Persons Detained,n/a,Criminal Justice,Adults Prison-CI,"Rate/100,000",adult_prison
+Y,"Average annual rate of total adults convicted of all crimes per 100,000",Criminal Justice,Persons Convicted,n/a,Criminal Justice,Adults Convicted,"Rate/100,000",adult_convicted
+Y,"Average annual rate of foreign citizens brought into formal contact with the police and/or criminal justice system of all crimes per 100, 000",Criminal Justice,Formal Contact,n/a,Criminal Justice,Foreign Citizens police CJS,Count ,foreign_citizens_police
+Y,"Average annual rate of female juveniles brought into formal contact with the police and/or criminal justice system per 100,000",Criminal Justice,Formal Contact,n/a,Criminal Justice,Female Juv Police-CJS,"Rate/100,000",female_juv_police
+Y,"Average annual rate of female adults brought into formal contact with the police and/or criminal justice system of all crimes per 100,000 population",Criminal Justice,Formal Contact,n/a,Criminal Justice,Female Adults Police-CJS,"Rate/100,000",female_adults_police
+Y,"Average annual rate of country citizens brought into formal contact with the police and/or criminal justice system of all crimes per 100,000",Criminal Justice,Formal Contact,n/a,Criminal Justice,Country Citizens Police-CJS,Count ,country_citizens_police
+Y,"Average annual rate of adults brought into formal contact with the police and/or criminal justice system per 100,000",Criminal Justice ,Formal Contact,n/a,Criminal Justice,Adults Police CJS,"Rate/100,000",adult_police
 Y,"Average annual prevalence (%) of HIV among people who use stimulants (ATS) (with 95 per cent confidence intervals, where available) expressed as a percent ",Drug Use and Health Consequences,HIV and the Use of Stimulants,n/a,HIV and the Use of Stimulants,HIV prevalence _ATS,% Prevalence,hiv_prev_ats
 Y,"Average annual prevalence (%) of HIV among people who use stimulants (cocaine) (with 95 per cent confidence intervals, where available) expressed as a percent ",Drug Use and Health Consequences,HIV and the Use of Stimulants,n/a,HIV and the Use of Stimulants,HIV prevalence_cocaine,% Prevalence,hiv_prev_cocaine
-N,Average annual medium prevalence of Hepatitis C (HCV) among people who inject drugs expressed as a percent,Drug Use and Health Consequences,"Injecting Drug Use, HIV, Hepatits and Tuberculosis ",n/a,,HCV inject drugs,% Medium Prevalence,
-Y,Average annual high prevalence of HIV among people who inject drugs expressed as a percent ,Drug Use and Health Consequences,"Injecting Drug Use, HIV, Hepatits and Tuberculosis ",n/a,,HIV inject drugs,% High Prevalence ,
-N,Average annual prevalence of use of synthetic cannabinoids in the general and youth population expressed as a percent ,Drug Use and Health Consequences,Use of NPS,Synthetic Cannabinoids,Use of NPS,Synthetic Cannabinoid Prevalence,% Prevalence,
-N,Average annual prevalence of use of synthetic cannabinoids among males in the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Synthetic Cannabinoids,Use of NPS,Synthetic Cannabinoid Prevalence Males,% Prevalence,
-N,Average annual prevalence of use of synthetic cannabinoids among females in the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Synthetic Cannabinoids,Use of NPS,Synthetic Cannabinoid Prevalence Females,% Prevalence,
-N,Average annual past year prevalence of miscellaneous new psychoactive substance use among the general and youth populations expressed as a percent,Drug Use and Health Consequences,Use of NPS,New Psychoactive Substances,Use of NPS,NPS prevalence,% Prevalence,
-N,Average annual past year prevalence of miscellaneous new psychoactive substance use among males in the general and youth populations expressed as a percent,Drug Use and Health Consequences,Use of NPS,New Psychoactive Substances,Use of NPS,NPS prevalence_males,% Prevalence,
-N,Average annual past year prevalence of miscellaneous new psychoactive substance use among females in the general and youth populations expressed as a percent,Drug Use and Health Consequences,Use of NPS,New Psychoactive Substances,Use of NPS,NPS prevalence_females,% Prevalence,
-N,Average annual past year prevalence of ketamine use among the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Ketamine,Use of NPS,Ketamine Prevalence,% Prevalence,
-N,Average annual past year prevalence of ketamine use among males in the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Ketamine,Use of NPS,Ketamine Prevalence_males,% Prevalence,
-N,Average annual past year prevalence of ketamine use among females in the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Ketamine,Use of NPS,Ketamine Prevalence_females,% Prevalence,
+Y,Average annual medium prevalence of Hepatitis C (HCV) among people who inject drugs expressed as a percent,Drug Use and Health Consequences,"Injecting Drug Use, HIV, Hepatits and Tuberculosis ",n/a,,HCV inject drugs,% Medium Prevalence,
+Y,Average annual medium prevalence of HIV among people who inject drugs expressed as a percent ,Drug Use and Health Consequences,"Injecting Drug Use, HIV, Hepatits and Tuberculosis ",n/a,,HIV inject drugs,% Medium Prevalence,
+Y,Average annual prevalence of use of synthetic cannabinoids in the general and youth population expressed as a percent ,Drug Use and Health Consequences,Use of NPS,Synthetic Cannabinoids,Use of NPS,Synthetic Cannabinoid Prevalence,% Prevalence,
+Y,Average annual prevalence of use of synthetic cannabinoids among males in the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Synthetic Cannabinoids,Use of NPS,Synthetic Cannabinoid Prevalence Males,% Prevalence,
+Y,Average annual prevalence of use of synthetic cannabinoids among females in the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Synthetic Cannabinoids,Use of NPS,Synthetic Cannabinoid Prevalence Females,% Prevalence,
+Y,Average annual past year prevalence of miscellaneous new psychoactive substance use among the general and youth populations expressed as a percent,Drug Use and Health Consequences,Use of NPS,New Psychoactive Substances,Use of NPS,NPS prevalence,% Prevalence,
+Y,Average annual past year prevalence of miscellaneous new psychoactive substance use among males in the general and youth populations expressed as a percent,Drug Use and Health Consequences,Use of NPS,New Psychoactive Substances,Use of NPS,NPS prevalence_males,% Prevalence,
+Y,Average annual past year prevalence of miscellaneous new psychoactive substance use among females in the general and youth populations expressed as a percent,Drug Use and Health Consequences,Use of NPS,New Psychoactive Substances,Use of NPS,NPS prevalence_females,% Prevalence,
+Y,Average annual past year prevalence of ketamine use among the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Ketamine,Use of NPS,Ketamine Prevalence,% Prevalence,
+Y,Average annual past year prevalence of ketamine use among males in the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Ketamine,Use of NPS,Ketamine Prevalence_males,% Prevalence,
+Y,Average annual past year prevalence of ketamine use among females in the general and youth population expressed as a percent,Drug Use and Health Consequences,Use of NPS,Ketamine,Use of NPS,Ketamine Prevalence_females,% Prevalence,
 Y,Average annual prevalence for cannabis being the primary drug of abuse among persons in treatment for drug problems in Africa expressed as a percent,Drug Use and Health Consequences,Treatment Demand,Africa,Treatment Demand 2,Cannabis_Africa,% Prevalence,cannabis_africa
 Y,Average annual prevalence of all opioids being the primary drug of abuse among persons in treatment for drug problems in Africa expressed as a percent,Drug Use and Health Consequences,Treatment Demand,Africa,Treatment Demand 2,Opioids_Africa,% Prevalence,opioids_africa
 Y,Average annual prevalence of heroin being the primary drug of abuse among persons in treatment for drug problems in Africa expressed as a percent,Drug Use and Health Consequences,Treatment Demand,Africa,Treatment Demand 2,Heroin_Africa,% Prevalence,heroin_africa
@@ -146,13 +146,13 @@ Y,Average annual number of persons in treatment for drug problems in Africa,Drug
 Y,Average annual number of persons in treatment for drug problems in the Americas ,Drug Use and Health Consequences,Treatment Demand,Americas,Treatment Demand,Treatment Provided_America,Number,
 Y,Average annual number of persons in treatment for drug problems in Asia,Drug Use and Health Consequences,Treatment Demand,Asia,Treatment Demand,Treatment Provided_Asia,Number,
 Y,Average annual number of persons in treatment for drug problems in Europe,Drug Use and Health Consequences,Treatment Demand,Europe,Treatment Demand,Treatment Provided_Europe,Number,
-Y,Average annual past year prevalence of illicit drug use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use,% Prevalence,
-Y,Average annual past year prevalence of illicit cannabis use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Cannabis,% Prevalence,
-Y,Average annual past year prevalence of illicit heroin use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Heroin,% Prevalence,
-Y,Average annual past year prevalence of illicit cocaine use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Cocaine,% Prevalence,
-Y,Average annual past year prevalence of illicit amphetamine use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Amphetamine,% Prevalence,
-Y,Average annual past year prevalence of illicit ecstasy use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Ecstasy,% Prevalence,
-Y,Average annual number of drug related deaths among persons aged 15-64 years ,Drug Use and Health Consequences,Mortality,n/a,Mortality,Drug Related Deaths,Number,
+Y,Average annual past year prevalence of illicit drug use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use,% Prevalence,drug_use
+Y,Average annual past year prevalence of illicit cannabis use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Cannabis,% Prevalence,drug_use_cannabis
+Y,Average annual past year prevalence of illicit heroin use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Heroin,% Prevalence,drug_use_heroin
+Y,Average annual past year prevalence of illicit cocaine use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Cocaine,% Prevalence,drug_use_cocaine
+Y,Average annual past year prevalence of illicit amphetamine use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Amphetamine,% Prevalence,drug_use_amphetamine
+Y,Average annual past year prevalence of illicit ecstasy use within prison among prisoners expressed as a percent,Drug Use and Health Consequences,Persons Held in Prison,n/a,Persons Held in Prison,Drug Use_Ecstasy,% Prevalence,drug_use_ecstasy
+Y,Average annual number of drug related deaths among persons aged 15-64 years ,Drug Use and Health Consequences,Mortality,n/a,Mortality,Drug Related Deaths,Number,drug_deaths
 Y,Ranking of cannabis as a primary cause of death among countries,Drug Use and Health Consequences,Mortality,n/a,Mortality,Cannabis_Death,Ranking,
 Y,Rranking of opioids as a primary cause of death among countries,Drug Use and Health Consequences,Mortality,n/a,Mortality,Opioids_Death,Ranking,
 Y,Ranking of cocaine as a primary cause of death among countries,Drug Use and Health Consequences,Mortality,n/a,Mortality,Cocaine_Death,Ranking,
@@ -160,18 +160,18 @@ Y,Ranking of amphetamines as a primary cause of death among countries,Drug Use a
 Y,Ranking of tranquillizers and sedatives as a primary cause of death among countries,Drug Use and Health Consequences,Mortality,n/a,Mortality,Tranquillizers and sedatives_Death,Ranking,
 Y,Ranking of hallucinogens as a primary cause of death among countries,Drug Use and Health Consequences,Mortality,n/a,Mortality,Hallucinogens_Death,Ranking,
 Y,Ranking of solvents and inhalants as a primary cause of death among countries,Drug Use and Health Consequences,Mortality,n/a,Mortality,Solvents and inhalants_Death,Ranking,
-Y,Average annual prevalence of active tuberculosis (TB) among people who inject drugs (PWID) expressed as a percent,Drug Use and Health Consequences,"Injecting Drug Use, HIV, Hepatits and Tuberculosis ",,"Injecting Drug Use, HIV, Hepatitis and TB",TB Prevalence among PWID,% Prevalence,
+Y,Average annual prevalence of active tuberculosis (TB) among people who inject drugs (PWID) expressed as a percent,Drug Use and Health Consequences,"Injecting Drug Use, HIV, Hepatits and Tuberculosis ",,"Injecting Drug Use, HIV, Hepatitis and TB",TB Prevalence among PWID,% Prevalence,tb_prev_pwid
 Y,Average annual medium prevalence of people who inject drugs expressed as a percent,Drug Use and Health Consequences,"Injecting Drug Use, HIV, Hepatits and Tuberculosis ",,"Injecting Drug Use, HIV, Hepatitis and TB",People Who Inject Drugs,% Medium Prevalence,
 N,"Prevalence (%) of HIV among people who use stimulants (with 95 per cent confidence intervals, where available)",Drug Use and Health Consequences,,,HIV and the use of stimulants,HIV prevalence,% Prevalence,
-Y,Average annual prevalence of sedatives and tranquillizers use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Sedatives and Tranquillizers Total,% Prevalence,
-Y,Average annual past year prevalence of opioid use among youth expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Opioid Use Youth,% Prevalence,
-Y,Average annual prevalence of ecstasy use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Ecstasy Use,% Prevalence,
-Y,Average annual prevalence of cocaine use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Cocaine Use,% Prevalence,
-Y,Average annual prevalence of cannabis use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Cannabis Use,% Prevalence,
-Y,Average annual prevalence of amphetamine group use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Amphetamine Use,% Prevalence,
-Y,Average annual prevalence of tranquillizers and sedatives use of the population ages 15-64 expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Tranquillizers and Sedatives,Annual Prevalence Adults,Tranquillizers and Sedatives Total,% Prevalence,
-Y,Average annual prevalence of tranquillizers and sedatives use of the population ages 15-64 among males expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Tranquillizers and Sedatives,Annual Prevalence Adults,Tranquillizers and Sedatives Males,% Prevalence,
-Y,Average annual prevalence of tranquillizers and sedatives use of the population ages 15-64 among females expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Tranquillizers and Sedatives,Annual Prevalence Adults,Tranquillizers and Sedatives Females,% Prevalence,
+Y,Average annual prevalence of sedatives and tranquillizers use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Sedatives and Tranquillizers Total,% Prevalence,youth_sedatives
+Y,Average annual past year prevalence of opioid use among youth expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Opioid Use Youth,% Prevalence,youth_opioid
+Y,Average annual prevalence of ecstasy use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Ecstasy Use,% Prevalence,youth_ecstasy
+Y,Average annual prevalence of cocaine use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Cocaine Use,% Prevalence,youth_cocaine
+Y,Average annual prevalence of cannabis use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Cannabis Use,% Prevalence,youth_cannabis
+Y,Average annual prevalence of amphetamine group use among youth expressed a percent,Drug Use and Health Consequences,Annual Prevalence Youth,n/a,Annual Prevalence Youth,Amphetamine Use,% Prevalence,youth_amphetamine
+Y,Average annual prevalence of tranquillizers and sedatives use of the population ages 15-64 expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Tranquillizers and Sedatives,Annual Prevalence Adults,Tranquillizers and Sedatives Total,% Prevalence,adult_sedatives
+Y,Average annual prevalence of tranquillizers and sedatives use of the population ages 15-64 among males expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Tranquillizers and Sedatives,Annual Prevalence Adults,Tranquillizers and Sedatives Males,% Prevalence,adult_sedatives_male
+Y,Average annual prevalence of tranquillizers and sedatives use of the population ages 15-64 among females expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Tranquillizers and Sedatives,Annual Prevalence Adults,Tranquillizers and Sedatives Females,% Prevalence,adult_sedatives_female
 Y,Average annual best prevalence of prescription stimulant use of the population aged 15-64 years expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Prescription Stimulants,Annual Prevalence Adults,Prescription Stimulant Use Total,% Best Prevalence,
 Y,Average annual prevalence of prescription stimulant use among the male population aged 15-64 years expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Prescription Stimulants,Annual Prevalence Adults,Prescription Stimulant Use Males,% Best Prevalence***,
 Y,Average annual prevalence of prescription stimulant use among the female population aged 15-64 years expressed as a percent,Drug Use and Health Consequences,Annual Prevalence Adults,Prescription Stimulants,Annual Prevalence Adults,Prescription Stimulant Use Females,% Best Prevalence***,
@@ -238,3 +238,61 @@ Y,Average annual number of females prosecuted for trafficking in persons,Traffic
 Y,Average annual number of total people convicted for trafficking in persons,Trafficking in Person,Persons Convicted,n/a,Trafficking in Person,Total Trafficking Convictions,Number,trafficking_con
 Y,Average annual number of males convicted for trafficking in persons,Trafficking in Person,Persons Convicted,n/a,Trafficking in Person,Male Trafficking Convictions,Number,trafficking_con_male
 Y,Average annual number of females convicted for trafficking in persons,Trafficking in Person,Persons Convicted,n/a,Trafficking in Person,Female Trafficking Convictions,Number,trafficking_con_female
+Y,Average annual number of non-specified ATS seizures in grams,Seizures,ATS,n/a,Drug Seizures 2,Non-Specified ATS Grams,Number,
+Y,Average annual number of non-specified ATS seizures in tablets,Seizures,ATS,n/a,Drug Seizures 2,Non-Specified ATS Tablets,Number,
+Y,Average annual number of non-specified cocaine seizures in grams,Seizures,Cocaine-type,n/a,Drug Seizures 2,Non-Specified Cocaine Grams,Number,
+Y,Average annual number of non-specified cocaine seizures in litres,Seizures,Cocaine-type,n/a,Drug Seizures 2,Non-Specified Cocaine Litres,Number,
+Y,Average annual number of non-specified sedatives and tranquillizers' seizures in tablets,Seizures,Sedatives and Tranquillizers,n/a,Drug Seizures 2,Non-Specified Sedatives and Tranquillizers Tablets,Number,
+Y,Average annual number of opium seizures in grams,Seizures,Opioids,n/a,Drug Seizures 2,Opium Grams,Number,
+Y,Average annual number of other hallucinogen seizures in grams,Seizures,Hallucinogens,n/a,Drug Seizures 2,Other Hallucinogens Grams,Number,
+Y,Average annual number of other NPS seizures in grams,Seizures,Substances Not Under International Control,n/a,Drug Seizures 2,Other NPS Grams,Number,
+Y,Average annual number of other plant-based substances' seizures in grams,Seizures,Substances Not Under International Control,n/a,Drug Seizures 2,Other Plant-Based Substances Grams,Number,
+Y,Average annual number of other sedatives and tranquillizer seizures in grams,Seizures,Sedatives and Tranquillizers,n/a,Drug Seizures 2,Other Sedatives and Tranquillizers Grams,Number,
+Y,Average annual number of other sedatives and tranquillizer seizures in tablets,Seizures,Sedatives and Tranquillizers,n/a,Drug Seizures 2,Other Sedatives and Tranquillizers Tablets,Number,
+Y,Average annual number of other stimulant seizures in grams,Seizures,ATS,n/a,Drug Seizures 2,Other Stimulant Seizures Grams,Number,
+Y,Average annual number of other types of cannabis seizures in grams,Seizures,Cannabis-type,n/a,Drug Seizures 2,Other Types of Cannabis Grams,Number,
+Y,Average annual number of pharmaceutical opioid seizures in grams,Seizures,Opioids,n/a,Drug Seizures 2,Pharmaceutical Opioids Grams,Number,
+Y,Average annual number of pharmaceutical opioid seizures in litres,Seizures,Opioids,n/a,Drug Seizures 2,Pharmaceutical Opioids Litres,Number,
+Y,Average annual number of pharmaceutical opioid seizures in tablets,Seizures,Opioids,n/a,Drug Seizures 2,Pharmaceutical Opioids Tablets,Number,
+Y,Average annual number of pharmaceutical opioid seizures in units,Seizures,Opioids,n/a,Drug Seizures 2,Pharmaceutical Opioids Units,Number,
+Y,Average annual number of phenethylamines seizures in grams,Seizures,Substances Not Under International Control,n/a,Drug Seizures 2,Phenethylamines Grams,Number,
+Y,Average annual number of piperazine seizures in grams,Seizures,Substances Not Under International Control,n/a,Drug Seizures 2,Piperazines Grams,Number,
+Y,Average annual number of piperazine seizures in tablets,Seizures,Substances Not Under International Control,n/a,Drug Seizures 2,Piperazines Tablets,Number,
+Y,Average annual number of plant-based NPS seizures in grams,Seizures,Substances Not Under International Control,n/a,Drug Seizures 2,Plant-Based NPS Grams,Number,
+Y,Average annual number of poppy plant seizures in grams,Seizures,Opioids,n/a,Drug Seizures 2,Poppy Plants Grams,Number,
+Y,Average annual number of poppy plant seizures by number of plants,Seizures,Opioids,n/a,Drug Seizures 2,Poppy Plants Plants,Number,
+Y,Average annual number of prescription stimulant seizures in grams,Seizures,ATS,n/a,Drug Seizures 2,Prescription Stimulants Grams,Number,
+Y,Average annual number of prescription stimulant seizures in tablets,Seizures,ATS,n/a,Drug Seizures 2,Prescription Stimulants Tablets,Number,
+Y,Average annual number of sedatives and tranquillizers' seizures in tablets,Seizures,Sedatives and Tranquillizers,n/a,Drug Seizures 2,Sedatives and Tranquillizers Tablets,Number,
+Y,Average annual number of synthetic cannabinoids under international control seizures in grams,Seizures,Cannabis-type,n/a,Drug Seizures 2,Synthetic Cannabinoids under Int. Control Grams,Number,
+Y,Average annual number of synthetic cannabinoid (Spice) seizures in grams,Seizures,Cannabis-type,n/a,Drug Seizures 2,Synthetic Cannabinoids (Spice),Number,
+Y,Average annual number of synthetic cathinone seizures in grams,Seizures,Substances Not Under International Control,n/a,Drug Seizures 2,Synthetic Cathinones Grams,Number,
+Y,Average annual number of amphetamine seizures in grams,Seizures,ATS,n/a,Drug Seizures,Drug Seizures_Amphetamine_Grams,Number,
+Y,Average annual number of amphetamine seizures in units,Seizures,ATS,n/a,Drug Seizures,Drug Seizures_Amphetamine_Unit,Number,
+Y,Average annual number of amphetamine seizures in tablets,Seizures,ATS,n/a,Drug Seizures,Drug Seizures_Amphetamine_Tablet,Number,
+Y,Average annual number of amphetamine seizures in pills,Seizures,ATS,n/a,Drug Seizures,Drug Seizures_Amphetamine_Pill,Number,
+Y,Average annual number of barbituate seizures in tablets,Seizures,Sedatives and Tranquillizers,n/a,Drug Seizures,Drug Seizures_Barbiturates_Tablet,Number,
+Y,Average annual number of barbituates seizures in grams,Seizures,Sedatives and Tranquillizers,n/a,Drug Seizures,Drug Seizures_Barbiturates_Grams,Number,
+Y,Average annual number of benzodiazepine seizures in grams,Seizures,Sedatives and Tranquillizers,n/a,Drug Seizures,Drug Seizures_Benzodiazepines_Grams,Number,
+Y,Average annual number of benzodiazepine seizures in tablets,Seizures,Sedatives and Tranquillizers,n/a,Drug Seizures,Drug Seizures_Benzodiazepines_Tablets,Number,
+Y,Average annual number of cannabis oil seizures in grams,Seizures,Cannabis-type,n/a,Drug Seizures,Drug Seizures_Cannabis Oil_Grams,Number,
+Y,Average annual number of cannabis plants in grams,Seizures,Cannabis-type,n/a,Drug Seizures,Drug Seizures_Cannabis Plants_Grams,Number,
+Y,Average annual number of cannabis plants seizures,Seizures,Cannabis-type,n/a,Drug Seizures,Drug Seizures_Cannabis Plants,Number,
+Y,Average annual number of cannabis seed seizures in grams,Seizures,Cannabis-type,n/a,Drug Seizures,Drug Seizures_Cannabis Seed_Grams,Number,
+Y,Average annual number of cannabis seed seizures,Seizures,Cannabis-type,n/a,Drug Seizures,Drug Seizures_Cannabis Seed,Number,
+Y,Average annual number of coca leaf seizures in grams,Seizures,Cocaine-type,n/a,Drug Seizures,Drug Seizures_Coca leaf_grams,Number,
+Y,Average annual number of coca paste/cocaine base seizures in grams,Seizures,Cocaine-type,n/a,Drug Seizures,Drug Seizures_Coca paste/cocaine base_grams,Number,
+Y,Average annual number of cocaine salts seizures in grams,Seizures,Cocaine-type,n/a,Drug Seizures,Drug Seizures_Cocaine salts_grams,Number,
+Y,Average annual number of crack seizures in grams,Seizures,Cocaine-type,n/a,Drug Seizures,Drug Seizures_Crack_grams,Number,
+Y,Average annual number of ecstasy-type substances seizures in grams,Seizures,ATS,n/a,Drug Seizures,Drug Seizures_Ecstasy-type substances_grams,Number,
+Y,Average annual number of ecstasy-type substances seizures in tablets,Seizures,ATS,n/a,Drug Seizures,Drug Seizures_Ecstasy-type substances_tablets,Number,
+Y,Average annual number of hashish (resin) seizures in grams,Seizures,Cannabis-type,n/a,Drug Seizures,Drug Seizures_Hashish (resin)_Grams,Number,
+Y,Average annual number of heroin seizures in grams,Seizures,Opioids,n/a,Drug Seizures,Drug Seizures_Heroin_Grams,Number,
+Y,Average annual number of illicit morphine seizures in grams,Seizures,Opioids,n/a,Drug Seizures,Drug Seizures_Illicit morphine_Grams,Number,
+Y,Average annual number of ketamine and phencyclidine-type substances seizures in grams,Seizures,Substances Not Under International Control,n/a,Drug Seizures,Drug Seizures_Ketamine and phencyclidine-type substances_Grams,Number,
+Y,Average annual number of LSD seizures in grams,Seizures,Hallucinogens,n/a,Drug Seizures,Drug Seizures_LSD_Grams,Number,
+Y,Average annual number of LSD seizures in doses,Seizures,Hallucinogens,n/a,Drug Seizures,Drug Seizures_LSD_Dose,Number,
+Y,Average annual number of LSD seizures in tablets,Seizures,Hallucinogens,n/a,Drug Seizures,Drug Seizures_LSD_Tablet,Number,
+Y,Average annual number of marijuana (herb) seizures in grams,Seizures,Cannabis-type,n/a,Drug Seizures,Drug Seizures_Marijuana (herb)_Grams,Number,
+Y,Average annual number of methamphetamine seizures in grams,Seizures,ATS,n/a,Drug Seizures,Drug Seizures_Methamphetamine_Grams,Number,
+Y,Average annual number of methamphetamine seizures in tablets,Seizures,ATS,n/a,Drug Seizures,Drug Seizures_Methamphetamine_Tablets,Number,
