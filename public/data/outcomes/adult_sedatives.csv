@@ -1,4 +1,4 @@
-Country,Year,Total,Definition,Interpretation,Link
+Country,Year,Number,Definition,Interpretation,Link
 Tunisia,2013,0.52,n/a,"Except where the prevalence values are taken from household surveys, changes between years need to be interpreted with caution as they might reflect a change in the methodology or the data source from which the estimate was derived and therefore should not be considered as a change in prevalence.",https://data.unodc.org/#state:1
 El Salvador,2014,1.76,,,
 Panama,2015,0.75,,,
