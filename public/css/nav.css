@@ -72,7 +72,7 @@
 .breadcrumb {
     font-size: 15px;
     line-height: 15px;
-	background: linear-gradient(to bottom left, rgb(255,255,255), rgb(235,235,235));
+	background: rgb(235,235,235);
 	padding: 5px 10px 8px 10px;
 }
 .breadcrumb, .breadcrumb a {
