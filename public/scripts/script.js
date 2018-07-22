@@ -97,7 +97,7 @@ window.onload = function() {
     
         $(randomArray).each(function(){
             var randomCountry = countryArray[this];
-            $('.countries-list').prepend('<div class="country-item last"><h1>'+randomCountry.name+' <span class="collection">'+randomCountry.domains.total_metric_count+' metrics, '+randomCountry.policies.length+' strategies</span></h1></div>');
+            $('.countries-list').prepend('<div class="country-item last"><h1>'+randomCountry.name+' <span class="collection">'+randomCountry.domains.total_metric_count+' Indicators, '+randomCountry.policies.length+' Strategies</span></h1></div>');
             $('.country-item.last').on('click', function(){
                 localStorage.setItem('country', JSON.stringify(randomCountry.name));
                 window.location = 'country-page.html';
@@ -112,7 +112,7 @@ window.onload = function() {
         
         if (country.domains){ //if country has domains data
             $('.country-card .collection').css({'display':'block'})
-                .text('Collects data on '+country.domains.total_metric_count+' metrics across ' + country.policies.length + ' Drug Strategies');
+                .text('Collects data on '+country.domains.total_metric_count+' indicators across ' + country.policies.length + ' Drug Strategies');
         } else {
             $('.country-card .collection').css({'display':'none'});
         }
@@ -122,16 +122,4 @@ window.onload = function() {
         var random = Math.floor((Math.random() * max) + min);
         return random;
     }
-    
-    $('.nav-countries').click(function(){
-        window.location = 'countries.html';
-    });
-
-    $('.nav-themes').click(function(){
-        window.location = 'themes.html';
-    });
-
-    $('.nav-analysis').click(function(){
-        window.location = 'analysis.html';
-    });
 };

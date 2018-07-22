@@ -119,7 +119,7 @@ window.onload = function(){
         $(lastCard + ' .gdp').text('$' + country.GDPtext + ' GDP');
         
         if (country.domains){ //if country has domains data
-            $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name + " <span class='collection'>"+country.domains.total_metric_count+" metrics, "+country.policies.length+" strategies");
+            $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name + " <span class='collection'>"+country.domains.total_metric_count+" Indicators, "+country.policies.length+" Strategies");
         } else {
             $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name);
         };
@@ -132,7 +132,7 @@ window.onload = function(){
     var updateCards = function(filteredArray){
         $('main section').css('display', 'flex');
         for (var i=0; i < filteredArray.length; i++){
-            $('main section').append("<div class='country-card last'><h1><span class='flag-icon'></span><span class='collection'>Collects data on 277 metrics across 45 themes</span></h1><div class='country-details'><div class='income'></div><div class='gdp'></div><div class='strategies'></div></div></div>");
+            $('main section').append("<div class='country-card last'><h1><span class='flag-icon'></span><span class='collection'></span></h1><div class='country-details'><div class='income'></div><div class='gdp'></div><div class='strategies'></div></div></div>");
         
             countryCard(filteredArray[i]);
             $('.last').on('click',function(){
@@ -302,7 +302,7 @@ window.onload = function(){
         d3.selectAll('.country-bar')
             .append('p')
             .attr('class', 'country-metrics')
-            .text(function(d) { return d.domains.total_metric_count + " metrics"; });
+            .text(function(d) { return d.domains.total_metric_count + " indicators"; });
     };
 
     

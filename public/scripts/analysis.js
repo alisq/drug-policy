@@ -216,11 +216,11 @@ window.onload = function(){
         var chartTitle;
         
         if (plotGuide.x.level == 'level one'){
-            chartTitle = 'Number of metrics used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
+            chartTitle = 'Number of indicators used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
         } else if (plotGuide.x.level == 'level two'){
             chartTitle = 'Number of '+plotGuide.x.text+' used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
         } else if (plotGuide.x.level == 'level three'){
-            chartTitle = 'Use of metrics to assess the '+plotGuide.x.text+' and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
+            chartTitle = 'Use of indicators to assess the '+plotGuide.x.text+' and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
         };
         
         $('.chart-title').text(chartTitle);
@@ -682,9 +682,9 @@ window.onload = function(){
     $('.level-one').on('click', function(){
         var dimension = $(this).closest('.dimension').attr('id');
         $('#' + dimension + ' .level-two').removeClass('hidden')
-            .children('.selected-value').text('Themes');
+            .children('.selected-value').text('Metrics');
         $('#' + dimension + ' .level-three').addClass('hidden')
-            .children('.selected-value').text('Specific Metrics');
+            .children('.selected-value').text('Specific Indicators');
     });
     
     $('.level-two').on('click', function(){
@@ -732,19 +732,19 @@ window.onload = function(){
         if ($(dataButton).hasClass('level-two')){ //if this is the level two list
             var levelTwo = $(this).attr('data-value');
             $('#' + dimension + ' .level-three .data-list').empty()
-                .append('<div class="data-list-item">Specific Metrics</div>');
+                .append('<div class="data-list-item">Specific Indicators</div>');
             
             if (levelTwo != 'all'){
                 var levelTwoMetrics = countryArray[0].domains[levelTwo].themes;
                 $(levelTwoMetrics).each(function(i){
-                    $('#' + dimension + ' .level-three .data-list').append('<div class="data-list-item" data-path="country.domains.'+levelTwo+'.themes.'+i+'.metric_count" data-unit="Number of Metrics">' + this.theme + '</div>');
+                    $('#' + dimension + ' .level-three .data-list').append('<div class="data-list-item" data-path="country.domains.'+levelTwo+'.themes.'+i+'.metric_count" data-unit="Number of Indicators">' + this.theme + '</div>');
                 });
                 activateLevelThreeList();
                 
                 $('#' + dimension + ' .data-button.selected').removeClass('selected');
                 $('#' + dimension + ' .level-two').addClass('selected');
                 $('#' + dimension + ' .level-three').removeClass('hidden')
-                    .children('.selected-value').text('Specific Metrics');
+                    .children('.selected-value').text('Specific Indicators');
             } else {
                 $('#' + dimension + ' .data-button.selected').removeClass('selected');
                 $('#' + dimension + ' .level-one').addClass('selected');
@@ -770,7 +770,7 @@ window.onload = function(){
             
             if ($(dataButton).hasClass('level-three')){ //if this is the level three list
                 var levelThree = $(this).text();
-                if (levelThree != 'Specific Metrics'){
+                if (levelThree != 'Specific Indicators'){
                     $('#' + dimension + ' .data-button.selected').removeClass('selected');
                     $('#' + dimension + ' .level-three').addClass('selected');
                 } else {

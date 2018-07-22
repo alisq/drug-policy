@@ -104,7 +104,7 @@ window.onload = function(){
                         $('.flag-hover').css({'top':yPos + yScroll - 24 + 'px', 'left':xPos + 10 + 'px', 'opacity':1});
                     }
                     $('.flag-hover h1').text(country);
-                    $('.flag-hover .metrics').html('Collects <span class="metric-count">'+ metrics +'</span> metrics on ' + theme);
+                    $('.flag-hover .metrics').html('Collects <span class="metric-count">'+ metrics +'</span> indicators on ' + theme);
                 }).on('mouseleave', function(){
                     $('.flag-hover').css('opacity',0);
                 }).on('click', function(){
@@ -115,9 +115,9 @@ window.onload = function(){
             });
             
             if (metricsSort == 'least-metrics' || metricsSort == 'most-metrics'){
-                $('.last .theme-subtitle').html('<span class="highlight">'+this.metric_count+' Metrics</span> collected under this theme across '+this.country_count+' countries');
+                $('.last .theme-subtitle').html('<span class="highlight">'+this.metric_count+' Indicators</span> collected under this metric across '+this.country_count+' countries');
             } else if (metricsSort == 'least-countries' || metricsSort == 'most-countries'){
-                $('.last .theme-subtitle').html('<span class="highlight">'+this.country_count+' Countries</span> collect a total of '+this.metric_count+' metrics under this theme');
+                $('.last .theme-subtitle').html('<span class="highlight">'+this.country_count+' Countries</span> collect a total of '+this.metric_count+' indicators under this metric');
             }
             $('.last.theme').removeClass('last');
         });
