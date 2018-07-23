@@ -247,7 +247,7 @@ window.onload = function(){
         
         // notes + sources for outcome data
         if (linkedArray[0].outcome){
-            $('.chart-notes .y-notes').html('<span class="chart-header">Y Axis Notes: </span>');
+            $('.chart-notes .y-notes').html('<span class="chart-header">Notes: </span>');
             
             if (linkedArray[0].outcome.years){
                 var yearString = '';
@@ -273,7 +273,7 @@ window.onload = function(){
         };
         
         if (plotGuide.y.text == 'Rate of Unemployment'){
-            $('.chart-sources').append('<a target="_blank" href="https://www.google.ca/">Unemployment Source</a>');
+            $('.chart-sources').append('<a target="_blank" href="https://data.worldbank.org/">World Bank</a>');
         };
         
         $('.chart-guide').css('opacity', '0');

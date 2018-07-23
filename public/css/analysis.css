@@ -573,6 +573,10 @@ nav.data {
     line-height:17px;
 }
 
+.x-notes {
+    display:none;
+}
+
 .chart-sources {
     border-top:1px solid rgb(220,220,220);
     padding:8px 12px 8px 12px;

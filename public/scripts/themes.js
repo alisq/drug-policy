@@ -163,12 +163,15 @@ window.onload = function(){
         var toolTipWidth = $('.tool-tip').width();
         var leftPos = pos.x - 12;
         var topPos = 32 + pos.y + scrollTop;
+        var tipText = $(this).attr('data-text');
         if (leftPos + toolTipWidth > windowWidth){
             $('.tool-tip').css({'top': topPos + 'px', 'left': leftPos - toolTipWidth + 20 + 'px', 'opacity':'1'})
-                .addClass('left');
+                .addClass('left')
+                .text(tipText)
         } else {
             $('.tool-tip').css({'top': topPos + 'px', 'left': leftPos + 'px', 'opacity':'1'})
-                .addClass('right');
+                .addClass('right')
+                .text(tipText);
         };
        
     }).on('mouseleave', function(){
