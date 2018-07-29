@@ -13,7 +13,7 @@ var getPolicies = function() {
         var lastCountry;
 
         data.forEach(function(d, i){
-            if (d['Country Completed'] == 'Y'){
+            if (d['Completed'] == 'Y'){
                 var currentCountry = d.Country;
 
                 if (i > 0) {
@@ -316,6 +316,7 @@ var getPopulation = function() {
 // JOIN DATA //
 
 var joinCountryTheme = function(){
+    console.log(countryDomainArray);
     $(countryDomainArray).each(function(i){
         var ISO = countryDomainArray[i].ISO;
         $(countryArray).each(function(k){
