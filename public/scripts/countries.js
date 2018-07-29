@@ -32,8 +32,10 @@ window.onload = function(){
         };
         
         if (filterRegion != null && filterRegion != 'all'){ //if filter is not null or all
+            console.log(filterRegion);
             for (var i=filteredArray.length-1; i >= 0; i--){
                 if (filteredArray[i].region != filterRegion){
+                    console.log(filteredArray[i]);
                     filteredArray.splice(i, 1);
                 };
             };
@@ -74,6 +76,27 @@ window.onload = function(){
     /// FILTER AND SORT MENU ///
     
     $('select').on('change', function(){
+        
+        if ($(this).hasClass('continent')){ // if continent, filter regions
+            var selectContinent = $('select.continent').val();
+            console.log(selectContinent);
+            if (selectContinent == 'all') {
+                $('select.region').html("<option selected disabled>Region</option> <option value='all'>All</option> <option>Northern Europe</option> <option>Western Europe</option> <option>Central Europe</option> <option>North America</option> <option>Latin America and Caribbean</option> <option>Eurasia</option> <option>South Asia</option> <option>Middle East</option> <option>Southeast Asia</option> <option>North Africa</option> <option>Central Africa</option> <option>West Africa</option> <option>East Africa</option> <option>Southern Africa</option>");
+            } else if (selectContinent == 'Asia'){
+                $('select.region').html("<option selected disabled>Region</option> <option value='all'>All</option> <option>Eurasia</option> <option>South Asia</option> <option>Middle East</option> <option>Southeast Asia</option>");
+            } else if (selectContinent == 'Africa'){
+                $('select.region').html("<option selected disabled>Region</option> <option value='all'>All</option> <option>North Africa</option> <option>Central Africa</option> <option>West Africa</option> <option>East Africa</option> <option>Southern Africa</option>");
+            } else if (selectContinent == 'North America'){
+                $('select.region').html("<option selected disabled>Region</option>");    
+            } else if (selectContinent == 'South America'){
+                $('select.region').html("<option selected disabled>Region</option>");
+            } else if (selectContinent == 'Europe'){
+                $('select.region').html("<option selected disabled>Region</option> <option value='all'>All</option> <option>Northern Europe</option> <option>Western Europe</option> <option>Central Europe</option>");
+            } else if (selectContinent == 'Oceania'){
+                $('select.region').html("<option selected disabled>Region</option>");
+            }
+        }
+                
         filterCountries();
         customRoute($(this).attr("class")+"="+$(this).val().toLowerCase().replace(" ","-"));
     });
