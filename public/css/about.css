@@ -66,7 +66,7 @@ header h1 {
 .mission-header{
     color: rgb(0,132,255);
     margin:0 0 30px 0;
-    font-size:30px;
+    font-size:24px;
     line-height:1.3em;
 }
 
@@ -74,6 +74,10 @@ header h1 {
     margin:30px 0 0 0;
     font-size:14px;
     line-height:18px;
+}
+
+.credit-title {
+    color:rgb(0,132,255);
 }
 
 .glossary {
@@ -135,4 +139,33 @@ header h1 {
 
 .glossary-term {
     color:rgb(0,132,255);
+}
+
+.logos {
+    margin:40px 0 0 0;
+}
+
+.logo {
+    margin:0 30px 16px 0;
+    vertical-align: middle;
+}
+
+.cdpe-text {
+    width:160px;
+}
+
+.sm-logo {
+    width:200px;
+}
+
+.ocad-logo {
+    width:80px;
+}
+
+.uoft-logo{
+    width:160px;
+}
+
+.ucsd-logo{
+    width:160px;
 }
