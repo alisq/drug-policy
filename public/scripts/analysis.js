@@ -72,13 +72,13 @@ window.onload = function(){
     function plotData(plotGuide){
         var xData = plotGuide.x.path.split('.');
         var yData = plotGuide.y.path.split('.');
-        console.log(plotGuide);
+        console.log(plotGuide, linkedArray);
         
         var dataArray = [];
+        var xArray = [];
+        var yArray = [];
         var countryNameArray = [];
         var yAltValueArray = [];
-        
-        console.log(linkedArray);
         
         $(linkedArray).each(function(){
             var dataElement = [];
@@ -87,6 +87,8 @@ window.onload = function(){
             
             if (dataElement[0] && dataElement[1]){
                 dataArray.push(dataElement);
+                xArray.push(dataElement[0]);
+                yArray.push(dataElement[1]);
                 countryNameArray.push(this.country.name);
                 
                 if (plotGuide.y.altValue){
@@ -96,9 +98,12 @@ window.onload = function(){
                 }
                 
             } else {
-                console.log('No X and/or Y data avalible for country');
+                console.log('No X and/or Y data available for ' + this.country.name);
             };
         });
+        
+        var spearmanCor = computeSpearmans(xArray, yArray);
+        var pearsonCor = computePearsons(xArray, yArray);
         
         var xMax = d3.max(dataArray, function(d){return d[0]});
            
@@ -235,6 +240,10 @@ window.onload = function(){
                 $('.country-list').append(countryNameArray[i] + ', ');
             }
         };
+        
+        // add statististical analysis
+        
+        $('.statistics').html("<span class='chart-header'>Analysis: </span>Spearman's Correlation<span class='stat'>"+spearmanCor+"</span>Pearson's Correlation<span class='stat'>"+pearsonCor+"</span>")
         
         // generate chart notes and sources
         
@@ -673,7 +682,7 @@ window.onload = function(){
         $('#' + dimension + ' .picked-data-point.selected').text('+').removeClass('selected');
         $(this).addClass('selected');
         
-        if ($('#x .data-button').hasClass('selected') && $('#y .data-button').hasClass('selected')){
+        if ($('#x .data-button').hasClass('selected') && $('#y .data-button').hasClass('selected') && !$('.plot-button').hasClass('enabled')){
             $('.plot-button').addClass('enabled');
             enablePlotButton();
         };
@@ -783,6 +792,124 @@ window.onload = function(){
         });
     };
     
+    /// Statistical Analysis
+    
+    /** Computes Spearman's rho, adjusted for ties, by Nick Kullman (https://bl.ocks.org/nkullman/f65d5619843dc22e061d957249121408) */
+    var computeSpearmans = function (arrX, arrY) {
+
+        // simple error handling for input arrays of nonequal lengths
+        if (arrX.length !== arrY.length) { return null; }
+
+        // number of observations
+        var n = arrX.length;
+
+        // rank datasets
+        var xRanked = rankArray(arrX),
+            yRanked = rankArray(arrY);
+
+        // sum of distances between ranks
+        var dsq = 0;
+        for (var i = 0; i < n; i++) {
+            dsq += Math.pow(xRanked[i] - yRanked[i], 2);
+        }
+
+        // compute correction for ties
+        var xTies = countTies(arrX),
+            yTies = countTies(arrY);
+        var xCorrection = 0,
+            yCorrection = 0;
+        for (var tieLength in xTies) {
+            xCorrection += xTies[tieLength] * tieLength * (Math.pow(tieLength, 2) - 1)
+        }
+        xCorrection /= 12.0;
+        for (var tieLength in yTies) {
+            yCorrection += yTies[tieLength] * tieLength * (Math.pow(tieLength, 2) - 1)
+        }
+        yCorrection /= 12.0;
+
+        // denominator
+        var denominator = n * (Math.pow(n, 2) - 1) / 6.0;
+
+        // compute rho
+        var rho = denominator - dsq - xCorrection - yCorrection;
+        rho /= Math.sqrt((denominator - 2 * xCorrection) * (denominator - 2 * yCorrection))
+
+        return rho;
+    }
+
+    /** Computes the rank array for arr, where each entry in arr is 
+     * assigned a value 1 thru n, where n is arr.length.
+     * 
+     * Tied entries in arr are each given the average rank of the ties.
+     * Lower ranks are not increased
+     */
+    var rankArray = function (arr) {
+
+        // ranking without averaging
+        var sorted = arr.slice().sort(function (a, b) { return b - a });
+        var ranks = arr.slice().map(function (v) { return sorted.indexOf(v) + 1 });
+
+        // counts of each rank
+        var counts = {};
+        ranks.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; });
+
+        // average duplicates
+        ranks = ranks.map(function (x) { return x + 0.5 * ((counts[x] || 0) - 1); });
+
+        return ranks;
+    }
+
+    /** Counts the number of ties in arr, and returns
+     * an object with
+     * a key for each tie length (an entry n for each n-way tie) and 
+     * a value corresponding to the number of key-way (n-way) ties
+     */
+    var countTies = function (arr) {
+        var ties = {},
+            arrSorted = arr.slice().sort(),
+            currValue = arrSorted[0],
+            tieLength = 1;
+
+        for (var i = 1; i < arrSorted.length; i++) {
+            if (arrSorted[i] === currValue) {
+                tieLength++;
+            } else {
+                if (tieLength > 1) {
+                    if (ties[tieLength] === undefined) ties[tieLength] = 0;
+                    ties[tieLength]++;
+                }
+                currValue = arrSorted[i];
+                tieLength = 1;
+            }
+        }
+        if (tieLength > 1) {
+            if (ties[tieLength] === undefined) ties[tieLength] = 0;
+            ties[tieLength]++;
+        }
+        return ties;
+    }
+    
+    /** Compute Pearson's correlation coefficient */
+    var computePearsons = function (arrX, arrY) {
+        var num = covar(arrX, arrY);
+        var denom = d3.deviation(arrX) * d3.deviation(arrY);
+        return num / denom;
+    }
+    
+    /** Computes the covariance between random variable observations
+     * arrX and arrY
+     */
+    var covar = function (arrX, arrY) {
+        var u = d3.mean(arrX);
+        var v = d3.mean(arrY);
+        var arrXLen = arrX.length;
+        var sq_dev = new Array(arrXLen);
+        var i;
+        for (i = 0; i < arrXLen; i++)
+            sq_dev[i] = (arrX[i] - u) * (arrY[i] - v);
+        return d3.sum(sq_dev) / (arrXLen - 1);
+    }
+    
     $(window).on('click', function(event){
         if(!event.target.closest('.data-list') && !event.target.closest('.data-button')){
             $('.data-list.open').removeClass('open right');
@@ -799,6 +926,6 @@ window.onload = function(){
                     .attr("download", "plot-"+timeStampInMs+".svg") 
             }
       
-    })
+    });
     
 };

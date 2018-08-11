@@ -561,9 +561,25 @@ nav.data {
 }
 
 .country-list {
+    padding:8px 12px 10px 12px;
+    font-size:14px;
+    line-height:19px;
+}
+
+.statistics{
+    border-top:1px solid rgb(220,220,220);
     padding:8px 12px 8px 12px;
     font-size:14px;
     line-height:19px;
+}
+
+.stat {
+    color: white;
+    background: rgb(0,132,255);
+    padding: 2px 5px 3px 5px;
+    border-radius: 6px;
+    line-height: 22px;
+    margin: 0 10px 0 5px;;
 }
 
 .chart-notes {
