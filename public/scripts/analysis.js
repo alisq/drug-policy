@@ -41,6 +41,8 @@ window.onload = function(){
                         outcome.unit = 'Rate per 100,000 population';
                     } else if (outcome.type == '% Prevalence'){
                         outcome.unit = '%'
+                    } else if (outcome.type == 'Prevalence Rate'){
+                        outcome.unit = '%'
                     }
                     
                     outcomeDatasets.push(outcome);
@@ -350,6 +352,10 @@ window.onload = function(){
                     var percent = percentagePrev(d);
                     outcome.value = percent[0];
                     outcome.years = percent[1];
+                } else if (datatype == 'Prevalence Rate'){
+                    var rate = averageRate(d);
+                    outcome.value = rate[0];
+                    outcome.years = rate[1];
                 }
                 
                 if (outcome.name.indexOf('*') > -1){

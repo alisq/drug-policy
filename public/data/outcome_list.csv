@@ -6,12 +6,12 @@ Y,"Average annual rate of police-recorded thefts per 100,000 population",Crime,C
 Y,"Average annual rate of police-recorded robbery per 100,000 population",Crime,Crime,n/a,Crime,Robbery,"Rate/100,000",robbery
 Y,"Average annual rate of police-recorded domestic burglary per 100,000 population",Crime,Burglary,n/a,Crime,Domestic brgly-housebrking,"Rate/100,000",dom_burg
 Y,"Average annual rate of burglary breaking and entering at the national level per 100,000 population ",Crime,Burglary,n/a,Crime,Burglary-police offences,"Rate/100,000",police_burg
-Y,Average annual police reporting rate for robbery,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Robbery,Prevalence Rate ,
-Y,Average annual police reporting rate for physical assault ,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Physical Assault,Prevalence Rate ,
-Y,Average annual prevalence rate of physical assault ,Crime Victimization,n/a,n/a,Crime Victimization,Physical Assault,Prevalence Rate ,
-Y,Average annual prevalence rate of robbery ,Crime Victimization,n/a,n/a,Crime Victimization,Rate of Robbery Prevalence,Prevalence Rate ,
-Y,Annual annual prevalence rate of sexual assault,Crime Victimization,n/a,n/a,Crime Victimization,Sexual Assult Prevalence,Prevalence Rate ,
-Y,Average annual prevalence rate of bribery,Crime Victimization,n/a,n/a,Crime Victimization ,Rate of Bribery Prevalence,Prevalence Rate ,
+Y,Average annual police reporting rate for robbery,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Robbery,Prevalence Rate,police_robbery
+Y,Average annual police reporting rate for physical assault ,Crime Victimization,n/a,n/a,Crime Victimization,Police Reporting Rate for Physical Assault,Prevalence Rate,police_assault
+Y,Average annual prevalence rate of physical assault ,Crime Victimization,n/a,n/a,Crime Victimization,Physical Assault,Prevalence Rate,phys_assault
+Y,Average annual prevalence rate of robbery ,Crime Victimization,n/a,n/a,Crime Victimization,Rate of Robbery Prevalence,Prevalence Rate,robbery_prev
+Y,Annual annual prevalence rate of sexual assault,Crime Victimization,n/a,n/a,Crime Victimization,Sexual Assult Prevalence,Prevalence Rate,police_sexual
+Y,Average annual prevalence rate of bribery,Crime Victimization,n/a,n/a,Crime Victimization ,Rate of Bribery Prevalence,Prevalence Rate,bribery_prev
 Y,"Average annual rate of total professional judges or magistrates per 100,000 population",Criminal Justice,System Resources,n/a,Criminal Justice,Total Professional Judges and Magistrates,"Rate/100,000",total_judges
 Y,Average annual rate of total police personnel at the national level ,Criminal Justice,System Resources,n/a,Criminal Justice,Total Police Personnel ,"Rate/100,000",total_police
 Y,"Average annual number of prison staff at juvenile prisons, penal institutions or correctional institutions ",Criminal Justice,System Resources,n/a,Criminal Justice,Juvenile Prison Staff,Count ,juvenile_prison_staff
