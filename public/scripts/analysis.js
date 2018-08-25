@@ -679,6 +679,9 @@ window.onload = function(){
     
     $('.data-modal .close-button').on('click', function(){
         $('.data-window').removeClass('show');
+        $('#y .data-button.selected').removeClass('selected');
+        $('#y .picked-data-point.selected').text('+').removeClass('selected');
+        $('.plot-button').removeClass('enabled');
     });
     
     $('.data-button').on('click', function(){
