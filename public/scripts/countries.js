@@ -209,7 +209,7 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .html(function(d){return '<span>Demand</span><span class="count">' + metric + '</span>'});
+                            .html(function(d){return '<span>Demand Reduction</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');
@@ -311,7 +311,7 @@ window.onload = function(){
                         d3.select('.tool-tip').style('display','inline-block')
                             .style('top', mouseY - 28 + 'px')
                             .style('left', mouseX + 'px')
-                            .html(function(d){return '<span>Supply</span><span class="count">' + metric + '</span>'});
+                            .html(function(d){return '<span>Supply Reduction</span><span class="count">' + metric + '</span>'});
                     }).on('mouseleave', function(){
                         d3.select('.tool-tip').style('display','none')
                             .text('');

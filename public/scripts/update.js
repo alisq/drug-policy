@@ -121,11 +121,11 @@ var getThemes = function(){
                         var theme = newTheme(d);
                         domains.rights.themes.push(theme);
                         domains.rights.metric_count = domains.rights.metric_count + theme.metrics.length;
-                    } else if (d.Domain == 'Demand'){
+                    } else if (d.Domain == 'Demand Reduction'){
                         var theme = newTheme(d);
                         domains.demand.themes.push(theme);
                         domains.demand.metric_count = domains.demand.metric_count + theme.metrics.length;
-                    } else if (d.Domain == 'Supply'){
+                    } else if (d.Domain == 'Supply Reduction'){
                         var theme = newTheme(d);
                         domains.supply.themes.push(theme);
                         domains.supply.metric_count = domains.supply.metric_count + theme.metrics.length;
@@ -203,8 +203,8 @@ var countData = function(){
 
 var newTheme = function(d){
     var theme = new Object;
-    theme.theme = d.Theme;
-    theme.metrics = d.Metrics;
+    theme.theme = d.Metric;
+    theme.metrics = d.Indicators;
 
     theme.metrics = theme.metrics.split('~'); // split by metric delimiter
     theme.metrics.pop(); // last item is a blank space, remove
