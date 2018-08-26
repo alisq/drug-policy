@@ -11,7 +11,6 @@ window.onload = function() {
 
     $.when(getCountries()).done(function(data){
         countryArray = data;
-        console.log(countryArray);
         drawCountries();
     });
         
@@ -89,7 +88,6 @@ window.onload = function() {
         var randomArray = [];
         while (randomArray.length < 3){
             var randomNum = getRandom(0, countryArray.length);
-            console.log(randomNum);
             if (randomArray.indexOf(randomNum) < 0){
                 randomArray.push(randomNum);
             };

@@ -695,6 +695,11 @@ window.onload = function(){
             $('.plot-button').addClass('enabled');
             enablePlotButton();
         };
+        
+        //hide existing chart
+        $('.chart-guide').css('opacity', '1');
+        $('.chart-text').css('opacity', '0');
+        $('.chart').css('opacity', '0');
     });
     
     $('.level-one').on('click', function(){

@@ -263,6 +263,10 @@ nav.data {
     vertical-align: bottom;
 }
 
+.data-button:hover {
+    background:linear-gradient(to right, rgba(26, 144, 255,1), rgba(0,132,255,1));
+}
+
 .data-button.hidden {
     display:none;
 }
@@ -289,8 +293,12 @@ nav.data {
     border-left: 15px solid rgb(200,200,200);
 }
 
+.data-button.pointed:hover::after{
+    border-left: 15px solid rgb(0,132,255);
+}
+
 .data-button.pointed.selected::after{
-    border-left: 15px solid rgba(0,104,214,1);
+    border-left: 15px solid rgb(0,104,214);
 }
 
 .data-button-group {
@@ -389,6 +397,10 @@ nav.data {
 .picked-data-point.selected {
     color:rgb(0,104,214);
     border:1px solid rgb(0,104,214);
+}
+
+.data-button:hover .picked-data-point{
+    color:rgb(0,132,255);
 }
 
 .chart-area{
