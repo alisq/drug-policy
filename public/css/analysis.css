@@ -587,12 +587,9 @@ nav.data {
 }
 
 .stat {
-    color: white;
-    background: rgb(0,132,255);
-    padding: 2px 5px 3px 5px;
-    border-radius: 6px;
+    color: rgb(0,132,255);
     line-height: 22px;
-    margin: 0 10px 0 5px;
+    margin: 0 0 0 5px;
     white-space: nowrap;
 }
 

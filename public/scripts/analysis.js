@@ -21,6 +21,10 @@ window.onload = function(){
         getOutcomeList();
     });
     
+    function round(value, decimals) {
+      return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+    }
+    
     function getOutcomeList(){
         d3.csv('data/outcome_list.csv', function(data){
             $(data).each(function(){
@@ -74,20 +78,24 @@ window.onload = function(){
     function plotData(plotGuide){
         var xData = plotGuide.x.path.split('.');
         var yData = plotGuide.y.path.split('.');
-        console.log(plotGuide, linkedArray);
         
         var dataArray = [];
         var xArray = [];
         var yArray = [];
         var countryNameArray = [];
         var yAltValueArray = [];
-        
+                
         $(linkedArray).each(function(){
             var dataElement = [];
             dataElement[0] = Number(getValue(this, xData));
             dataElement[1] = Number(getValue(this, yData));
             
             if (dataElement[0] && dataElement[1]){
+                
+                if (plotGuide.y.path == 'country.GDP'){
+                    dataElement[1] = Math.log10(dataElement[1]);
+                };
+                
                 dataArray.push(dataElement);
                 xArray.push(dataElement[0]);
                 yArray.push(dataElement[1]);
@@ -100,14 +108,20 @@ window.onload = function(){
                 }
                 
             } else {
-                console.log('No X and/or Y data available for ' + this.country.name);
+                console.log('No X and/or Y data available for a country');
             };
         });
+        
+        // check if x and y arrays are equal
+        if (xArray.length != yArray.length){
+            console.log('x and y data arrays are not equal')
+        }
         
         var spearmanCor = computeSpearmans(xArray, yArray);
         var pearsonCor = computePearsons(xArray, yArray);
         
         var xMax = d3.max(dataArray, function(d){return d[0]});
+        var yMax = d3.max(dataArray, function(d){return d[1]});
            
         var padding = {top:20, right:20, bottom:60, left:88};
             
@@ -116,7 +130,7 @@ window.onload = function(){
             .range([padding.left, svgWidth - padding.right]);
         
         var yScale = d3.scaleLinear()
-            .domain([0, d3.max(dataArray, function(d){return d[1]})])
+            .domain([0, yMax])
             .range([svgHeight - padding.bottom, padding.top]);
         
         var xAxis = d3.axisBottom(xScale);
@@ -155,9 +169,13 @@ window.onload = function(){
             $('.chart-hover .country-data-x').html(plotGuide.x.text + ' <span class="amount">' + data[0] + '</span>');
             
             if (plotGuide.y.altValue){
-                $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + yAltValue + '</span>'); 
+                if (plotGuide.y.path == 'country.GDP'){
+                    $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + yAltValue + '</span> <span class="amount"> Log10: ' + round(data[1], 4) + '</span>'); 
+                } else {
+                    $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + yAltValue + '</span>'); 
+                }
             } else {
-               $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + data[1] + '</span>'); 
+               $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + round(data[1], 4) + '</span>'); 
             }
             
             if (plotGuide.y.unit) {
@@ -234,18 +252,21 @@ window.onload = function(){
         
         // add list of countries
         
+        var countryNameAlpha = countryNameArray;
+        countryNameAlpha.sort();
+        
         $('.country-list').html("<span class='chart-header'>Countries Plotted: </span>");
-        for (var i=0; i < countryNameArray.length; i++){
-            if (i == countryNameArray.length-1){
-                $('.country-list').append(countryNameArray[i]);
+        for (var i=0; i < countryNameAlpha.length; i++){
+            if (i == countryNameAlpha.length-1){
+                $('.country-list').append(countryNameAlpha[i]);
             } else {
-                $('.country-list').append(countryNameArray[i] + ', ');
+                $('.country-list').append(countryNameAlpha[i] + ', ');
             }
         };
         
         // add statististical analysis
         
-        $('.statistics').html("<span class='chart-header'>Analysis: </span>Spearman's Correlation<span class='stat'>"+spearmanCor+"</span>Pearson's Correlation<span class='stat'>"+pearsonCor+"</span>")
+        $('.statistics').html("<span class='chart-header'>Analysis: <br></span>Spearman's Correlation<span class='stat'>"+round(spearmanCor, 4)+"</span><br>Pearson's Correlation<span class='stat'>"+round(pearsonCor, 4)+"</span>")
         
         // generate chart notes and sources
         
@@ -538,7 +559,7 @@ window.onload = function(){
             };
 
             if (yText == 'GDP'){
-                yText = 'GDP';
+                yText = 'Gross Domestic Product';
             };
 
             console.log('X: ' + xText,'Y: ' + yText);
@@ -570,7 +591,6 @@ window.onload = function(){
         var dataNestArray;
         
         dataNestArray = $.grep(outcomeDatasets, function(obj){return obj.category === dataTitle});
-        console.log(dataNestArray);
         
         $('.data-modal-list').html('');
         
