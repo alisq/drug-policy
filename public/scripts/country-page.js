@@ -525,18 +525,29 @@ window.onload = function() {
     var sameRegion = function(){
         var countryRegion = country.region;
         var regionArray = [];
+        var regionString = '';
         
         $(countries).each(function(){
             if (this.region){
-                if (this.name != country.name && this.region == countryRegion){
-                    regionArray.push(this);
+                for (var i=0; i < countryRegion.length; i++){
+                    if (this.name != country.name && this.region.indexOf(countryRegion[i]) > -1){
+                        regionArray.push(this);
+                    }
                 }
             }
         });
         
         if (regionArray.length > 0){
+            for (var i=0; i < countryRegion.length; i++){
+                if (i < countryRegion.length - 1){
+                    regionString += countryRegion[i] + ', ';
+                } else {
+                    regionString += countryRegion[i];
+                }
+            }
+            
             $('.comparable-region').css('display', 'block');
-            $('.comparable-region header').text('Other Countries in ' + countryRegion);
+            $('.comparable-region header').text('Other Countries in ' + regionString);
             $(regionArray).each(function(){
                 $('.comparable-region main').append('<p><a class="last"><span class="flag-icon flag-icon-'+this.ISO_2+'"></span><span class="country-name">'+this.name+'</span></a></p>');
                 var contextCountryName = this.name;

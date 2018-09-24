@@ -8,6 +8,7 @@ window.onload = function(){
 
     $.when(getCountries()).done(function(data){
         allCountryArray = data;
+        console.log(allCountryArray);
         startVisual();
     });
     
@@ -25,7 +26,7 @@ window.onload = function(){
         
         if (filterContinent != null && filterContinent != 'all'){ //if filter is not null or all
             for (var i=filteredArray.length-1; i >= 0; i--){
-                if (filteredArray[i].continent != filterContinent){
+                if (filteredArray[i].continent.indexOf(filterContinent) == -1){
                     filteredArray.splice(i, 1);
                 };
             };
@@ -34,7 +35,7 @@ window.onload = function(){
         if (filterRegion != null && filterRegion != 'all'){ //if filter is not null or all
             console.log(filterRegion);
             for (var i=filteredArray.length-1; i >= 0; i--){
-                if (filteredArray[i].region != filterRegion){
+                if (filteredArray[i].region.indexOf(filterRegion) == -1){
                     console.log(filteredArray[i]);
                     filteredArray.splice(i, 1);
                 };
@@ -79,7 +80,6 @@ window.onload = function(){
         
         if ($(this).hasClass('continent')){ // if continent, filter regions
             var selectContinent = $('select.continent').val();
-            console.log(selectContinent);
             if (selectContinent == 'all') {
                 $('select.region').html("<option selected disabled>Region</option> <option value='all'>All</option> <option>Northern Europe</option> <option>Western Europe</option> <option>Central Europe</option> <option>North America</option> <option>Latin America and Caribbean</option> <option>Eurasia</option> <option>South Asia</option> <option>Middle East</option> <option>Southeast Asia</option> <option>North Africa</option> <option>Central Africa</option> <option>West Africa</option> <option>East Africa</option> <option>Southern Africa</option>");
             } else if (selectContinent == 'Asia'){

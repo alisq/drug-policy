@@ -47,6 +47,9 @@ var getPolicies = function() {
                     country.income = d['Income Group (World Bank)'];
 
                     country.unemployment = country.unemployment.substring(0, country.unemployment.length - 1);
+                    
+                    country.continent = country.continent.split(', ');
+                    country.region = country.region.split (', ');
 
                     country.GDP = country.GDP.replace(/,/g , "");
                     country.GDP = country.GDP.split(' USD');

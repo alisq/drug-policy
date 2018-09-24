@@ -117,200 +117,209 @@ window.onload = function(){
             console.log('x and y data arrays are not equal')
         }
         
-        var spearmanCor = computeSpearmans(xArray, yArray);
-        var pearsonCor = computePearsons(xArray, yArray);
-        
-        var xMax = d3.max(dataArray, function(d){return d[0]});
-        var yMax = d3.max(dataArray, function(d){return d[1]});
-           
-        var padding = {top:20, right:20, bottom:60, left:88};
-            
-        var xScale = d3.scaleLinear()
-            .domain([0, xMax])
-            .range([padding.left, svgWidth - padding.right]);
-        
-        var yScale = d3.scaleLinear()
-            .domain([0, yMax])
-            .range([svgHeight - padding.bottom, padding.top]);
-        
-        var xAxis = d3.axisBottom(xScale);
-        var yAxis = d3.axisLeft(yScale).tickFormat(d3.format("0.2s"));
-        
-        var plot = svg.append('g')
-            .attr('class', 'plot');
-                        
-        plot.selectAll("circle")
-            .data(dataArray)
-            .enter()
-            .append("circle")
-            .attr('class', 'point')
-            .attr('fill','#0084ff')
-            .attr("cx", function(d) {return xScale(d[0])})
-            .attr("cy", function(d) {return yScale(d[1])})
-            .attr("r", 5)
-            .on('mouseenter', function(d, i){
-                $(this).addClass('point-hover');
-                var countryName = countryNameArray[i];
-                hoverPoint(d, countryName, yAltValueArray[i]);
-            }).on('mousemove', function(d, i){
-                $(this).addClass('point-hover');
-                var countryName = countryNameArray[i];
-                hoverPoint(d, countryName, yAltValueArray[i]);
-            }).on('mouseleave', function(d){
-                $('.chart-hover').removeClass('show')
-                $(this).removeClass('point-hover');
-            });
-        
-        function hoverPoint(data, countryName, yAltValue){
-            var mouseX = event.clientX + 14;
-            var mouseY = $(window).scrollTop() + event.clientY - 3;
-            
-            $('.chart-hover .country-name').text(countryName);
-            $('.chart-hover .country-data-x').html(plotGuide.x.text + ' <span class="amount">' + data[0] + '</span>');
-            
-            if (plotGuide.y.altValue){
-                if (plotGuide.y.path == 'country.GDP'){
-                    $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + yAltValue + '</span> <span class="amount"> Log10: ' + round(data[1], 4) + '</span>'); 
-                } else {
-                    $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + yAltValue + '</span>'); 
-                }
-            } else {
-               $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + round(data[1], 4) + '</span>'); 
-            }
-            
-            if (plotGuide.y.unit) {
-                $('.chart-hover .country-data-y').append('<span class="unit">' + plotGuide.y.unit + '</span>');
-            }
-            
-            if (plotGuide.x.unit) {
-                $('.chart-hover .country-data-x').append('<span class="unit">' + plotGuide.x.unit + '</span>');
-            }
-            
-            var chartHoverWidth = $('.chart-hover').innerHeight();
-            $('.chart-hover').addClass('show')
-                .css({'top': mouseY - chartHoverWidth - 5 + 'px', 'left': mouseX - 5 + 'px'});
-        };
-        
-        plot.append("g")
-            .call(xAxis)
-            .attr("transform", "translate(0," + (svgHeight - padding.bottom) + ")")
-            .attr("class", "axis");
-        
-        plot.append("g")
-            .call(yAxis)
-            .attr("transform", "translate(" + padding.left + ", 0)")
-            .attr("class", "axis");
-        
-        plot.append("foreignObject")
-            .attr('width', svgWidth - padding.left - padding.right + 'px')
-            .attr('height', '32px')
-            .attr('x', padding.left + 'px')
-            .attr('y', svgHeight - 32 + 'px')
-            .append('xhtml:div')
-            .append('p')
-            .attr('class', 'axis-title')
-            .text(function(){
-                if (plotGuide.x.unit){
-                    return plotGuide.x.text + ' (' + plotGuide.x.unit + ')';
-                } else {
-                   return plotGuide.x.text; 
-                }
-            });
-        
-        plot.append("foreignObject")
-            .attr('width', svgWidth - padding.top - padding.bottom + 'px')
-            .attr('height', '48px')
-            .attr('x', (svgHeight - padding.bottom) * '-1')
-            .attr('y', 0)
-            .attr('transform', 'rotate(-90)')
-            .append('xhtml:div')
-            .append('p')
-            .attr('class', 'axis-title')
-            .text(function(){
-                if (plotGuide.y.unit){
-                    return plotGuide.y.text + ' (' + plotGuide.y.unit + ')';
-                } else {
-                   return plotGuide.y.text; 
-                }
-            });
-        
-        /// CHART TEXT ///
-        
-        // generate chart title
-        
-        var chartTitle;
-        
-        if (plotGuide.x.level == 'level one'){
-            chartTitle = 'Number of indicators used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
-        } else if (plotGuide.x.level == 'level two'){
-            chartTitle = 'Number of '+plotGuide.x.text+' used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
-        } else if (plotGuide.x.level == 'level three'){
-            chartTitle = 'Use of indicators to assess the '+plotGuide.x.text+' and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
-        };
-        
-        $('.chart-title').text(chartTitle);
-        
-        // add list of countries
-        
-        var countryNameAlpha = countryNameArray;
-        countryNameAlpha.sort();
-        
-        $('.country-list').html("<span class='chart-header'>Countries Plotted: </span>");
-        for (var i=0; i < countryNameAlpha.length; i++){
-            if (i == countryNameAlpha.length-1){
-                $('.country-list').append(countryNameAlpha[i]);
-            } else {
-                $('.country-list').append(countryNameAlpha[i] + ', ');
-            }
-        };
-        
-        // add statististical analysis
-        
-        $('.statistics').html("<span class='chart-header'>Analysis: <br></span>Spearman's Correlation<span class='stat'>"+round(spearmanCor, 4)+"</span><br>Pearson's Correlation<span class='stat'>"+round(pearsonCor, 4)+"</span>")
-        
-        // generate chart notes and sources
-        
-        $('.chart-notes .x-notes').html('');
-        $('.chart-notes .y-notes').html('');
-        $('.chart-sources').html('<span class="chart-header">Sources: </span>');
-        
-        $('.chart-notes .x-notes').html('<span class="chart-header">X Axis Notes: </span>');
-        $('.chart-notes .x-notes').append('Notes from St.Micheals Team about metric data go here.');
-        
-        // notes + sources for outcome data
-        if (linkedArray[0].outcome){
-            $('.chart-notes .y-notes').html('<span class="chart-header">Notes: </span>');
-            
-            if (linkedArray[0].outcome.years){
-                var yearString = '';
-                for (var i=0; i<linkedArray[0].outcome.years.length; i++){
-                    if (i == linkedArray[0].outcome.years.length - 1){
-                        yearString = yearString + linkedArray[0].outcome.years[i] + '. ';
+        // if x array is not empty
+        if (xArray.length != 0){
+            var spearmanCor = computeSpearmans(xArray, yArray);
+            var pearsonCor = computePearsons(xArray, yArray);
+
+            var xMax = d3.max(dataArray, function(d){return d[0]});
+            var yMax = d3.max(dataArray, function(d){return d[1]});
+
+            var padding = {top:20, right:20, bottom:60, left:88};
+
+            var xScale = d3.scaleLinear()
+                .domain([0, xMax])
+                .range([padding.left, svgWidth - padding.right]);
+
+            var yScale = d3.scaleLinear()
+                .domain([0, yMax])
+                .range([svgHeight - padding.bottom, padding.top]);
+
+            var xAxis = d3.axisBottom(xScale);
+            var yAxis = d3.axisLeft(yScale).tickFormat(d3.format("0.2s"));
+
+            var plot = svg.append('g')
+                .attr('class', 'plot');
+
+            plot.selectAll("circle")
+                .data(dataArray)
+                .enter()
+                .append("circle")
+                .attr('class', 'point')
+                .attr('fill','#0084ff')
+                .attr("cx", function(d) {return xScale(d[0])})
+                .attr("cy", function(d) {return yScale(d[1])})
+                .attr("r", 5)
+                .on('mouseenter', function(d, i){
+                    $(this).addClass('point-hover');
+                    var countryName = countryNameArray[i];
+                    hoverPoint(d, countryName, yAltValueArray[i]);
+                }).on('mousemove', function(d, i){
+                    $(this).addClass('point-hover');
+                    var countryName = countryNameArray[i];
+                    hoverPoint(d, countryName, yAltValueArray[i]);
+                }).on('mouseleave', function(d){
+                    $('.chart-hover').removeClass('show')
+                    $(this).removeClass('point-hover');
+                });
+
+            function hoverPoint(data, countryName, yAltValue){
+                var mouseX = event.clientX + 14;
+                var mouseY = $(window).scrollTop() + event.clientY - 3;
+
+                $('.chart-hover .country-name').text(countryName);
+                $('.chart-hover .country-data-x').html(plotGuide.x.text + ' <span class="amount">' + data[0] + '</span>');
+
+                if (plotGuide.y.altValue){
+                    if (plotGuide.y.path == 'country.GDP'){
+                        $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + yAltValue + '</span> <span class="amount"> Log10: ' + round(data[1], 4) + '</span>'); 
                     } else {
-                        yearString = yearString + linkedArray[0].outcome.years[i] + ', ';
+                        $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + yAltValue + '</span>'); 
                     }
+                } else {
+                   $('.chart-hover .country-data-y').html(plotGuide.y.text + ' <span class="amount">' + round(data[1], 4) + '</span>'); 
+                }
+
+                if (plotGuide.y.unit) {
+                    $('.chart-hover .country-data-y').append('<span class="unit">' + plotGuide.y.unit + '</span>');
+                }
+
+                if (plotGuide.x.unit) {
+                    $('.chart-hover .country-data-x').append('<span class="unit">' + plotGuide.x.unit + '</span>');
+                }
+
+                var chartHoverWidth = $('.chart-hover').innerHeight();
+                $('.chart-hover').addClass('show')
+                    .css({'top': mouseY - chartHoverWidth - 5 + 'px', 'left': mouseX - 5 + 'px'});
+            };
+
+            plot.append("g")
+                .call(xAxis)
+                .attr("transform", "translate(0," + (svgHeight - padding.bottom) + ")")
+                .attr("class", "axis");
+
+            plot.append("g")
+                .call(yAxis)
+                .attr("transform", "translate(" + padding.left + ", 0)")
+                .attr("class", "axis");
+
+            plot.append("foreignObject")
+                .attr('width', svgWidth - padding.left - padding.right + 'px')
+                .attr('height', '32px')
+                .attr('x', padding.left + 'px')
+                .attr('y', svgHeight - 32 + 'px')
+                .append('xhtml:div')
+                .append('p')
+                .attr('class', 'axis-title')
+                .text(function(){
+                    if (plotGuide.x.unit){
+                        return plotGuide.x.text + ' (' + plotGuide.x.unit + ')';
+                    } else {
+                       return plotGuide.x.text; 
+                    }
+                });
+
+            plot.append("foreignObject")
+                .attr('width', svgWidth - padding.top - padding.bottom + 'px')
+                .attr('height', '48px')
+                .attr('x', (svgHeight - padding.bottom) * '-1')
+                .attr('y', 0)
+                .attr('transform', 'rotate(-90)')
+                .append('xhtml:div')
+                .append('p')
+                .attr('class', 'axis-title')
+                .text(function(){
+                    if (plotGuide.y.unit){
+                        return plotGuide.y.text + ' (' + plotGuide.y.unit + ')';
+                    } else {
+                       return plotGuide.y.text; 
+                    }
+                });
+
+            /// CHART TEXT ///
+
+            // generate chart title
+
+            var chartTitle;
+
+            if (plotGuide.x.level == 'level one'){
+                chartTitle = 'Number of indicators used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
+            } else if (plotGuide.x.level == 'level two'){
+                chartTitle = 'Number of '+plotGuide.x.text+' used to evaluate national drug policies and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
+            } else if (plotGuide.x.level == 'level three'){
+                chartTitle = 'Use of indicators to assess the '+plotGuide.x.text+' and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
+            };
+
+            $('.chart-title').text(chartTitle);
+
+            // add list of countries
+
+            var countryNameAlpha = countryNameArray;
+            countryNameAlpha.sort();
+
+            $('.country-list').html("<span class='chart-header'>Countries Plotted: </span>");
+            for (var i=0; i < countryNameAlpha.length; i++){
+                if (i == countryNameAlpha.length-1){
+                    $('.country-list').append(countryNameAlpha[i]);
+                } else {
+                    $('.country-list').append(countryNameAlpha[i] + ', ');
+                }
+            };
+
+            // add statististical analysis
+
+            $('.statistics').html("<span class='chart-header'>Analysis: <br></span>Spearman's Correlation<span class='stat'>"+round(spearmanCor, 4)+"</span><br>Pearson's Correlation<span class='stat'>"+round(pearsonCor, 4)+"</span>")
+
+            // generate chart notes and sources
+
+            $('.chart-notes .x-notes').html('');
+            $('.chart-notes .y-notes').html('');
+            $('.chart-sources').html('<span class="chart-header">Sources: </span>');
+
+            $('.chart-notes .x-notes').html('<span class="chart-header">X Axis Notes: </span>');
+            $('.chart-notes .x-notes').append('Notes from St.Micheals Team about metric data go here.');
+
+            // notes + sources for outcome data
+            if (linkedArray[0].outcome){
+                $('.chart-notes .y-notes').html('<span class="chart-header">Notes: </span>');
+
+                if (linkedArray[0].outcome.years){
+                    var yearString = '';
+                    for (var i=0; i<linkedArray[0].outcome.years.length; i++){
+                        if (i == linkedArray[0].outcome.years.length - 1){
+                            yearString = yearString + linkedArray[0].outcome.years[i] + '. ';
+                        } else {
+                            yearString = yearString + linkedArray[0].outcome.years[i] + ', ';
+                        }
+                    };
+                    $('.chart-notes .y-notes').append('Average of available data from the years ' + yearString);
                 };
-                $('.chart-notes .y-notes').append('Average of available data from the years ' + yearString);
+
+                if (linkedArray[0].outcome.notes){
+                    $('.chart-notes .y-notes').append(linkedArray[0].outcome.notes);
+                };
+
+                $('.chart-sources').append('<a target="_blank" href="https://data.unodc.org/">UNODC</a>');
             };
-            
-            if (linkedArray[0].outcome.notes){
-                $('.chart-notes .y-notes').append(linkedArray[0].outcome.notes);
+
+            if (plotGuide.y.text == 'GDP'){
+                $('.chart-sources').append('<a target="_blank" href="https://data.worldbank.org/">World Bank</a>');
             };
-            
-            $('.chart-sources').append('<a target="_blank" href="https://data.unodc.org/">UNODC</a>');
-        };
-        
-        if (plotGuide.y.text == 'GDP'){
-            $('.chart-sources').append('<a target="_blank" href="https://data.worldbank.org/">World Bank</a>');
-        };
-        
-        if (plotGuide.y.text == 'Rate of Unemployment'){
-            $('.chart-sources').append('<a target="_blank" href="https://data.worldbank.org/">World Bank</a>');
-        };
-        
-        $('.chart-guide').css('opacity', '0');
-        $('.chart-text').css('opacity', '1');
-        $('.chart').css('opacity', '1');
+
+            if (plotGuide.y.text == 'Rate of Unemployment'){
+                $('.chart-sources').append('<a target="_blank" href="https://data.worldbank.org/">World Bank</a>');
+            };
+
+            $('.chart-guide').css('opacity', '0');
+            $('.chart-text').css('opacity', '1');
+            $('.guide-text').text('Select data to plot on the X and Y axis, then click “Generate Scatterplot”. A plot will be generated here.');
+            $('.chart').css('opacity', '1');
+        } else { //if no countries can be plotted
+            $('.chart-guide').css('opacity', '1');
+            $('.guide-text').text('Analyses could not be generated for the following reason: The countries included do not collect the metric or outcome you requested, however, we have not assessed all countries at this point.');
+            $('.chart-text').css('opacity', '0');
+            $('.chart').css('opacity', '0');
+        }
     };
     
     function getValue(data, array){
@@ -718,6 +727,7 @@ window.onload = function(){
         
         //hide existing chart
         $('.chart-guide').css('opacity', '1');
+        $('.guide-text').text('Select data to plot on the X and Y axis, then click “Generate Scatterplot”. A plot will be generated here.');
         $('.chart-text').css('opacity', '0');
         $('.chart').css('opacity', '0');
     });
