@@ -18,6 +18,7 @@ window.onload = function(){
 
     $.when(getCountries()).done(function(data){
         countryArray = data;
+        console.log(data);
         getOutcomeList();
     });
     
@@ -100,6 +101,8 @@ window.onload = function(){
                 xArray.push(dataElement[0]);
                 yArray.push(dataElement[1]);
                 countryNameArray.push(this.country.name);
+                
+                console.log(this.country.name, dataElement);
                 
                 if (plotGuide.y.altValue){
                     var yValue = plotGuide.y.altValue.split('.');
@@ -254,7 +257,7 @@ window.onload = function(){
 
             // add list of countries
 
-            var countryNameAlpha = countryNameArray;
+            var countryNameAlpha = countryNameArray.slice();
             countryNameAlpha.sort();
 
             $('.country-list').html("<span class='chart-header'>Countries Plotted: </span>");
