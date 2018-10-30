@@ -38,16 +38,10 @@ window.onload = function(){
                     outcome.csv = this['CSV Name'].trim();
                     outcome.type = this['Type'].trim();
 
-                    if (outcome.type == 'Rate/100,000'){
+                    if (outcome.type == 'Rate/100,000' || outcome.type == 'Count' || outcome.type == 'Number'){
                         outcome.unit = 'Rate per 100,000 population';
-                    } else if (outcome.type == 'Count'){
-                        outcome.unit = 'Rate per 100,000 population';
-                    } else if (outcome.type == 'Number'){
-                        outcome.unit = 'Rate per 100,000 population';
-                    } else if (outcome.type == '% Prevalence'){
-                        outcome.unit = '%'
-                    } else if (outcome.type == 'Prevalence Rate'){
-                        outcome.unit = '%'
+                    } else if (outcome.type == '% Prevalence' || outcome.type == 'Prevalence Rate' || outcome.type == 'Percent'){
+                        outcome.unit = '%';
                     }
                     
                     outcomeDatasets.push(outcome);
@@ -88,10 +82,19 @@ window.onload = function(){
                 
         $(linkedArray).each(function(){
             var dataElement = [];
-            dataElement[0] = Number(getValue(this, xData));
-            dataElement[1] = Number(getValue(this, yData));
+            dataElement[0] = getValue(this, xData);
+            dataElement[1] = getValue(this, yData);
             
-            if (dataElement[0] && dataElement[1]){
+            if (dataElement[0] != null){
+                dataElement[0] = Number(dataElement[0]);
+            }
+            if (dataElement[1] != null){
+                dataElement[1] = Number(dataElement[1]);
+            }
+            
+            console.log(dataElement);
+            
+            if ((dataElement[0] || (dataElement[0] == 0)) && (dataElement[1] || dataElement[1]==0)){
                 
                 if (plotGuide.y.path == 'country.GDP'){
                     dataElement[1] = Math.log10(dataElement[1]);
@@ -101,9 +104,7 @@ window.onload = function(){
                 xArray.push(dataElement[0]);
                 yArray.push(dataElement[1]);
                 countryNameArray.push(this.country.name);
-                
-                console.log(this.country.name, dataElement);
-                
+                                
                 if (plotGuide.y.altValue){
                     var yValue = plotGuide.y.altValue.split('.');
                     yValue = getValue(this, yValue);
@@ -156,17 +157,17 @@ window.onload = function(){
                 .on('mouseenter', function(d, i){
                     $(this).addClass('point-hover');
                     var countryName = countryNameArray[i];
-                    hoverPoint(d, countryName, yAltValueArray[i]);
+                    hoverPoint(d, countryName, yAltValueArray[i], d3.event);
                 }).on('mousemove', function(d, i){
                     $(this).addClass('point-hover');
                     var countryName = countryNameArray[i];
-                    hoverPoint(d, countryName, yAltValueArray[i]);
+                    hoverPoint(d, countryName, yAltValueArray[i], d3.event);
                 }).on('mouseleave', function(d){
                     $('.chart-hover').removeClass('show')
                     $(this).removeClass('point-hover');
                 });
 
-            function hoverPoint(data, countryName, yAltValue){
+            function hoverPoint(data, countryName, yAltValue, event){
                 var mouseX = event.clientX + 14;
                 var mouseY = $(window).scrollTop() + event.clientY - 3;
 
@@ -253,7 +254,7 @@ window.onload = function(){
                 chartTitle = 'Use of indicators to assess the '+plotGuide.x.text+' and the '+plotGuide.y.text+' across '+dataArray.length+' countries';
             };
 
-            $('.chart-title').text(chartTitle);
+            $('.chart-title').text(toTitleCase(chartTitle));
 
             // add list of countries
 
@@ -305,7 +306,7 @@ window.onload = function(){
                 $('.chart-sources').append('<a target="_blank" href="https://data.unodc.org/">UNODC</a>');
             };
 
-            if (plotGuide.y.text == 'GDP'){
+            if (plotGuide.y.text == 'Gross Domestic Product'){
                 $('.chart-sources').append('<a target="_blank" href="https://data.worldbank.org/">World Bank</a>');
             };
 
@@ -348,7 +349,7 @@ window.onload = function(){
     function getter() {
         var current = arguments[0];
         for(var i = 1; i < arguments.length; i++) {
-            if(current[arguments[i]]) {
+            if(current[arguments[i]] || current[arguments[i]] == 0) {
                 current = current[arguments[i]];
             } else {
                 return null;
@@ -361,42 +362,42 @@ window.onload = function(){
         outcomeArray = [];
         d3.csv('data/outcomes/'+dataset+'.csv', function(data){
             data.forEach(function(d){
-                var outcome = new Object;
-                outcome.name = d.Country;
+                d.Country = cleanCountryName(d.Country);
                 
-                if (datatype == 'Rate/100,000'){
-                    var rate = averageRate(d);
+                var outcome = new Object;
+                outcome.name = cleanCountryName(d.Country);
+                outcome.notes = data[0]['Interpretation'];
+                outcome.link = data[0]['Link'];
+                
+                if (datatype == 'Rate/100,000' || datatype == 'Prevalence Rate' || datatype == 'Percent'){
+                    var rate = getHorizontalAverage(d);
                     outcome.value = rate[0];
                     outcome.years = rate[1];
                 } else if (datatype == 'Count'){
-                    var count = averageCount(d);
+                    var count = getHorizontalRate(d);
                     outcome.value = count[0];
                     outcome.years = count[1];
                 } else if (datatype == 'Number'){
-                    var countryCheck = $.grep(outcomeArray, function(obj){return obj.name === d.Country;});
+                    var countryName = cleanCountryName(d.Country);
+                    var countryCheck = $.grep(outcomeArray, function(obj){return obj.name === countryName;});
                     if (countryCheck.length <= 0){
-                        var number = averageNumber(d, data);
+                        var number = getVerticalRate(d, data);
                         outcome.value = number[0];
                         outcome.years = number[1];
                     } else {
                         return;
                     }
                 } else if (datatype == '% Prevalence'){
-                    var percent = percentagePrev(d);
-                    outcome.value = percent[0];
-                    outcome.years = percent[1];
-                } else if (datatype == 'Prevalence Rate'){
-                    var rate = averageRate(d);
-                    outcome.value = rate[0];
-                    outcome.years = rate[1];
-                }
-                
-                if (outcome.name.indexOf('*') > -1){
-                    outcome.name = outcome.name.replace('*','');
+                    var countryName = cleanCountryName(d.Country);
+                    var countryCheck = $.grep(outcomeArray, function(obj){return obj.name === countryName;});
+                    if (countryCheck.length <= 0){
+                        var number = getVerticalAverage(d, data);
+                        outcome.value = number[0];
+                        outcome.years = number[1];
+                    } else {
+                        return;
+                    }
                 };
-                
-                outcome.notes = data[0]['Interpretation'];
-                outcome.link = data[0]['Link'];
                 
                 outcomeArray.push(outcome);
             });
@@ -404,7 +405,7 @@ window.onload = function(){
         });
     };
     
-    function averageRate(d){
+    function getHorizontalAverage(d){
         var objectKeys = Object.keys(d);
         var numericKeys = [];
         var countryAverage = 0;
@@ -417,7 +418,7 @@ window.onload = function(){
         });
         
         $(numericKeys).each(function(){
-            if (d[this]){
+            if (d[this] != 'na' && d[this] != 'NA' && d[this] != undefined && d[this] != null && d[this] != ''){
                 countryAverage = countryAverage + parseFloat(d[this].replace(',',''));
                 countryCount++;
             };
@@ -426,15 +427,16 @@ window.onload = function(){
         countryAverage = countryAverage/countryCount;
         countryAverage = countryAverage.toFixed(2);
         
-        return [countryAverage, numericKeys];
+        return [countryAverage, [2011, 2012, 2013, 2014, 2015]];
     }
     
-    function averageCount(d){
+    function getHorizontalRate(d){
         var objectKeys = Object.keys(d);
         var numericKeys = [];
         var countryAverage = 0;
         var countryCount = 0;
         var popAverage;
+        var dataCountry = d.Country;
         
         $(objectKeys).each(function(){
             if (!isNaN(this)){
@@ -443,42 +445,54 @@ window.onload = function(){
         });
         
         $(numericKeys).each(function(){
-            if (d[this]){
+            if (d[this] != 'na' && d[this] != 'NA' && d[this] != undefined && d[this] != null && d[this] != ''){
                 countryAverage = countryAverage + parseFloat(d[this].replace(',',''));
                 countryCount++;
             };
         });
         
         $(countryArray).each(function(){
-            if (d.Country == this.UNODCName){
+            if (dataCountry == this.UNODCName){
                 popAverage = this.population.averagePop;
             };
         });
-                
-        if (countryAverage && popAverage){
+        
+        countryAverage = countryAverage/countryCount;   
+        
+        if ((countryAverage || countryAverage == 0) && popAverage){
             var perCapita = ((countryAverage/popAverage) * 100000).toFixed(2);
-            return [perCapita, numericKeys];
+            return [perCapita, [2011, 2012, 2013, 2014, 2015]];
         } else {
             return [null, null];
         }
     }
     
-    function averageNumber(country, data){
+    function getVerticalRate(country, data){
         var dataArray = [];
         var yearCount = 0;
         var yearAverage = 0;
         var popAverage;
         
         $(data).each(function(){
-           if (this.Country == country.Country){
-               dataArray.push(this);
-           }
+            var countryName = cleanCountryName(this.Country);
+            if (countryName == country.Country){
+                dataArray.push(this);
+            } else if (countryName == country.Country){
+                dataArray.push(this);
+            };
         });
-                
+                                
         $(dataArray).each(function(){
-            if (this.Total != 'na' && this.Total != 'NA' && this.Total != undefined){
-                yearCount++;
-                yearAverage = yearAverage + parseFloat(this.Total.replace(',',''));
+            if (this.Total){
+                if (this.Total != 'na' && this.Total != 'NA' && this.Total != undefined && this.Total != null && this.Total != ''){
+                    yearCount++;
+                    yearAverage = yearAverage + parseFloat(this.Total.replace(',',''));
+                }
+            } else if (this.Number){
+                if (this.Number != 'na' && this.Number != 'NA' && this.Number != undefined && this.Number != null && this.Number != ''){
+                    yearCount++;
+                    yearAverage = yearAverage + parseFloat(this.Number.replace(',',''));
+                }
             }
         });
         
@@ -490,7 +504,7 @@ window.onload = function(){
         
         yearAverage = yearAverage/yearCount;
         
-        if (yearAverage && popAverage){
+        if ((yearAverage || yearAverage == 0)  && popAverage){
             var perCapita = ((yearAverage/popAverage) * 100000).toFixed(2);
             return [perCapita, [2011, 2012, 2013, 2014, 2015]];
         } else {
@@ -498,9 +512,53 @@ window.onload = function(){
         }
     }
     
-    function percentagePrev(d){
-        var percent = d.Number.replace('%', '');
-        return [percent, [2011, 2012, 2013, 2014, 2015]];
+    function getVerticalAverage(country, data){
+        var dataArray = [];
+        var yearCount = 0;
+        var yearAverage = 0;
+        var popAverage;
+        
+        $(data).each(function(){
+           var countryName = cleanCountryName(this.Country);
+           if (countryName == country.Country){
+               dataArray.push(this);
+           } else if (countryName == country.Country){
+               dataArray.push(this);
+           } else if (countryName == country.Country){
+               dataArray.push(this);
+           };
+        });
+                        
+        $(dataArray).each(function(){
+            if (this.Total){
+                if (this.Total != 'na' && this.Total != 'NA' && this.Total != undefined && this.Total != null && this.Total != ''){
+                    yearCount++;
+                    yearAverage = yearAverage + parseFloat(this.Total.replace(',',''));
+                }
+            } else if (this.Number){
+                if (this.Number != 'na' && this.Number != 'NA' && this.Number != undefined && this.Number != null && this.Number != ''){
+                    yearCount++;
+                    yearAverage = yearAverage + parseFloat(this.Number.replace(',',''));
+                }
+            } else if (this.Best){
+                if (this.Best != 'na' && this.Best != 'NA' && this.Best != undefined && this.Best != null && this.Best != ''){
+                    yearCount++;
+                    yearAverage = yearAverage + parseFloat(this.Best.replace(',',''));
+                }
+            }
+        });
+        
+        yearAverage = yearAverage/yearCount;
+        return [yearAverage, [2011, 2012, 2013, 2014, 2015]];
+    }
+    
+    function cleanCountryName(name){
+        var countryName = name;
+        if (countryName.indexOf('*') > -1){
+            countryName = countryName.replace('*','');
+        };
+        countryName = countryName.trim();
+        return countryName;
     }
     
     function linkArray(){
@@ -608,10 +666,10 @@ window.onload = function(){
         
         $(dataNestArray).each(function(){
             // if no subcategories
-            if (this.subcategory == 'n/a' || this.subcategory == 'N/A' || this.subcategory == undefined){
+            if (this.subcategory == 'n/a' || this.subcategory == 'N/A' || this.subcategory == undefined || this.subcategory == ''){
                 $('.data-modal-list').append("<div class='data-point last' data-type='"+this.type+"' data-set='"+this.csv+"' data-unit='"+this.unit+"' data-path='outcome.value'>"+this.title+"</div>");
             // if one subcategory
-            } else if (this.subcategoryTwo == 'n/a' || this.subcategoryTwo == 'N/A' || this.subcategoryTwo == undefined) {
+            } else if (this.subcategoryTwo == 'n/a' || this.subcategoryTwo == 'N/A' || this.subcategoryTwo == undefined || this.subcategory == '') {
                 var detailElements = $('.data-modal-list details');
                 var existingCategory = false;
                 var subCategory = this.subcategory;
@@ -812,7 +870,7 @@ window.onload = function(){
     });
     
     var activateLevelThreeList = function(){
-        $('.data-list-item').on('click', function(){
+        $('.data-list-item').on('click', function(event){
             event.stopPropagation();
             var dimension = $(this).closest('.dimension').attr('id');
             var dataButton = $(this).parent().parent();
@@ -955,6 +1013,15 @@ window.onload = function(){
         for (i = 0; i < arrXLen; i++)
             sq_dev[i] = (arrX[i] - u) * (arrY[i] - v);
         return d3.sum(sq_dev) / (arrXLen - 1);
+    }
+    
+    var toTitleCase = function(str) {
+        return str.replace(
+            /\w\S*/g,
+            function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
     }
     
     $(window).on('click', function(event){

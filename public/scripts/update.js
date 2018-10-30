@@ -37,7 +37,7 @@ var getPolicies = function() {
                     policies = [];
 
                     country.name = d['Country'];
-                    country.UNODCName = d['UNODC Name'];
+                    country.UNODCName = d['UNODC Name'].trim();
                     country.continent = d.Continent;
                     country.region = d.Region;
                     country.ISO = d.ISO;
