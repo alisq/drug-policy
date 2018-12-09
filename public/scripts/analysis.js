@@ -42,6 +42,8 @@ window.onload = function(){
                         outcome.unit = 'Rate per 100,000 population';
                     } else if (outcome.type == '% Prevalence' || outcome.type == 'Prevalence Rate' || outcome.type == 'Percent'){
                         outcome.unit = '%';
+                    } else if (outcome.type == '$USD'){
+                        outcome.unit = 'USD';
                     }
                     
                     outcomeDatasets.push(outcome);
@@ -91,9 +93,7 @@ window.onload = function(){
             if (dataElement[1] != null){
                 dataElement[1] = Number(dataElement[1]);
             }
-            
-            console.log(dataElement);
-            
+                        
             if ((dataElement[0] || (dataElement[0] == 0)) && (dataElement[1] || dataElement[1]==0)){
                 
                 if (plotGuide.y.path == 'country.GDP'){
@@ -387,7 +387,7 @@ window.onload = function(){
                     } else {
                         return;
                     }
-                } else if (datatype == '% Prevalence'){
+                } else if (datatype == '% Prevalence' || datatype == '$USD'){
                     var countryName = cleanCountryName(d.Country);
                     var countryCheck = $.grep(outcomeArray, function(obj){return obj.name === countryName;});
                     if (countryCheck.length <= 0){
@@ -544,6 +544,11 @@ window.onload = function(){
                 if (this.Best != 'na' && this.Best != 'NA' && this.Best != undefined && this.Best != null && this.Best != ''){
                     yearCount++;
                     yearAverage = yearAverage + parseFloat(this.Best.replace(',',''));
+                }
+            } else if (this['Retail Level Price Typical']){
+                if (this['Retail Level Price Typical'] != 'na' && this['Retail Level Price Typical'] != 'NA' && this['Retail Level Price Typical'] != undefined && this['Retail Level Price Typical'] != null && this['Retail Level Price Typical'] != ''){
+                    yearCount++;
+                    yearAverage = yearAverage + parseFloat(this['Retail Level Price Typical'].replace(',',''));
                 }
             }
         });
