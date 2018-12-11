@@ -44,6 +44,8 @@ window.onload = function(){
                         outcome.unit = '%';
                     } else if (outcome.type == '$USD'){
                         outcome.unit = 'USD';
+                    } else if (outcome.type == 'Amount'){
+//                        console.log(outcome);
                     }
                     
                     outcomeDatasets.push(outcome);
@@ -358,9 +360,15 @@ window.onload = function(){
         return current;
     };
     
-    function getOutcome(dataset, datatype){
+    function getOutcome(dataset, datatype, dataButton){
         outcomeArray = [];
         d3.csv('data/outcomes/'+dataset+'.csv', function(data){
+            
+            if (datatype == 'Amount'){ //unit needs to be added if data type is amount
+                var amountUnit = getAmountUnit(data[0]);
+                $(dataButton).attr('data-unit', amountUnit);
+            };
+            
             data.forEach(function(d){
                 d.Country = cleanCountryName(d.Country);
                 
@@ -397,7 +405,17 @@ window.onload = function(){
                     } else {
                         return;
                     }
-                };
+                } else if (datatype == 'Amount'){
+                    var countryName = cleanCountryName(d.Country);
+                    var countryCheck = $.grep(outcomeArray, function(obj){return obj.name === countryName;});
+                    if (countryCheck.length <= 0){
+                        var number = getVerticalAverageAmount(d, data);
+                        outcome.value = number[0];
+                        outcome.years = number[1];
+                    } else {
+                        return;
+                    }
+                }
                 
                 outcomeArray.push(outcome);
             });
@@ -555,6 +573,73 @@ window.onload = function(){
         
         yearAverage = yearAverage/yearCount;
         return [yearAverage, [2011, 2012, 2013, 2014, 2015]];
+    }
+    
+    function getVerticalAverageAmount(country, data){
+        var dataArray = [];
+        var yearCount = 0;
+        var yearAverage = 0;
+        var popAverage;
+        
+        $(data).each(function(){
+           var countryName = cleanCountryName(this.Country);
+           if (countryName == country.Country){
+               dataArray.push(this);
+           } else if (countryName == country.Country){
+               dataArray.push(this);
+           } else if (countryName == country.Country){
+               dataArray.push(this);
+           };
+        });
+                        
+        $(dataArray).each(function(){
+            if (this['Quantity Seized']){
+                if (this['Quantity Seized'] != 'na' && this['Quantity Seized'] != 'NA' && this['Quantity Seized'] != undefined && this['Quantity Seized'] != null && this['Quantity Seized'] != ''){
+                    var unit = this['Unit of Measurement'];
+                    var quantitySeized = parseFloat(this['Quantity Seized'].replace(',',''));
+                    quantitySeized = convertUnit(unit, quantitySeized);
+                    yearCount++;
+                    yearAverage = yearAverage + quantitySeized;
+                }
+            }
+        });
+        
+        yearAverage = yearAverage/yearCount;
+        return [yearAverage, [2011, 2012, 2013, 2014, 2015]];
+    }
+    
+    function getAmountUnit(data){
+        if (data['Unit of Measurement'] == 'Kilogram' || data['Unit of Measurement'] == 'Gram'){
+            return 'Grams';
+        } else if (data['Unit of Measurement'] == 'Millilitre' || data['Unit of Measurement'] == 'Litre'){
+            return 'Litres';
+        } else if (data['Unit of Measurement'] == 'Tablet'){
+            return 'Tablets';
+        } else if (data['Unit of Measurement'] == 'Unit'){
+            return 'Units';
+        } else if (data['Unit of Measurement'] == 'Plants'){
+            return 'Plants';
+        } else if (data['Unit of Measurement'] == 'Pill'){
+            return 'Pills';
+        } else if (data['Unit of Measurement'] == 'Seeds'){
+            return 'Seeds'
+        } else if (data['Unit of Measurement'] == 'Dose'){
+            return 'Doses';
+        } else {
+            console.log('Uncategorized unit type: ' + data['Unit of Measurement']);
+        }
+    }
+    
+    function convertUnit(unit, amount){
+        if (unit == 'Gram' || unit == 'Litre' || unit == 'Tablet' || unit == 'Unit' || unit == 'Plants' || unit == 'Pill' || unit == 'Seeds' || unit == 'Dose'){
+            return amount;
+        } else if (unit == 'Kilogram'){ // convert to grams
+            var newAmount = amount * 1000;
+            return newAmount;
+        } else if (unit == 'Millilitre'){ // convert to litre
+            var newAmount = amount / 1000;
+            return newAmount;
+        };
     }
     
     function cleanCountryName(name){
@@ -760,7 +845,7 @@ window.onload = function(){
                 $(dataButton).attr('data-path', dataPath)
                     .attr('data-unit', dataUnit)
                     .children('.picked-data-point').text(dataPointTitle).addClass('selected');
-                getOutcome(dataSet, dataType);
+                getOutcome(dataSet, dataType, dataButton);
             }).removeClass('last');
         });
         
