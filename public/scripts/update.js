@@ -32,6 +32,8 @@ var getPolicies = function() {
                         countryArray.push(country);
                     };
 
+                    console.log(countryArray);
+
                     // create new country and policies;
                     country = new Object;
                     policies = [];
