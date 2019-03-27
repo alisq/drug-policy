@@ -886,7 +886,7 @@ window.onload = function(){
     $('.level-one').on('click', function(){
         var dimension = $(this).closest('.dimension').attr('id');
         $('#' + dimension + ' .level-two').removeClass('hidden')
-            .children('.selected-value').text('Metrics');
+            .children('.selected-value').text('Domains');
         $('#' + dimension + ' .level-three').addClass('hidden')
             .children('.selected-value').text('Specific Indicators');
     });
