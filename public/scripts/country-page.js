@@ -18,7 +18,7 @@ window.onload = function() {
         for (var i=0; i < countries.length; i++){
             if (countries[i].name == countryName){
                 country = countries[i];
-                console.log(country);
+                
                 break;
             };
         };
@@ -107,13 +107,15 @@ window.onload = function() {
             var policy = country.policies[i];
             var article = $('.last'); //target last created article
             
-            $(article).append('<p class="strategy-title">'+policy.NDS_Name+' <i class="fa fa-external-link" aria-hidden="true"></i></p>');
+            $(article).append('<p class="strategy-title"><a href="http://google.com">'+policy.NDS_Name+'</a> <i class="fa fa-external-link" aria-hidden="true"></i></p>');
             
             if (policy.NDS_StartDate) { //if policy has start and end dates
                 $(article).append('<p class="strategy-date">'+policy.NDS_StartDate+'—'+policy.NDS_EndDate+'</p>');
             } else { //else append policy year
                 $(article).append('<p class="strategy-date">'+policy.NDS_Year+'</p>');
             }
+
+
             
             $(article).append('<p class="lead-agency"></p>');
             $(policy.Lead_Agency_Name).each(function(i){
@@ -220,21 +222,34 @@ window.onload = function() {
         });
         
         if (country.domains){
+
             $('#domains-summary').css('display', 'block');
             $('#domains-summary .collects').html('<i class="fa fa-bar-chart" aria-hidden="true"></i> '+country.domains.total_metric_count+' indicators across 57 metrics');
             $('#domains-summary .metrics').html('<li><a href="#demand"><span>Demand Reduction</span><span class="metrics-count">'+country.domains.demand.metric_count+'</span></a></li><li><a href="#supply"><span>Supply Reduction</span><span class="metrics-count">'+country.domains.supply.metric_count+'</span></a></li><li><a href="#health"><span>Health</span><span class="metrics-count">'+country.domains.health.metric_count+'</span></a></li><li><a href="#rights"><span>Human Rights</span><span class="metrics-count">'+country.domains.rights.metric_count+'</span></a></li><li><a href="#peace"><span>Peace & Security</span><span class="metrics-count">'+country.domains.peace.metric_count+'</span></a></li><li><a href="#international"><span>International Cooperation</span><span class="metrics-count">'+country.domains.international.metric_count+'</span></a></li><li><a href="#development"><span>Development</span><span class="metrics-count">'+country.domains.development.metric_count+'</span></a></li>');
             
             $('#health .collects').text(country.domains.health.metric_count+' indicators across '+country.domains.health.themes.length+' metrics');
             $(country.domains.health.themes).each(function(){
+                console.log($(this))
                 var theme = $(this)[0];
+
                 $('#health .themes').append('<li class="theme last"></li>');
                 var last = $('.last');
-                
+                console.log(theme)
                 if (theme.metrics.length > 0){ //if theme has metrics
                     $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' indicators</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
-                        $(last).find('ol').append('<li>'+$(this)[0]+'<small>'+$(this)[1]+'</small></li>');
+                        
+
+                        //ADD NDS link to each theme (this is a bit hacky)
+                        for (i=0;i<country.policies.length;i++) {                            
+                            if (country.policies[i].NDS_Name.substring(0, 25) == $(this)[1].substring(0,25)) {
+                                $(last).find('ol').append('<li><a target="_blank" href="'+country.policies[i].NDS_Link+'">'+$(this)[0]+'<small>'+$(this)[1]+'</a></small></li>');
+                            }
+                        }
+
+                        
+
                     });
                 } else { //if theme does not have metrics
                     $(last).append('<h4><i class="fa fa-times-circle no" aria-hidden="true"></i>'+theme.theme+'</h4>');
