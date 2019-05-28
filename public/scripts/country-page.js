@@ -92,9 +92,9 @@ window.onload = function() {
     var countryPolicies = function(country){
         clearCountry();
         
-        $('.small-header h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name);
-        $('nav .country').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span> ' + country.name);
-        $('.country-profile h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span> ' + country.name);
+        $('.small-header h1').html('<span class="flag-icon flag-icon-'+country.ISO_2.toLowerCase()+'"></span>' + country.name);
+        $('nav .country').html('<span class="flag-icon flag-icon-'+country.ISO_2.toLowerCase()+'"></span> ' + country.name);
+        $('.country-profile h1').html('<span class="flag-icon flag-icon-'+country.ISO_2.toLowerCase()+'"></span> ' + country.name);
         $('.country-profile .continent').text(country.continent);
         $('.country-profile .gdp .figure').text('$'+country.GDPtext);
         $('.country-profile .income-group .figure').text(country.income);
@@ -233,7 +233,7 @@ window.onload = function() {
                 var theme = $(this)[0];
 
                 $('#health .themes').append('<li class="theme last"></li>');
-                var last = $('.last');
+                var last = $('.last'); 
                 console.log(theme)
                 if (theme.metrics.length > 0){ //if theme has metrics
                     $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');

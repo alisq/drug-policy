@@ -104,7 +104,7 @@ window.onload = function() {
     };
     
     var countryCard = function(country){
-        $('.country-card h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name);
+        $('.country-card h1').html('<span class="flag-icon flag-icon-'+country.ISO_2.toLowerCase()+'"></span>' + country.name);
         $('.country-card .income').text(country.income + ' Income');
         $('.country-card .gdp').text('$' + country.GDPtext + ' GDP');
         

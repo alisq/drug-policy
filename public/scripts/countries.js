@@ -142,9 +142,9 @@ window.onload = function(){
         $(lastCard + ' .gdp').text('$' + country.GDPtext + ' GDP');
         
         if (country.domains){ //if country has domains data
-            $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name + " <span class='collection'>"+country.domains.total_metric_count+" Indicators, "+country.policies.length+" Strategies");
+            $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2.toLowerCase()+'"></span>' + country.name + " <span class='collection'>"+country.domains.total_metric_count+" Indicators, "+country.policies.length+" Strategies");
         } else {
-            $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2+'"></span>' + country.name);
+            $(lastCard + ' h1').html('<span class="flag-icon flag-icon-'+country.ISO_2.toLowerCase()+'"></span>' + country.name);
         };
         
         $(lastCard)
