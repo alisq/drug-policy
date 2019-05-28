@@ -6,7 +6,7 @@ window.onload = function() {
     //var countryName = JSON.parse(localStorage.getItem('country'));
     var countryName = getAllUrlParams().ISO;
 
-    //console.log(countryName);
+  
     var countries;
     var descriptions;
     
@@ -16,7 +16,7 @@ window.onload = function() {
 
     $.when(getCountries()).done(function(data){
         countries = data;
-        console.log(countries);
+        
         for (var i=0; i < countries.length; i++){
             if (countries[i].ISO == countryName){
                 country = countries[i];
@@ -107,9 +107,10 @@ window.onload = function() {
         $(country.policies).each(function(i){
             $('.strategies').append('<article class="last"></article>');
             var policy = country.policies[i];
+
             var article = $('.last'); //target last created article
             
-            $(article).append('<p class="strategy-title"><a href="http://google.com">'+policy.NDS_Name+'</a> <i class="fa fa-external-link" aria-hidden="true"></i></p>');
+            $(article).append('<p class="strategy-title"><a href="'+policy.NDS_Link+'">'+policy.NDS_Name+'</a> <i class="fa fa-external-link" aria-hidden="true"></i></p>');
             
             if (policy.NDS_StartDate) { //if policy has start and end dates
                 $(article).append('<p class="strategy-date">'+policy.NDS_StartDate+'—'+policy.NDS_EndDate+'</p>');
@@ -231,12 +232,12 @@ window.onload = function() {
             
             $('#health .collects').text(country.domains.health.metric_count+' indicators across '+country.domains.health.themes.length+' metrics');
             $(country.domains.health.themes).each(function(){
-                console.log($(this))
+
                 var theme = $(this)[0];
 
                 $('#health .themes').append('<li class="theme last"></li>');
                 var last = $('.last'); 
-                console.log(theme)
+                
                 if (theme.metrics.length > 0){ //if theme has metrics
                     $(last).append('<h4><i class="fa fa-check-circle yes" aria-hidden="true"></i>'+theme.theme+'</h4>');
                     $(last).append('<details><summary>'+theme.metrics.length+' indicators</summary><ol></ol></details>');
