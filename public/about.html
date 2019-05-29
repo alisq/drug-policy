@@ -5,6 +5,7 @@
         <script src='https://unpkg.com/simple-statistics@6.0.0/dist/simple-statistics.min.js'></script>
         <script src='scripts/d3.min.js'></script>
         <script src='scripts/analysis.js'></script>
+        
 
         <link rel="stylesheet" href="css/about.css">
         <link rel="stylesheet" href="css/nav.css">
@@ -112,5 +113,23 @@
         <div class='mobile-screen'>
             <div class='mobile-text'>Please access the Drug Policy Metrics Map on a desktop computer or a device with a larger screen</div>
         </div>
+
+          <div id="contact-form" class="active">
+            <div id="contact-header">
+                    Contact Us
+                    <div class="contact-control"></div>
+            </div>
+            <div id="contact-form-fields">
+                <input id="name" name="name" type="text" placeholder="Your name" required="required">
+    
+                <input id="email" name="email" type="text" placeholder="Your email" required="required">
+    
+                <textarea id="message" name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
+            
+                <button id="contact-submit" class="button" disabled>Submit</button>
+            </div>
+
+        </div>
+        <script src='scripts/contact-form.js'></script>
     </body>
 </html>
