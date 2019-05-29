@@ -1,3 +1,8 @@
+
+$("body").append("<div id='contact-form' class='active'><div id='contact-header'>Contact Us<div class='contact-control'></div></div><div id='contact-form-fields'><input id='name' name='name' type='text' placeholder='Your name' required='required'><input id='email' name='email' type='text' placeholder='Your email' required='required'><textarea id='message' name='message' placeholder='Enter your message here' rows='3' required='required'></textarea><button id='contact-submit' class='button' disabled>Submit</button></div></div>");
+
+
+
       $('#contact-submit').click(function() {
               $.ajax({
                   url: '/',
@@ -26,10 +31,14 @@ $("#contact-header").click(function(){
 })
 
 
-$("#name, #email, #message").keypress(function(){
+$("#name, #email, #message").bind('input',function(){
+
   if (($('#name').val()) && ($('#email').val()) && ($('#message').val())) {
       $("#contact-submit").removeAttr('disabled');
   } else {
     $("#contact-submit").attr('disabled','disabled');
   }
 })
+
+
+
