@@ -1,6 +1,7 @@
 console.log('Updating Drug Policies');
 
 var countryArray = [];
+
 var countryDomainArray = [];
 var countryPopArray = [];
 
@@ -30,6 +31,7 @@ var getPolicies = function() {
                     // last country is complete, push it to array;
                     if (i > 0) {
                         countryArray.push(country);
+                        
                     };
 
                     // create new country and policies;
@@ -69,6 +71,8 @@ var getPolicies = function() {
         console.log("All Policies Loaded");
         getThemes();
     });
+
+
 };
 
 var GDPparse = function(labelValue){
@@ -320,8 +324,10 @@ var getPopulation = function() {
 
 var joinCountryTheme = function(){
     console.log(countryDomainArray);
+
     $(countryDomainArray).each(function(i){
         var ISO = countryDomainArray[i].ISO;
+    
         $(countryArray).each(function(k){
             if (ISO == countryArray[k].ISO) {
                 countryArray[k].domains = countryDomainArray[i].domains;
