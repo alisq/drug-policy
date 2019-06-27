@@ -89,7 +89,7 @@ window.onload = function(){
             $('.themes').append('<div class="theme last"><p class="theme-title">'+this.theme+'</p><p class="theme-subtitle"></p><div class="country-flags"></div></div>');
             var theme = this.theme;
             $(this.countries).each(function(){
-                $('.last .country-flags').append('<span data-name="'+this.name+'" data-theme="'+theme+'" data-metrics="'+this.metrics.length+'" class="last flag-icon flag-icon-'+this.ISO_2+'"></span>');
+                $('.last .country-flags').append('<span data-name="'+this.name+'" data-theme="'+theme+'" data-iso="'+this.ISO+'" data-metrics="'+this.metrics.length+'" class="last flag-icon flag-icon-'+this.ISO_2.toLowerCase()+'"></span>');
                 $('.last.flag-icon').on('mousemove', function(e){
                     var xPos = e.clientX;
                     var yPos = e.clientY;
@@ -109,8 +109,9 @@ window.onload = function(){
                     $('.flag-hover').css('opacity',0);
                 }).on('click', function(){
                     var country = $(this).attr('data-name');
+                    
                     localStorage.setItem('country', JSON.stringify(country));
-                    window.location = 'country-page.html';
+                    window.location = 'country-page.html?ISO='+$(this).data("iso");
                 }).removeClass('last');
             });
             
