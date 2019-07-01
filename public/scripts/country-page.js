@@ -243,13 +243,22 @@ window.onload = function() {
                     $(last).append('<details><summary>'+theme.metrics.length+' indicators</summary><ol></ol></details>');
                     $(theme.metrics).each(function(){
                         
+ 
 
-                        //ADD NDS link to each theme (this is a bit hacky)
-                        for (i=0;i<country.policies.length;i++) {                            
+
+                        // //ADD NDS link to each theme (this is a bit hacky)
+
+                        l = "";
+                        for (i=0;i<country.policies.length;i++) {
+
+
                             if (country.policies[i].NDS_Name.substring(0, 25) == $(this)[1].substring(0,25)) {
-                                $(last).find('ol').append('<li><a target="_blank" href="'+country.policies[i].NDS_Link+'">'+$(this)[0]+'<small>'+$(this)[1]+'</a></small></li>');
+                               l = '<a target="_blank" href="'+country.policies[i].NDS_Link+'">';
                             }
                         }
+
+
+                        $(last).find('ol').append('<li>'+l+$(this)[0]+'</a><small>'+$(this)[1]+'</small></li>');
 
                         
 
