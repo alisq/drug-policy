@@ -212,7 +212,7 @@ var newTheme = function(d){
     var theme = new Object;
     theme.theme = d.Metric;
     theme.metrics = d.Indicators;
-
+    console.log(d.Metrics)
     theme.metrics = theme.metrics.split('~'); // split by metric delimiter
     theme.metrics.pop(); // last item is a blank space, remove
 
